@@ -1,0 +1,77 @@
+/* 主体 */
+#content .main .slider {height:355px;padding:10px 10px 13px;background:#F9F9F9 url(../images/shadow-line.jpg) repeat-x 0 bottom;position:relative;}
+#content .main .slider .v {width:710px;height:355px;position:relative;z-index:100;}
+#content .main .slider .v .wrap {height:355px;width:7100px;position:absolute;left:0}
+#content .main .slider .v .wrap a {float:left;}
+#content .main .slider .v .thumbpics {width:700px;padding:8px 5px 5px;line-height:50px;display:none;position:absolute;bottom:0;left:0;z-index:0;background:rgba(0,0,0,0.8);}
+#content .main .slider .v .thumbpics ul li {height:30px;line-height:30px;padding:2px;margin:0 3px;float:left;cursor:pointer;position:relative;}
+#content .main .slider .v .thumbpics img {display:block;}
+#content .main .section {background:#F9F9F9;margin:15px 0;padding:5px 10px;}
+#content .main .section .thumb {padding:10px 0 5px;}
+#content .main .section .thumb li {float:left;width:210px;height:168px;margin:3px;padding:10px;background:url(../images/shadow-bg.png);position:relative;}
+#content .main .section .thumb li img {position:relative;z-index:10;}
+#content .main .section .thumb .cover {width:228px;height:177px;display:none;position:absolute;top:0;left:0;z-index:0;}
+#content .main .section .thumb li p {line-height:30px;text-align:center;font-size:13px;}
+#content .main .section .thumb li p a {position:relative;z-index:10;}
+
+/* 热门推荐 */
+#content .sider .recommend {background:#F9F9F9;padding:5px 10px 10px;height:360px;}
+#content .sider .recommend .view {margin-top:10px;text-align:center;padding:0 4px;}
+#content .sider .recommend .view h3 {text-align:left;padding-left:5px;margin:10px 0 5px;}
+#content .sider .recommend .view p {line-height:20px;letter-spacing:1px;text-align:left;text-indent:20px;padding-left:5px;}
+/* 热门标签 */
+#content .sider .tag {height:205px;margin:19px 0 15px;background:#F9F9F9;padding:5px 10px 10px;}
+#content .sider .tag .taglist {margin:10px 5px;}
+#content .sider .tag .taglist li {height:23px;float:left;line-height:23px;margin:3px;white-space:nowrap;}
+#content .sider .tag .taglist li a.lev1 {font-size:23px;color:orange;}
+#content .sider .tag .taglist li a.lev2 {font-size:18px;color:#75C50A;}
+#content .sider .tag .taglist li a.lev3 {font-size:15px;color:#606060;}
+/* 主题活动 */
+#content .sider .active {height:260px;margin:15px 0;background:#F9F9F9;padding:5px 10px 10px;}
+#content .sider .active .actdesc {padding:10px 5px;}
+#content .sider .active .actdesc p {margin-top:5px;font-size:13px;text-align:center;padding-bottom:5px;}
+#content .sider .active .actdesc p.h {margin-top:10px;border-bottom:1px solid #CCCCCC;}
+/* 悟语 */
+#content .sider .weibo {height:305px;margin:15px 0;background:#F9F9F9;padding:5px 10px;}
+#content .sider .weibo .outer {margin:10px 5px 0;height:252px;}
+#content .sider .weibo .outer .wbdesc {position:relative;}
+#content .sider .weibo .outer .wbdesc .wblist {margin-bottom:10px;}
+#content .sider .weibo .outer .wbdesc .wblist .userinfo {padding-bottom:10px;border-bottom:1px dashed #CCCCCC;}
+#content .sider .weibo .outer .wbdesc .wblist .userinfo img {float:left;margin-right:10px;}
+#content .sider .weibo .outer .wbdesc .wblist .userinfo h4 {float:left;width:150px;margin-bottom:10px;}
+#content .sider .weibo .outer .wbdesc .wblist .cont {margin-top:7px;}
+#content .sider .weibo .outer .wbdesc .wblist .cont p {line-height:18px;margin-bottom:10px;}
+/* 旅行日志 */
+#content .sider .article {height:265px;margin:15px 0;background:#F9F9F9;padding:5px 10px 10px;}
+#content .sider .arclist {margin:10px 5px;}
+#content .sider .arclist .arctop {border-bottom:1px dashed #CCCCCC;padding-bottom:10px;}
+#content .sider .arclist .arctop img {float:left;margin-right:10px;}
+#content .sider .arclist .arctop h4 {float:left;width:100px;margin-bottom:20px;font-size:12px;}
+#content .sider .arclist .arctop p {float:left;width:100px;}
+#content .sider .arclist .arctop img {float:left;margin-right:10px;}
+#content .sider .arclist ul {margin-top:2px;}
+#content .sider .arclist ul li {line-height:15px;font-size:13px;border-bottom:1px dashed #CCCCCC;padding:5px 5px 5px 10px;}
+/* 活跃会员 */
+#content .sider .hotuser {height:385px;margin:15px 0;background:#F9F9F9;padding:5px 10px 10px;}
+#content .sider .hotuser .users {margin:0 5px;}
+#content .sider .hotuser .users li {border-bottom:1px dashed #CCCCCC;overflow:hidden;padding:10px 5px;}
+#content .sider .hotuser .users img {float:left;margin-right:10px;}
+#content .sider .hotuser .users p {width:140px;float:left;line-height:22px;color:#B4B4B4;}
+#content .sider .hotuser .users span {margin:0 5px;}
+/* 关注我们 */
+#content .sider .focus {height:260px;background:#F9F9F9;padding:5px 7px 10px;position:relative;}
+#content .sider .focus .focusdesc {height:211px;margin-top:10px;border-left:1px solid #E5E5E5;border-right:1px solid #E5E5E5;border-bottom:1px solid #E5E5E5;}
+#content .sider .focus .focusdesc a {float:left;width:112px;height:71px;}
+#content .sider .focus .focusdesc a.sina:link {background:url(../images/sites.png) -222px 0 no-repeat;}
+#content .sider .focus .focusdesc a.sina:hover {background:url(../images/sites.png) no-repeat;}
+#content .sider .focus .focusdesc a.qqzone:link {background:url(../images/sites.png) -334px -140px no-repeat;}
+#content .sider .focus .focusdesc a.qqzone:hover {background:url(../images/sites.png) -112px -140px no-repeat;}
+#content .sider .focus .focusdesc a.qqweibo:link {background:url(../images/sites.png) -222px -71px no-repeat;}
+#content .sider .focus .focusdesc a.qqweibo:hover {background:url(../images/sites.png) 0 -71px no-repeat;}
+#content .sider .focus .focusdesc a.douban:link {background:url(../images/sites.png) -334px -71px no-repeat;}
+#content .sider .focus .focusdesc a.douban:hover {background:url(../images/sites.png) -112px -71px no-repeat;}
+#content .sider .focus .focusdesc a.renren:link {background:url(../images/sites.png) -222px -141px no-repeat;}
+#content .sider .focus .focusdesc a.renren:hover {background:url(../images/sites.png) 0 -141px no-repeat;}
+#content .sider .focus .focusdesc a.weixin:link {height:69px;background:url(../images/sites.png) -222px -211px no-repeat;}
+#content .sider .focus .focusdesc a.weixin:hover {height:69px;background:url(../images/sites.png) 1px -211px no-repeat;}
+#content .sider .focus .wximg {width:223px;height:210px;background:#FFFFFF;position:absolute;top:52px;left:8px;display:none;text-align:center;}

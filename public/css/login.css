@@ -1,0 +1,28 @@
+#login {width:980px;position:absolute;left:50%;bottom:282px;margin-left:-490px;}
+#login .logo {padding-left:10px;}
+#login .logo a {display:block;width:125px;height:50px;background:url(../images/logo.png) no-repeat;}
+#login .box {background:#F9F9F9;border:1px solid #F1F1F1;border-radius:3px;}
+#login .box .pics {width:520px;padding:20px 30px 30px;float:left;background:#F6F6F6;}
+#login .box .pics .tit {font-size:16px;padding-left:10px;}
+#login .box .pics img {display:block;width:100%;height:100%;margin:5px;}
+#login .box .pics .pic1 {width:200px;height:310px;float:left;}
+#login .box .pics .pic2 {width:300px;height:155px;float:left;}
+#login .box .pics .pic3 {width:150px;height:155px;float:left;}
+#login .box .pics .pic4 {width:150px;height:155px;float:left;}
+
+
+#login .box .logform {width:350px;float:right;padding:10px 330px 10px 20px;}
+#login .box .logform h2 {margin-top:15px;padding-left:10px;color:#606060;padding-bottom:5px;letter-spacing:2px;border-bottom:1px solid #CCCCCC;}
+#login .box .logform table {width:320px;margin:10px auto;}
+#login .box .logform table td {height:65px;font-size:14px;}
+#login .box .logform table td input {width:318px;height:18px;font-size:16px;color:#9A9A9A;border:1px solid #CCCCCC;border-radius:3px;padding:11px 0 11px 10px;}
+#login .box .logform table td input.sub {width:115px;text-align:center;padding:0;letter-spacing:2px;height:35px;line-height:35px;border:none;color:#FFFFFF;cursor:pointer;background:url(../images/icon_3.png) 0 -90px no-repeat;}
+#login .box .logform table td input.chk {width:10px;height:10px;vertical-align:bottom;}
+#login .box .logform table td .qqlog {width:140px;height:40px;display:block;background:url(../images/head.png) -303px -122px no-repeat;}
+#login .box .logform table td .sinalog {width:172px;height:40px;display:block;float:right;background:url(../images/head.png) -463px -122px no-repeat;}
+#login .box .logform .reg {text-align:right;}
+#login .box .logform .reg a {margin:0 5px;}
+
+/* 底部 */
+#footer {position:absolute;bottom:0;width:100%;}
+#footer .copy {height:50px;text-align:center;padding:10px;line-height:25px;font-size:14px;}

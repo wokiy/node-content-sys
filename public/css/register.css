@@ -1,0 +1,24 @@
+#register {width:980px;position:absolute;left:50%;bottom: 282px;margin-left:-490px;}
+#register .logo {padding-left:10px;}
+#register .logo a {display:block;width:125px;height:50px;background:url(../images/logo.png) no-repeat;}
+#register .box {background:#F9F9F9;border:1px solid #F1F1F1;border-radius:3px;padding:30px 20px;}
+#register .box h2 {padding-left:5px;color:#606060;letter-spacing:2px;width:85px;padding-bottom:2px;border-bottom:5px solid #75C50A;}
+#register .box .regform {width:430px;height:300px;padding:0 20px 10px;border-right:1px solid #CCCCCC;float:left;}
+#register .box .regform table {margin-top:40px;}
+#register .box .regform table td {height:60px;font-size:16px;color:#606060;}
+#register .box .regform table td input {width:230px;height:18px;font-size:16px;color:#9A9A9A;border:1px solid #CCCCCC;border-radius:3px;padding:8px 0 8px 7px;}
+#register .box .regform table td input.sub {width:115px;text-align:center;padding:0;letter-spacing:2px;height:35px;line-height:35px;border:none;color:#FFFFFF;cursor:pointer;background:url(../images/icon_3.png) 0 -90px no-repeat;}
+
+#register .box .quickreg {width:409px;height:300px;padding:0 10px 10px 40px;float:left;}
+#register .box .quickreg .apps {margin-top:46px;}
+#register .box .quickreg .apps a {display:block;height:40px;float:left;margin-bottom:20px;}
+#register .box .quickreg .apps a.qq {width:140px;margin-right:70px;background:url(../images/head.png) -703px -122px no-repeat;}
+#register .box .quickreg .apps a.sina {width:172px;float:left;background:url(../images/head.png) -863px -122px no-repeat;}
+#register .box .quickreg .apps a.taobao {width:140px;margin-right:70px;background:url(../images/head.png) -703px -178px no-repeat;}
+#register .box .quickreg .apps a.tent {width:172px;float:left;background:url(../images/head.png) -863px -178px no-repeat;}
+#register .box .quickreg .apps a.douban {width:140px;margin-right:70px;background:url(../images/head.png) -703px -234px no-repeat;}
+#register .box .quickreg .nowlog {line-height:40px;font-size:14px;text-align:right;}
+
+/* 底部 */
+#footer {position:absolute;bottom:0;width:100%;}
+#footer .copy {height:50px;text-align:center;padding:10px;line-height:25px;font-size:14px;}

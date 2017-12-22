@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+    <title>随心笔记后台管理</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/bootstrap-maizi.css"/>
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <!--小屏幕导航按钮和logo-->
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="index.ejs" class="navbar-brand">随心笔记后台管理</a>
+        </div>
+        <!--小屏幕导航按钮和logo-->
+        <!--导航-->
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;后台首页</a></li>
+                <li><a href="/admin/user_list?page=1"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;用户管理</a></li>
+                <li class="active"><a href="/admin/catagory?page=1"><span class="glyphicon glyphicon-category"></span>&nbsp;&nbsp;分类管理</a></li>
+                <li ><a href="/admin/admin?page=1"> <span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;内容管理</a></li>
+                <!--<li><a href="tag.html"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;标签管理</a></li>-->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <%=session.loginUser.username%>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li><a href="index.ejs"><span class="glyphicon glyphicon-screenshot"></span>&nbsp;&nbsp;前台首页</a></li>
+                        <li><a href="index.ejs"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;个人主页</a></li>
+                        <li><a href="index.ejs"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;个人设置</a></li>
+                        <li><a href="index.ejs"><span class="glyphicon glyphicon-credit-card"></span>&nbsp;&nbsp;账户中心</a></li>
+                        <li><a href="index.ejs"><span class="glyphicon glyphicon-heart"></span>&nbsp;&nbsp;我的收藏</a></li>
+                    </ul>
+                </li>
+                <li><a href="/admin/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;退出</a></li>
+            </ul>
+        </div>
+        <!--导航-->
+
+    </div>
+</nav>
+<!--导航-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="list-group">
+                <a href="/admin/category?page=1" class="list-group-item active">分类管理</a>
+                <a href="/admin/addCategory" class="list-group-item">分类添加</a>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="page-header">
+                <h1>分类管理</h1>
+            </div>
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="/admin/category?page=1">分类管理</a>
+                </li>
+                <li>
+                    <a href="/admin/addCategory">分类添加</a>
+                </li>
+                <li><%=msg.success%></li>
+            </ul>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>分类名称</th>
+                    <th>作者</th>
+                    <th>发布时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%
+                        if(!categorys && categorys.length ==0){
+                %>
+                        <tr>
+                            <td>现在还没有分类，请添加分类</td>
+                        </tr>
+                <%
+                    }else{
+                            for(let i =0 ;i<categorys.length;i++){
+
+                %>
+                <tr>
+                    <th scope="row"><%=categorys[i].name%></th>
+                    <td>jasonlwy</td>
+                    <td>2017/11/09</td>
+                    <td>
+                        <div role="presentation" class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                操作<span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="" class="edit" C_ID="<%=categorys[i]._id%>" C_name="<%=categorys[i].name%>" data-toggle="modal" data-target="#myModal">编辑</a></li>
+                                <li><a href="/admin/delete_category?id=<%=categorys[i]._id%>">删除</a></li>
+                                <li><a href="#">全局置顶</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <%
+                             }
+                        }
+                %>
+                </tbody>
+            </table>
+            <nav class="pull-right">
+                <ul class="pagination">
+                    <%
+                    if(categorys && categorys.length>0){
+                    %>
+
+                    <li><a href="/admin/catagory?page=<%=page-1%>"><span aria-hidden="true">&laquo;</span></a></li>
+                    <%
+                    }
+                    %>
+                    <!--没用用户的情况-->
+                    <%
+                    if(!categorys && categorys.length == 0){
+                    %>
+                    <li class="active"><a href="#">0</a></li>
+                    <%
+                    }else{
+                    for(let i = 1;i<=pages;i++){
+                    %>
+                    <li><a href="/admin/catagory?page=<%=i%>"><%=i%></a></li>
+                    <%
+                    }
+                    }
+                    %>
+                    <%
+                    if(categorys && categorys.length>0){
+                    %>
+                    <li><a href="/admin/catagory?page=<%=page+1%>"><span aria-hidden="true">&raquo;</span></a></li>
+                    <%
+                    }
+                    %>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<!--modal-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">修改分类</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/edit_Category" method="post">
+                    <div class="form-group">
+                        <label for="addname">分类名</label>
+                        <input id="hidden_id" type="hidden"class="form-control"  name="id" value="">
+                        <input type="text" id="addname" name="name" class="form-control" value="">
+                    </div>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--footer-->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    Copyright&nbsp;jasonlwy
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--footer-->
+<script src="../js/jquery-1.12.4.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+        let $e = $("#edit");
+        $(".edit").click(function () {
+             //获取属性的值
+          let category_id = $(this).attr('C_ID');
+          let category_name= $(this).attr('C_name');
+
+            $("#hidden_id").attr("value",category_id);
+            $("#addname").attr("value",category_name);
+        });
+    });
+</script>
+</body>
+</html>

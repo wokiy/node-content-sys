@@ -1,0 +1,52 @@
+#content .banner {margin-bottom:15px;}
+#content .main {width:700px;padding:10px 15px 5px;margin-bottom:15px;background:#FFFFFF;}
+#content .main .cont .conttitle {line-height:35px;padding:8px 5px;border-bottom:1px solid #CCCCCC;}
+#content .main .cont .conttitle h2 {color:#323232;font-size:28px;font-weight:normal;letter-spacing:2px;float:left;}
+#content .main .cont .conttitle .turn {float:right;}
+#content .main .cont .conttitle .turn a {width:36px;height:36px;float:left;margin-right:8px;}
+#content .main .cont .conttitle .turn a.prev {background:url(../images/turn.png) 0 0 no-repeat;}
+#content .main .cont .conttitle .turn a.prev:hover {background:url(../images/turn.png) 0 -95px no-repeat;}
+#content .main .cont .conttitle .turn a.dir {background:url(../images/turn.png) 0 -238px no-repeat;}
+#content .main .cont .conttitle .turn a.dir:hover {background:url(../images/turn.png) 0 -190px no-repeat;}
+#content .main .cont .conttitle .turn a.next {background:url(../images/turn.png) 0 -48px no-repeat;}
+#content .main .cont .conttitle .turn a.next:hover {background:url(../images/turn.png) 0 -143px no-repeat;}
+#content .main .cont p {font-size:14px;line-height:30px;padding-left:5px;color:#9A9A9A;}
+#content .main .cont p span {margin-right:20px;}
+#content .main .cont .conttext {font-size:15px;line-height:30px;letter-spacing:2px;padding:5px 15px;text-indent:25px;}
+#content .main .cont .conttext p {color:#323232;}
+#content .main .share {border-top:1px solid #CCCCCC;margin-top:10px;padding:10px;}
+
+#content .main .best .bestlist {padding:10px 0 0;}
+#content .main .best .bestlist ul li {padding:0 5px;float:left;}
+#content .main .best .bestlist ul li img {width:223px;display:block;}
+#content .main .best .bestlist ul li p {text-align:center;line-height:30px;}
+#content .main .new {margin-top:10px;}
+#content .main .new .newlist {padding:5px 5px 10px}
+#content .main .new .newlist ul li {padding:10px 5px;border-bottom:1px dashed #CCCCCC;overflow:hidden;}
+#content .main .new .newlist ul li img {width:240px;margin-right:20px;display:block;float:left;}
+#content .main .new .newlist ul li .summary {width:420px;padding:10px 0;float:left;}
+#content .main .new .newlist ul li .summary p {margin:8px 0;color:#606060;line-height:20px;font-size:13px;}
+#content .main .new .newlist ul li .summary p span {margin-right:15px;}
+#content .main .pagelist {padding:10px 10px 15px;}
+#content .main .pagelist ul li {margin:0 5px;float:left;font-size:15px;}
+
+#content #wrap {height:220px;}
+#content .siderfixed {width:240px;top:66px;background:url(../images/bg.jpg); padding-bottom:10px;}
+#content .sider .snwrap {padding:10px;background:#FFFFFF;}
+#content .sider .snwrap ul li {width:72px;height:60px;float:left;text-align:center;line-height:60px;}
+#content .sider .snwrap ul li.noborder {border:0 none;}
+
+#content .sider .author {margin:10px 0;padding:10px;background:#FFFFFF;}
+#content .sider .author img {float:left;margin-right:10px;}
+#content .sider .author h3 {width:150px;font-size:13px;font-weight:normal;letter-spacing:1px;float:left;margin-bottom:13px;}
+#content .sider .author p {width:150px;float:left;}
+#content .sider .author p span {margin-right:10px;}
+
+#content .sider .sharebtn {height:32px;padding:10px;background:#FFFFFF;}
+#content .sider .sharefixed {top:66px;background:url(../images/bg.jpg);padding-bottom:10px;}
+#content .sider .sharebtn .jiathis_style_32x32 a span {margin:0 4px;}
+
+#content .sider .hotarc {margin-top:10px;padding:4px 10px 15px;background:#FFFFFF;}
+#content .sider .hotarc .title {height:30px;line-height:30px;}
+#content .sider .hotarc .title h3 {padding-left:5px;color:#323232;}
+#content .sider .hotarc ul li {height:30px;line-height:35px;font-size:13px;padding-left:10px;border-bottom:1px dashed #CCCCCC;}

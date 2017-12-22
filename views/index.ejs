@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>随心笔记</title>
+    <meta name="description" content="Ghost 是基于 Node.js 构建的开源博客平台。Ghost 具有易用的书写界面和体验，博客内容默认采用 Markdown 语法书写。Ghost 的目标是取代臃肿的 Wordpress。" />
+    <meta name="keywords" content="Ghost,blog,Ghost中国,Ghost博客,Ghost中文,Ghost中文文档">
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/8.5/styles/monokai_sublime.min.css">
+    <link href="//cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+
+    <link rel="canonical" href="http://www.ghostchina.com/" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="http://www.ghostchina.com/page/2/" />
+    <script type="text/javascript" src="/shared/ghost-url.min.js?v=a8de6833b5"></script>
+    <script type="text/javascript">
+        ghost.init({
+            clientId: "ghost-frontend",
+            clientSecret: "721352203d6a"
+        });
+    </script>
+    <meta name="generator" content="Ghost 0.7" />
+    <link rel="alternate" type="application/rss+xml" title="Ghost 开源博客平台" href="http://www.ghostchina.com/rss/" />
+</head>
+<body class="home-template">
+
+<!-- start header -->
+<header style="display: none;" class="main-header"  style="background-image: url(http://static.ghostchina.com/image/6/d1/fcb3879e14429d75833a461572e64.jpg)">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <!-- start logo -->
+                <a class="branding" href="http://www.ghostchina.com" title="Ghost 开源博客平台"><img src="http://static.ghostchina.com/image/b/46/4f5566c1f7bc28b3f7ac1fada8abe.png" alt="Ghost 开源博客平台"></a>
+                <!-- end logo -->
+                <h2 class="text-hide">Ghost 是一个简洁、强大的写作平台。你只须专注于用文字表达你的想法就好，其余的事情就让 Ghost 来帮你处理吧。</h2>
+
+                <img src="http://static.ghostchina.com/image/6/d1/fcb3879e14429d75833a461572e64.jpg" alt="Ghost 博客系统" class="hide">
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header -->
+
+<!-- start navigation -->
+<nav class="main-navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div style="display: none;" class="navbar-header ">
+                        <span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-bars"></i>
+                        </span>
+                </div>
+                <div class="collapse navbar-collapse" id="main-menu">
+                    <ul class="menu">
+                        <li class="nav-current" role="presentation"><a href="/">首页</a></li>
+                        <li  role="presentation"><a href="/committeam">摄影</a></li>
+                        <li  role="presentation"><a href="/committeam">旅游</a></li>
+                        <li  role="presentation"><a href="/about">关于博主</a></li>
+                        <li class="pull-right"></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- end navigation -->
+<!-- start site's main content area -->
+<section class="content-wrap">
+    <div class="container">
+        <div class="row">
+
+            <main class="col-md-8 main-content">
+                <%
+                if(!contents && contents.length  ==0){
+                %>
+                <article id="108" class="post">
+                    <div class="post-head">
+                        当前没有博文!!!!!
+                    </div>
+                </article>
+                <%
+                }else{
+                for(let i=0;i<contents.length;i++){
+                %>
+                <article id=108 class="post">
+                    <div class="post-head">
+                        <h1 class="post-title"><a href="/custom-excerpts/"><%=contents[i].title%></a></h1>
+                        <div class="post-meta">
+                            <span class="author">作者：<a href="/author/wangsai/"><%=contents[i].user.username%></a></span> &bull;
+                            <time class="post-date" datetime="2017年8月9日星期三下午4点57分" title="2017年8月9日星期三下午4点57分"><%=arr[i].toString()%></time>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <img src="<%=contents[i].images%>" alt="" class="img-rounded">
+                        <p><%=contents[i].description%></p>
+                    </div>
+                    <div class="post-permalink">
+                        <!--点击获取全文-->
+                        <a href="/views?id=<%=contents[i]._id%>" class="btn btn-default">阅读全文</a>
+                    </div>
+                    <footer class="post-footer clearfix">
+                        <div class="pull-left tag-list">
+                            <i class="fa fa-folder-open-o"></i>
+                            <%=contents[i].category.name%>
+                        </div>
+                        <div class="pull-right share">
+                        </div>
+                    </footer>
+                </article>
+                <%
+                         }
+                }
+                %>
+                <nav class="pagination" role="navigation">
+                    <%
+                        if(page==1){
+                    %>
+                    <span class="page-number">当前<%=page%>页 总共<%=pages%></span>
+                    <a class="older-posts" href="/index?page=<%=page+1%>"><i class="fa fa-angle-right"></i></a>
+                    <%
+                        }else if(page==pages){
+                    %>
+                    <a class="older-posts" href="/index?page=<%=page-1%>"><i class="fa fa-angle-left"></i></a>
+                    <span class="page-number">当前<%=page%>页 总共<%=pages%></span>
+                    <%
+                        }else{
+                    %>
+                    <a class="older-posts" href="/index?page=<%=page-1%>"><i class="fa fa-angle-left"></i></a>
+                    <span class="page-number">当前<%=page%>页 总共<%=pages%></span>
+                    <a class="older-posts" href="/index?page=<%=page+1%>"><i class="fa fa-angle-right"></i></a>
+                    <%
+                        }
+                    %>
+                </nav>
+            </main>
+            <aside class="col-md-4 sidebar">
+                <!-- start widget -->
+                <!-- end widget -->
+                <!-- start tag cloud widget -->
+                <div class="widget">
+                    <h4 class="title">用户区域</h4>
+                    <div class="content community">
+                        <%
+                        if(!session.loginUser){
+                        %>
+                        <p>未登录</p>
+                        <p><a href="/login"><i class="glyphicon glyphicon-user"></i> &nbsp;登陆</a></p>
+                        <p><a href="/register"><i class="glyphicon glyphicon-pencil"></i>&nbsp; 注册</a></p>
+                        <%
+                        }else{
+                        %>
+                        <p>用户: <%=session.loginUser.username%></p>
+                        <p><a href="/logout">退出</a></p>
+                        <%
+                        }
+                        %>
+                    </div>
+                </div>
+                <!-- end tag cloud widget -->
+
+                <!-- start widget -->
+                <div style="display: none;" class="widget">
+                    <h4 class="title">下载 Ghost</h4>
+                    <div class="content download">
+                        <a href="/download/" class="btn btn-default btn-block" onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '下载Ghost'])">Ghost 中文版（0.6.0）</a>
+                    </div>
+                </div>
+                <!-- end widget -->
+                <!-- start tag cloud widget -->
+                <div class="widget">
+                    <h4 class="title">文章分类</h4>
+                    <div class="content tag-cloud">
+                        <!--分类展示-->
+                        <%
+                        if(!categorys && categorys.length ==0){
+                        %>
+                        <p>没有任何文章分类！！！</p>
+                        <%
+                        }else{
+                        for(let i =0;i<categorys.length;i++){
+                        %>
+                        <!--根据分类ID查询该分类的所有文章-->
+                        <a href="/contents?id=<%=categorys[i]._id%>&page=1"><%=categorys[i].name%></a>
+                        <%
+                        }
+                        }
+                        %>
+                    </div>
+                </div>
+                <!-- end tag cloud widget -->
+            </aside>
+
+        </div>
+    </div>
+</section>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div style="display: none;" class="widget">
+                    <h4 class="title">最新文章</h4>
+                    <div class="content recent-post">
+                        <div class="recent-single-post">
+                            <a href="/custom-excerpts/" class="post-title">自定义文章摘要（Excerpt）</a>
+                            <div class="date">2017年8月9日</div>
+                        </div>
+                        <div class="recent-single-post">
+                            <a href="/primary-tags/" class="post-title">首要“标签”</a>
+                            <div class="date">2017年8月3日</div>
+                        </div>
+                        <div class="recent-single-post">
+                            <a href="/ghost-1-0-released/" class="post-title">Ghost 1.0 版本正式发布</a>
+                            <div class="date">2017年7月29日</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div style="display: none;" class="widget">
+                    <h4 class="title">标签云</h4>
+                    <div class="content tag-cloud">
+                        <a href="/tag/about-ghost/">Ghost</a>
+                        <a href="/tag/release/">新版本发布</a>
+                        <a href="/tag/javascript/">JavaScript</a>
+                        <a href="/tag/promise/">Promise</a>
+                        <a href="/tag/zhuti/">主题</a>
+                        <a href="/tag/nodejs/">Node.js</a>
+                        <a href="/tag/mysql/">MySQL</a>
+                        <a href="/tag/nginx/">Nginx</a>
+                        <a href="/tag/aliyun-ecs/">阿里云服务器</a>
+                        <a href="/tag/ubuntu/">Ubuntu</a>
+                        <a href="/tag/ghost-in-depth/">深度玩转 Ghost</a>
+                        <a href="/tag/theme/">Theme</a>
+                        <a href="/tag/zhu-shou-han-shu/">助手函数</a>
+                        <a href="/tag/markdown/">Markdown</a>
+                        <a href="/tag/proxy/">反向代理</a>
+
+                        <a href="/tag-cloud/">...</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div style="display: none;" class="widget">
+                    <h4 class="title">合作伙伴</h4>
+                    <div class="content tag-cloud friend-links">
+                        <a href="http://www.bootcss.com" title="Bootstrap中文网" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'bootcsscom'])" target="_blank">Bootstrap中文网</a>
+                        <a href="http://www.bootcdn.cn" title="开放CDN服务" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'bootcdncn'])" target="_blank">开放CDN服务</a>
+                        <a href="http://www.gruntjs.net" title="Grunt中文网" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'gruntjsnet'])" target="_blank">Grunt中文网</a>
+                        <a href="http://www.gulpjs.com.cn/" title="Gulp中文网" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'gulpjscomcn'])" target="_blank">Gulp中文网</a>
+                        <hr>
+                        <a href="http://lodashjs.com/" title="Lodash中文文档" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'lodashjscom'])" target="_blank">Lodash中文文档</a>
+                        <a href="http://www.jquery123.com/" title="jQuery中文文档" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'jquery123com'])" target="_blank">jQuery中文文档</a>
+                        <hr>
+                        <a href="http://www.aliyun.com/" title="阿里云" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'aliyun'])" target="_blank">阿里云</a>
+                        <hr>
+                        <a href="https://www.upyun.com/" title="又拍云" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'upyun'])" target="_blank">又拍云</a>
+                        <a href="http://www.qiniu.com/" title="七牛云存储" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'qiniu'])" target="_blank">七牛云存储</a>
+                    </div>
+                </div></div>
+        </div>
+    </div>
+</footer>
+
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>Copyright &copy; <a href="http://www.JasonLWY.com/">jasonlwy</a></span> |
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/fitvids/1.1.0/jquery.fitvids.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+<script src="js/demo.js"></script>
+<script>
+    $(function(){
+        $('.post-content img').each(function(item){
+            var src = $(this).attr('src');
+
+            $(this).wrap('<a href="' + src + '" class="mfp-zoom" style="display:block;"></a>');
+        });
+
+        /*$('.post-content').magnificPopup({
+          delegate: 'a',
+          type: 'image'
+        });*/
+    });
+</script>
+
+<script>
+    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+<script>
+    $(function(){
+        var version = '0.7.4';
+        var $download =  $('.download > a').first();
+        var html = $download.html().replace(/\d\.\d\.\d/, version);
+
+        $download.html(html);
+    });
+</script>
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6338835ad35c6d950a554fdedb598e48' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>

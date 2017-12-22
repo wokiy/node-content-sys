@@ -1,0 +1,38 @@
+/* 全局样式 */
+body, ul, ol, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img, div {margin:0;padding:0;border:0;}
+body {background:url(../images/bg.jpg);color:#333333;font-size:12px;font-family:"微软雅黑","SimSun","宋体","Arial Narrow";}
+ul, ol {list-style-type:none;}
+div, ul {overflow:hidden;}
+table {border-collapse:collapse;border-spacing:0;font-size:inherit;}
+input, textarea, select {font-family:inherit;font-size:inherit;font-weight:inherit;outline:none;}
+select, input, img, select {vertical-align:middle;}
+a {text-decoration:none;}
+a:link, a:visited {color:#606060;}
+a:hover {color:orange;}
+.w980 {width:980px;margin:0 auto;}
+.l {float:left;}
+.r {float:right;}
+.fixed {position:fixed;z-index:1000;}
+.line {background:url(../images/bg-line.png);}
+.title {height:35px;line-height:35px;border-bottom:1px solid #CCCCCC;letter-spacing:1px;}
+.title h2 {padding-left:15px;float:left;font-size:20px;}
+.title h2 a:link, .title h2 a:hover, .title h2 a:visited {color:#75C50A;}
+.title h3 {padding-left:10px;float:left;font-size:15px;color:#75C50A;}
+.title span {font-size:13px;float:right;}
+#bg {width:100%;height:100%;position:absolute;top:0;left:0;z-index:-1;}
+#bg img {width:100%;height:100%;}
+.tools {position:fixed;right:10px;bottom:10px;}
+.tools a {display:block;width:55px;height:56px;color:#FFFFFF;padding:1px;line-height:22px;text-align:center;}
+.tools a i {width:25px;height:22px;display:block;margin:5px auto;}
+.tools .gotop {background:#999999;margin-bottom:1px;display:none;}
+.tools .gotop i {background:url(../images/sjbz_survey.png) -63px 5px no-repeat;}
+.tools .gotop:hover {background:#CCCCCC;}
+.tools .suggest {background:#3687D9;height:65px;}
+.tools .suggest i {width:27px;height:30px;background:url(../images/sjbz_survey.png) -30px 5px no-repeat;}
+.tools .suggest:hover {background:#66A4E3;}
+.sugform {width:318px;overflow:hidden;height:0;background:#FFFFFF;border-radius:3px;border:1px solid #CCCCCC;position:fixed;bottom:0;right:5px;}
+.sugform .sugtitle {font-size:14px;height:35px;line-height:35px;border-bottom:1px solid #CCCCCC;}
+.sugform .sugtitle p {float:left;text-align:center;padding-left:15px;}
+.sugform .sugtitle p span {color:orange;margin:0 5px;}
+.sugform .sugtitle a {width:35px;height:35px;float:right;margin-right:5px;background:url(../images/sjbz_survey.png) 0 -52px no-repeat;cursor:pointer;}
+.sugform .sugtitle a:hover {background:url(../images/sjbz_survey.png) -25px -52px no-repeat;}

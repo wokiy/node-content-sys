@@ -1,0 +1,7 @@
+#content .waterfall {padding:20px;margin-bottom:15px;background:#F9F9F9;}
+#content .waterfall ul {position:relative;}
+#content .waterfall ul li {width:203px;text-align:center;padding:10px;position:absolute;cursor:pointer;background:#F9F9F9;border:1px solid #F1F1F1;}
+#content .waterfall ul li.listnav {background:#FFFFFF;border:1px solid #CCCCCC;}
+#content .waterfall ul li img {width:200px;}
+#content .waterfall ul li p {padding:5px 3px;letter-spacing:1px;text-align:left;}
+#content .waterfall ul li .layer {left:0;top:0;position:absolute;z-index:10;background:#5A8DCD;opacity:0.2}
