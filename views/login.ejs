@@ -1,66 +1,60 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
-    <title>用户登陆</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="../../css/init.css" />
-    <link rel="stylesheet" type="text/css" href="../../css/login.css" />
+    <meta charset="utf-8"/>
+    <title>博客登陆</title>
+    <meta name="author" content="DeathGhost" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <style>
+        body{height:100%;background:#16a085;overflow:hidden;}
+        canvas{z-index:-1;position:absolute;}
+    </style>
+    <script src="../../js/jquery-1.12.4.min.js"></script>
+    <script src="../../js/verificationNumbers.js"></script>
+    <script src="../../js/Particleground.js"></script>
+    <script>
+        $(document).ready(function() {
+            //粒子背景特效
+            $('body').particleground({
+                dotColor: '#5cbdaa',
+                lineColor: '#5cbdaa'
+            });
+            //验证码
+            createCode();
+            //测试提交，对接程序删除即可
+            $(".submit_btn").click(function(){
+                location.href="index.html";
+            });
+        });
+    </script>
 </head>
 <body>
-    <div id="bg"><img src="../../images/24.jpg" /></div>
-    <div id="login">
-
-        <div class="box">
-            <div class="pics" style="display: none;">
-                <div class="tit">发现更多精彩!</div>
-                <div class="pic1"><a href="#"><img src="../../upload/log1.jpg" /></a></div>
-            </div>
-            <div class="logform">
-                <form action="/api/user/login" method="post">
-                    <h2>用户登陆</h2>
-                    <table>
-                        <tr>
-                            <td colspan="2">
-                                <input type="text" name="username" placeholder="微博账号/QQ号码/电子邮箱" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input type="password" name="password" placeholder="密码" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="submit" class="sub" value="登 陆" />
-                            </td>
-                            <td align="center">
-                                <input type="checkbox" class="chk" name="check" />下次自动登陆
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="javascript:void(0)" class="qqlog"></a>
-                            </td>
-                            <td>
-                                <a href="javascript:void(0)" class="sinalog"></a>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="reg">
-                        <a href="javascript:void(0)">忘记密码？</a>|
-                        <a href="register.html">注册新账号</a>|
-                        <a href="/">返回客户端主页</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- 底部 -->
-    <div id="footer">
-        <div class="copy">
-            <p>网站开发测试中...</p>
-            <p>github:JasonLWY</p>
-        </div>
-    </div>
+<form action="/api/user/login" method="post">
+    <dl class="admin_login">
+        <dt>
+            <strong>博客登陆</strong>
+            <em>jasonlwy个人博客</em>
+            <em class="MSGSucceed"><%= msg.succeed%></em>
+        </dt>
+        <dd class="user_icon">
+            <input type="text" name="username" placeholder="账号" class="login_txtbx"/>
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" name="password" placeholder="密码" class="login_txtbx"/>
+        </dd>
+        <!--  <dd class="val_icon">
+         <div class="checkcode">
+           <input type="text" id="J_codetext" placeholder="验证码" maxlength="4" class="login_txtbx">
+           <canvas class="J_codeimg" id="myCanvas" onclick="createCode()">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+         </div>
+         <input type="button" value="验证码核验" class="ver_btn" onClick="validate();">
+        </dd> -->
+        <dd>
+            <input type="submit" value="立即登陆" class="submit_btn"/>
+        </dd>
+        <dd>
+        </dd>
+</dl>
+</form>
 </body>
 </html>

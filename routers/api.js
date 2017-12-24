@@ -28,6 +28,7 @@ router.post("/user/regist",function (req,res) {
             msg.err = "用户名已经存在";
             res.render("register",{msg:msg});
         } else {
+            msg.succeed = "注册成功";
             res.render("login",{msg:msg});
         }
     });

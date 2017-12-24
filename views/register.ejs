@@ -1,89 +1,63 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
-    <title>注册用户</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="css/init.css" />
-    <link rel="stylesheet" type="text/css" href="css/register.css" />
-    <script src="js/jquery-1.12.4.min.js"></script>
-  <!--  <script type="text/javascript">
-
-        $(function () {
-           $("#btn").on("click",function () {
-               $.ajax({
-                  type:'post',
-                   url:'/api/user/register',
-                   data:{
-                      username:$("#registerBox").find('[name="username"]').val(),
-                      password:$("#registerBox").find('[name="password"]').val(),
-                       repassword:$("#registerBox").find('[name="repassword"]').val()
-                   },
-                   dataType:'json',
-                   success:function (result) {
-                       console.log(result);
-                   }
-               });
-           });
+    <meta charset="utf-8"/>
+    <title>博客注册</title>
+    <meta name="author" content="DeathGhost" />
+    <link rel="stylesheet" type="text/css" href="../../css/style.css" />
+    <style>
+        body{height:100%;background:#16a085;overflow:hidden;}
+        canvas{z-index:-1;position:absolute;}
+    </style>
+    <script src="../../js/jquery-1.12.4.min.js"></script>
+    <script src="../../js/verificationNumbers.js"></script>
+    <script src="../../js/Particleground.js"></script>
+    <script>
+        $(document).ready(function() {
+            //粒子背景特效
+            $('body').particleground({
+                dotColor: '#5cbdaa',
+                lineColor: '#5cbdaa'
+            });
+            //验证码
+            createCode();
+            //测试提交，对接程序删除即可
+            $(".submit_btn").click(function(){
+                location.href="index.html";
+            });
         });
-    </script>-->
+    </script>
 </head>
 <body>
-    <div id="bg"><img src="images/2.jpg" /></div>
-    <div id="register">
-        <div class="logo"><a href="/index"></a></div>
-        <div class="box">
-            <div class="regform">
-                <h2>普通注册</h2>
-                <%= typeof msg !="undefined"?msg.err:""%>
-                <span class="errMsg"><%=msg.err%></span>
-                <form action="/api/user/regist" method="post">
-                    <table>
-                        <tr>
-                            <td>用户名：</td>
-                            <td><input type="text" name="username"/></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>密　　码：</td>
-                            <td><input type="password" name="password" value="" /></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>确认密码：</td>
-                            <td><input type="password" name="repassword" value="" /></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" align="center"><input id="btn" type="submit" class="sub" value="注 册" /></td>
-                        </tr>
-                    </table>
-                </form>
-
-            </div>
-            <div class="quickreg">
-                <h2>快速注册</h2>
-                <div class="apps">
-                    <a class="qq" href="javascript:void(0)"></a>
-                    <a class="sina" href="javascript:void(0)"></a>
-                    <a class="taobao" href="javascript:void(0)"></a>
-                    <a class="tent" href="javascript:void(0)"></a>
-                    <a class="douban" href="javascript:void(0)"></a>
-                </div>
-                <div class="nowlog">
-                    <a href="./login">已有账号，现在去登陆！</a>
-
-                    <a href="/">返回客户端主页</a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!-- 底部 -->
-    <div id="footer">
-        <div class="copy">
-            <p>网站开发测试中...</p>
-            <p>github:JasonLWY</p>
-        </div>
-    </div>
+<form action="/api/user/regist" method="post">
+    <dl class="admin_login">
+        <dt>
+            <strong>博客注册</strong>
+            <em>jasonlwy个人博客</em>
+            <em class="MSGErr"><%=msg.err%></em>
+        </dt>
+        <dd class="user_icon">
+            <input type="text" name="username" placeholder="账号" class="login_txtbx"/>
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" name="password" placeholder="密码" class="login_txtbx"/>
+        </dd>
+        <dd class="pwd_icon">
+            <input type="password" name="repassword" placeholder="确认密码" class="login_txtbx"/>
+        </dd>
+        <!--  <dd class="val_icon">
+         <div class="checkcode">
+           <input type="text" id="J_codetext" placeholder="验证码" maxlength="4" class="login_txtbx">
+           <canvas class="J_codeimg" id="myCanvas" onclick="createCode()">对不起，您的浏览器不支持canvas，请下载最新版浏览器!</canvas>
+         </div>
+         <input type="button" value="验证码核验" class="ver_btn" onClick="validate();">
+        </dd> -->
+        <dd>
+            <input type="submit" value="立即登陆" class="submit_btn"/>
+        </dd>
+        <dd>
+        </dd>
+    </dl>
+</form>
 </body>
 </html>
