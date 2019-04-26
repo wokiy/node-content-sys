@@ -2,7 +2,7 @@
 实现博客前台界面是boostrap布局，ejs 数据渲染，后台(也是boostrap实现布局)实现博客的管理，数据库nosql 实现存储
 ## 页面展示
 #### 首页展示
- ![node博客首页](http://114.215.91.58/Blog//static/userImages/20171111/1510330841311053032.jpg)
+ ![node博客首页](/public/images/a.png)
 #### 文章展示
  ![node文章展示页](http://114.215.91.58/Blog//static/userImages/20171111/1510330841911019766.jpg)
 #### 评论展示
