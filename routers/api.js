@@ -1,6 +1,6 @@
 var express = require("express");
-var User = require("../schemas/User")
-var sms_util = require('./sms_util')
+var User = require("../schemas/User");
+var sms_util = require('./sms_util');
 var router = express.Router();
 var sha1 = require("sha1");
 /*统一返回数据格式

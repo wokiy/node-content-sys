@@ -377,6 +377,9 @@ pre {
 .post-content p {
     margin-top: 0;
     margin-bottom: 1.46em;
+    font-size: 0.85em;
+    font-family: "Microsoft YaHei","微软雅黑","SimSun","宋体";
+
 }
 .post-content a {
     word-wrap: break-word;

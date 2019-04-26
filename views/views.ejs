@@ -3,22 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <title>随心笔记</title>
+    <title>银时博文</title>
     <meta name="description" content="" />
     <meta name="keywords" content="Ghost,blog,Ghost中国,Ghost博客,Ghost中文,Ghost中文文档">
-
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="shortcut icon" href="/favicon.ico">
-
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/8.5/styles/monokai_sublime.min.css">
     <link href="//cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
-
     <link rel="canonical" href="http://www.ghostchina.com/ghost-1-0-0-beta-2-released/" />
     <meta name="referrer" content="origin" />
     <script type="text/javascript" src="js/demo01.js"></script>
@@ -31,28 +26,8 @@
 
     <meta name="generator" content="Ghost 0.7" />
     <link rel="alternate" type="application/rss+xml" title="Ghost 开源博客平台" href="http://www.ghostchina.com/rss/" />
-
 </head>
 <body class="post-template">
-
-<!-- start header -->
-<header style="display: none;" class="main-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-
-                <!-- start logo -->
-                <a class="branding" href="http://www.ghostchina.com" title="Ghost 开源博客平台"><img src="http://static.ghostchina.com/image/b/46/4f5566c1f7bc28b3f7ac1fada8abe.png" alt="Ghost 开源博客平台"></a>
-                <!-- end logo -->
-                <h2 class="text-hide">Ghost 是一个简洁、强大的写作平台。你只须专注于用文字表达你的想法就好，其余的事情就让 Ghost 来帮你处理吧。</h2>
-
-
-            </div>
-        </div>
-    </div>
-</header>
-<!-- end header -->
-
 <!-- start navigation -->
 <nav class="main-navigation">
     <div class="container">
@@ -67,8 +42,8 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         <li class="nav-current" role="presentation"><a href="/">首页</a></li>
-                        <li  role="presentation"><a href="/committeam">摄影</a></li>
-                        <li  role="presentation"><a href="/committeam">旅游</a></li>
+                        <!--<li  role="presentation"><a href="/committeam">摄影</a></li>-->
+                        <!--<li  role="presentation"><a href="/committeam">旅游</a></li>-->
                         <li  role="presentation"><a href="/about">关于博主</a></li>
                     </ul>
                 </div>
@@ -100,11 +75,13 @@
                     </header>
 
                     <section class="featured-media">
-                        <img src="<%=content.images%>" alt="Ghost 1.0.0-beta.2 发布啦！">
+                        <img src="<%=content.images%>" alt="image">
                     </section>
 
                     <section class="post-content">
-                                    <%=content.content%>
+                        <p>
+                            <%=content.content%>
+                        </p>
                     </section>
 
                     <footer class="post-footer clearfix">

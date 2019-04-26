@@ -2,10 +2,11 @@ require("../tools/db")
 
 var Content = require("../schemas/Content");
 Content.create({
-    name:"react",
+    title:"react",
     description:"asdadasd",
     content:"sadasdsaddddddddddddddddddddddddddddddddddddddddddasdasdsa",
-    comments:[]
+    comments:[],
+
 },function (err) {
     if(!err){
         console.log("数据插入成功！！！");

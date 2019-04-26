@@ -2,8 +2,8 @@ require("../tools/db")
 
 var User = require("../schemas/User");
 User.create({
-    username:"deleteTest",
-    password:"40bd001563085fc35165329ea1ff5c5ecbdbbeef",
+    username:"aaasss",
+    password:"1234561",
     live:false
 },function (err) {
     if(!err){
