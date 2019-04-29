@@ -1,17 +1,21 @@
-# node-express博客
-实现博客前台界面是boostrap布局，ejs 数据渲染，后台(也是boostrap实现布局)实现博客的管理，数据库nosql 实现存储
+# node-content-sys
+>node内容发布系统,界面布局统一使用响应式boostrap布局，ejs 数据渲染，后台(也是boostrap实现布局)实现node-content-sys的管理，数据库是使用mongodb实现存储。
 ## 页面展示
+
 #### 首页展示
- ![node博客首页](/public/images/b.png)
-#### 文章展示
- ![node文章展示页](/public/images/a.png)
+ ![node博客首页](/public/img/a.png)
+#### 文章展示和评论
+
+ ![node文章展示页](/public/img/d.jpg)
 #### 登陆页面展示
- ![node文章展示页](/public/images/c.png)
+
+ ![node文章展示页](/public/img/b.jpg)
 ## 后台展示
+
 #### 后台首页
- ![node后台展示页面](/public/images/D.png)
+ ![node后台展示页面](/public/img/d.jpg)
 #### 分类管理
-![fenlei](/public/images/e.png)
+
 #### 文章发布管理 
- ![node文章管理页](/public/images/F.png)
+
 
