@@ -11,7 +11,7 @@ router.use(function (req , res , next) {
     next();
 });
 var users = {};
-router.post("/user/regist",function (req,res) {
+router.post("/regist",function (req,res) {
     var username = req.body.username.trim();
     var password = req.body.password.trim();
     var repassword = req.body.repassword.trim();
@@ -52,16 +52,17 @@ router.get('/sendcode', function (req, res, next) {
 
     //3. 返回响应数据
     res.send({"code": 0})
-})
+});
 /*登陆方法实现*/
-router.post("/user/login",function (req,res) {
+router.post("/login",function (req,res) {
     let username = req.body.username.trim();
     let password = req.body.password.trim();
     //数据查询用户 和密码正确
     User.findOne({username:username},function (err,user) {
         if(!err && user && user.password ==sha1(password)&&user.isBigadmin==true){
-                req.session.loginUser = user
-                res.redirect("/admin/admin?page=1");
+                req.session.loginUser = user;
+                res.render("node-admin-sys-index");
+                // res.redirect("/admin/admin?page=1");
         }else if(!err && user && user.password ==sha1(password)){
                 req.session.loginUser = user;
                 res.redirect("/index");
@@ -69,6 +70,12 @@ router.post("/user/login",function (req,res) {
             res.render("login", {msg: {err: "用户名或密码错误！！！！"}, username: username});
         }
     });
+});
+
+//node-admin-sys index  iframe 路由加载内容
+router.get("/index_v3",function (req,res) {
+   //iframe 路由添加内容
+   res.render("node-admin-sys-index_v3");
 });
 
 /*判断用户是否登陆*/

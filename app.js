@@ -23,6 +23,8 @@ app.use(session({
 /*加载模板文件*/
 app.set("view engine","ejs");
 app.set("views","views");
+app.set("admin","admin");
+
 /*加载静态文件*/
 app.use(express.static("public"));
 /*中间件必须在路由之前 不然加载不到中间件*/
@@ -32,11 +34,11 @@ app.use(multer({dest: './public/upload'}).any());
 app.use(function (req,res,next) {
     res.locals.session = req.session;
     next();
-})
+});
 app.use(function (req,res,next) {
     res.locals.msg = {};
     next();
-})
+});
 /*路由加载*/
 app.use("/admin",require("./routers/admin"));
 app.use("/api",require("./routers/api"));

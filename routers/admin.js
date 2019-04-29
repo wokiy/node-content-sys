@@ -24,7 +24,6 @@ function checklogin(req,res,next) {
         next();
     }
 }
-
 /*跳转到用户管理页面*/
 router.get("/user_list",checklogin,function (req,res) {
     /*分页实先*/
@@ -228,6 +227,11 @@ router.get("/admin",function (req,res) {
         })
     })
 });
+
+router.get("/index_v3",function (req,res) {
+    res.render("node-admin-sys-index_v3");
+});
+
 module.exports = router;
 
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>node-admin-sys</title>
+    <meta name="keywords" content="node-admin-sys">
+    <meta name="description" content="node-admin-sys">
+    <link rel="shortcut icon" href="images/bitbug_favicon.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" >
+    <link href="css/animate.min.css" rel="stylesheet" type="text/css" >
+    <link href="css/style.min.css" rel="stylesheet" type="text/css" >
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    <style>
+        /*修改gray-bg16进制颜色*/
+        .gray-bg{
+            background-color: #092923;
+        }
+        /*change middle-box margin-top 大小调整*/
+        .middle-box{
+            margin-top:100px;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <div>
+            <h1 class="logo-name">N</h1>
+        </div>
+        <h3>欢迎使用node-admin-sys</h3>
+        <!--登陆表达接口跳转-->
+        <form class="m-t" role="form" action="/api/login" method="post">
+            <div class="form-group">
+                <input type="text" name="username" class="form-control" placeholder="用户名" required="true">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="密码" required="true">
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+            <p class="text-muted text-center"> <a href="#"><small>忘记密码了？</small></a> | <a href="/register">注册一个新账号</a>
+            </p>
+
+        </form>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
