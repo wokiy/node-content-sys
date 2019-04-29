@@ -23,4 +23,11 @@
 
 #### 文章发布管理 
 
+## 项目运行
+1. 具备node环境 npm install
+2. 具备 mongodb 并且服务开启(自己配置数据库 新建数据库 本人数据库:blog2 以提供基本mongodb数据库脚本 public 目录下 mongodb.sql)
+
+   
+
+
 
