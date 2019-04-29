@@ -13,7 +13,7 @@
 ## 后台展示
 
 #### 后台首页
- ![node后台展示页面](/public/img/d.jpg)
+ ![node后台展示页面](/public/img/c.jpg)
 #### 分类管理
 
 #### 文章发布管理 
