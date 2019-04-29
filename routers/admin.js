@@ -227,9 +227,37 @@ router.get("/admin",function (req,res) {
         })
     })
 });
-
+//-----------------------------------------------------新后台mongodb数据CRUD操作-----------------------------------------------------------------
+//加载后台首页显示的页面
 router.get("/index_v3",function (req,res) {
     res.render("node-admin-sys-index_v3");
+});
+//用户列表查询显示
+router.get("/userList",function (req,res) {
+    //每页显示条数
+    let  limit = 6;
+    //页数
+    let page = Number(req.query.page || 1);
+    //过滤条数
+    let skip = (page -1 ) *limit;
+    //总页数初始值
+    let pages = 0;
+    User.count().then(function (count) {
+        //总页数
+        pages = Math.ceil(count/limit);
+        //最大页数
+        page = Math.min(page,pages-1);
+        //最小页数
+        page = Math.max(page,1);
+        res.render("node-admin-sys-userList")
+        // User.find({isBigadmin:{$ne:true},live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
+        //     res.render("user",{users:users,
+        //         count:count,
+        //         pages :pages,
+        //         page:page
+        //     });
+        // })
+    });
 });
 
 module.exports = router;
