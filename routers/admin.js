@@ -249,14 +249,16 @@ router.get("/userList",function (req,res) {
         page = Math.min(page,pages-1);
         //最小页数
         page = Math.max(page,1);
-        res.render("node-admin-sys-userList")
-        // User.find({isBigadmin:{$ne:true},live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
-        //     res.render("user",{users:users,
-        //         count:count,
-        //         pages :pages,
-        //         page:page
-        //     });
-        // })
+        // res.render("node-admin-sys-userList")
+        //查询所有用户数据User.find({isBigadmin:{$ne:true},live:{$ne:false}})
+        User.find({live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
+            res.render("node-admin-sys-userList",{users:users,
+                count:count,
+                pages :pages,
+                page:page
+            });
+            console.log(users);
+        });
     });
 });
 

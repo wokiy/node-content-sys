@@ -11,7 +11,7 @@ router.use(function (req , res , next) {
     next();
 });
 var users = {};
-router.post("/regist",function (req,res) {
+router.post("/register",function (req,res) {
     var username = req.body.username.trim();
     var password = req.body.password.trim();
     var repassword = req.body.repassword.trim();
