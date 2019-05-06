@@ -296,7 +296,18 @@ router.get("/adminList",function (req,res) {
         });
     });
 });
-
+//用户删除
+router.get("/delete_user",function (req,res) {
+    //根据id 修改live 变为伪删除
+    let id = req.query.id;
+    User.update({_id:id},{$set:{live:false}},function (err) {
+        //重定向到用户列表页
+        if (!err){
+            //没出现出error 重定向
+            res.redirect("/admin/userList?userList=1");
+        }
+    })
+});
 module.exports = router;
 
 
