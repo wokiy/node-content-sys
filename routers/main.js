@@ -101,7 +101,7 @@ router.get("/views",function (req,res) {
         let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
         content.views++;
         content.save();
-        let arr =[]
+        let arr =[];
         for(let i=0;i<content.comments.length;i++){
             let nowT = content.comments[i].postTime;
             let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");

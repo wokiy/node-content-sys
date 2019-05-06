@@ -12,7 +12,13 @@ var userSchema = mongoose.Schema({
     live:{
         type:Boolean,
         default:true
+    },
+    //添加时间
+    addTime:{
+        type:Date,
+        default:new Date()
     }
+    
 });
 module.exports = mongoose.model("User",userSchema);
 
