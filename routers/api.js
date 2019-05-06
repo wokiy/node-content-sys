@@ -3,8 +3,7 @@ var User = require("../schemas/User");
 var sms_util = require('./sms_util');
 var router = express.Router();
 var sha1 = require("sha1");
-/*统一返回数据格式
-* */
+/*统一返回数据格式 */
 //向res.locals中添加一个msg对象
 router.use(function (req , res , next) {
     res.locals.msg = {};
@@ -17,7 +16,9 @@ router.post("/register",function (req,res) {
     var repassword = req.body.repassword.trim();
     //创建对象保存错误信息
     var msg = {
-        username: username
+        username: username,
+        err: "",
+        succeed: ""
     };
     //插入数据库
     User.create({
@@ -26,10 +27,10 @@ router.post("/register",function (req,res) {
     }, function (err) {
         if (err) {
             msg.err = "用户名已经存在";
-            res.render("register",{msg:msg});
+            res.render("node-admin-sys-register",{msg:msg});
         } else {
             msg.succeed = "注册成功";
-            res.render("login",{msg:msg});
+            res.render("node-admin-sys-login",{msg:msg});
         }
     });
 });
@@ -48,8 +49,7 @@ router.get('/sendcode', function (req, res, next) {
             users[phone] = code;
             console.log('保存验证码: ', phone, code)
         }
-    })
-
+    });
     //3. 返回响应数据
     res.send({"code": 0})
 });
@@ -67,17 +67,15 @@ router.post("/login",function (req,res) {
                 req.session.loginUser = user;
                 res.redirect("/index");
         }else {
-            res.render("login", {msg: {err: "用户名或密码错误！！！！"}, username: username});
+            res.render("node-admin-sys-login", {msg: {err: "用户名或密码错误！！！！"}, username: username});
         }
     });
 });
-
 //node-admin-sys index  iframe 路由加载内容
 router.get("/index_v3",function (req,res) {
    //iframe 路由添加内容
    res.render("node-admin-sys-index_v3");
 });
-
 /*判断用户是否登陆*/
 function checklogin(req,res,next) {
 //    判断是否登陆

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node-admin-sys</title>
+    <meta name="keywords" content="node-admin-sys">
+    <meta name="description" content="node-admin-sys">
+    <link rel="shortcut icon" href="images/bitbug_favicon.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+    <style>
+        /*修改gray-bg16进制颜色*/
+        .gray-bg{
+            background-color: #092923;
+        }
+        /*change middle-box margin-top 大小调整*/
+        .middle-box{
+            margin-top:100px;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="middle-box text-center loginscreen   animated fadeInDown">
+    <div>
+        <div>
+            <h1 class="logo-name">N</h1>
+        </div>
+        <h3>欢迎注册node-content-sys</h3>
+        <p>创建一个N新账户</p>
+        <form class="m-t" role="form" action="/api/register" method="post">
+            <div class="form-group">
+                <input type="text" name="username" class="form-control" placeholder="请输入用户名" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="请输入密码" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" name="repassword" class="form-control" placeholder="请再次输入密码" required="">
+            </div>
+            <div class="form-group text-left">
+                <div class="checkbox i-checks">
+                    <label class="no-padding">
+                        <input type="checkbox"><i></i> 我同意注册协议</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">注 册</button>
+            <p class="text-muted text-center"><small>已经有账户了？</small><a href="/login">点此登录</a>
+            </p>
+
+        </form>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
+</script>
+
+</body>
+
+</html>

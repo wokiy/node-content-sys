@@ -332,7 +332,6 @@
                                 else{
                                     //数据遍历渲染
                                     for(let i=0;i<users.length;i++){
-
                             %>
                             <tr>
                                 <td>
@@ -346,8 +345,7 @@
                                 <td>jasonlwy@163.com</td>
                                 <td>2019.11.11</td>
                                 <td>
-                                    <a href="#"><i class="fa fa-check text-navy"></i></a>
-
+                                    <a href="#"><i class="fa fa-times text-navy"></i></a>
                                 </td>
                             </tr>
                             <%
@@ -358,12 +356,16 @@
                         </table>
                     </div>
                     <nav class="pull-right">
+                        <!--管理员和用户在同个文档内 所以每次查询的count是全体文档数目，so分页显示有点bug-->
+                        <%
+                            if(userType === "admin"){
+                            //管理员
+                        %>
                         <ul class="pagination">
-
                             <%
                             if(users && users.length>0){
                             %>
-                            <li><a href="/admin/userList?page=<%=page-1%>"><span aria-hidden="true">&laquo;</span></a></li>
+                            <li><a href="/admin/adminList?page=<%=page-1%>"><span aria-hidden="true">&laquo;</span></a></li>
                             <%
                             }
                             %>
@@ -376,7 +378,7 @@
                             }else{
                             for(let i = 1;i<=pages;i++){
                             %>
-                            <li><a href="/admin/userList?page=<%=i%>"><%=i%></a></li>
+                            <li><a href="/admin/adminList?page=<%=i%>"><%=i%></a></li>
                             <%
                             }
                             }
@@ -384,11 +386,48 @@
                             <%
                             if(users && users.length>0){
                             %>
-                            <li><a href="/admin/userList?page=<%=page+1%>"><span aria-hidden="true">&raquo;</span></a></li>
+                            <li><a href="/admin/adminList?page=<%=page+1%>"><span aria-hidden="true">&raquo;</span></a></li>
                             <%
                             }
                             %>
                         </ul>
+                        <%
+                        }else{
+                            //用户列表
+                        %>
+                           <ul class="pagination">
+                                    <%
+                                    if(users && users.length>0){
+                                    %>
+                                    <li><a href="/admin/userList?page=<%=page-1%>"><span aria-hidden="true">&laquo;</span></a></li>
+                                    <%
+                                    }
+                                    %>
+                                    <!--没有用户的情况-->
+                                    <%
+                                    if(!users && users.length == 0){
+                                    %>
+                                        <li class="active"><a href="#">0</a></li>
+                                    <%
+                                    }else{
+                                    for(let i = 1;i<=pages;i++){
+                                    %>
+                                    <li><a href="/admin/userList?page=<%=i%>"><%=i%></a></li>
+                                    <%
+                                    }
+                                    }
+                                    %>
+                                    <%
+                                    if(users && users.length>0){
+                                    %>
+                                    <li><a href="/admin/userList?page=<%=page+1%>"><span aria-hidden="true">&raquo;</span></a></li>
+                                    <%
+                                    }
+                                    %>
+                                </ul>
+                        <%
+                        }
+                        %>
                     </nav>
                 </div>
             </div>

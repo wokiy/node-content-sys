@@ -6,11 +6,11 @@
     <title>node-admin-sys</title>
     <meta name="keywords" content="node-admin-sys">
     <meta name="description" content="node-admin-sys">
-    <link rel="shortcut icon" href="images/bitbug_favicon.ico">
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" >
-    <link href="css/animate.min.css" rel="stylesheet" type="text/css" >
-    <link href="css/style.min.css" rel="stylesheet" type="text/css" >
+    <link rel="shortcut icon" href="../images/bitbug_favicon.ico">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css" >
+    <link href="../css/animate.min.css" rel="stylesheet" type="text/css" >
+    <link href="../css/style.min.css" rel="stylesheet" type="text/css" >
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html" />
     <![endif]-->
@@ -33,6 +33,12 @@
             <h1 class="logo-name">N</h1>
         </div>
         <h3>欢迎使用node-admin-sys</h3>
+
+        <div style="padding: 8px;font-size: 16px;" class="alert alert-success" role="alert">
+            <%= msg.succeed%>
+            <%= msg.err%>
+        </div>
+
         <!--登陆表达接口跳转-->
         <form class="m-t" role="form" action="/api/login" method="post">
             <div class="form-group">
@@ -44,11 +50,10 @@
             <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
             <p class="text-muted text-center"> <a href="#"><small>忘记密码了？</small></a> | <a href="/register">注册一个新账号</a>
             </p>
-
         </form>
     </div>
 </div>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

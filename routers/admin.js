@@ -120,7 +120,6 @@ router.post("/addCategory_content",function (req,res) {
 router.get("/delete_category",function (req,res) {
     //根据id 修改live 变为伪删除
     let id = req.query.id;
-
     Category.update({_id:id},{$set:{live:false}},function (err) {
         //重定向到分类页面
         if(!err) {
@@ -242,6 +241,7 @@ router.get("/userList",function (req,res) {
     let skip = (page -1 ) *limit;
     //总页数初始值
     let pages = 0;
+    let userType = '';
     User.count().then(function (count) {
         //总页数
         pages = Math.ceil(count/limit);
@@ -249,15 +249,50 @@ router.get("/userList",function (req,res) {
         page = Math.min(page,pages-1);
         //最小页数
         page = Math.max(page,1);
+        userType = 'user';
         // res.render("node-admin-sys-userList")
         //查询所有用户数据User.find({isBigadmin:{$ne:true},live:{$ne:false}})
-        User.find({live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
+        //相对应结构化SQL而言 "$ne"===================>"!="
+        User.find({isBigadmin:{$ne:true},live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
             res.render("node-admin-sys-userList",{users:users,
                 count:count,
                 pages :pages,
-                page:page
+                page:page,
+                userType:userType
             });
-            console.log(users);
+        });
+    });
+});
+//查询admin 管理员
+router.get("/adminList",function (req,res) {
+    //每页显示条数
+    let limit = 6;
+    //页数
+    let page = Number(req.query.page || 1);
+    //过滤条数
+    let skip = (page -1) * limit;
+    //总页数初始值
+    let pages = 0;
+    //用户类型
+    let userType = '';
+    User.count().then(function (count) {
+        //用户类型
+        userType = 'admin';
+        //总页数
+        pages = Math.ceil(count/limit);
+        console.log(count);
+        //最大页数
+        page = Math.min(page,pages-1);
+        //最小页数
+        page = Math.max(page,1);
+        //相对应结构化SQL而言 "$ne"===================>"!="
+        User.find({isBigadmin:{$ne:false},live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
+            res.render("node-admin-sys-userList",{users:users,
+                count:count,
+                pages :pages,
+                page:page,
+                userType:userType
+            });
         });
     });
 });
