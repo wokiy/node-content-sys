@@ -339,13 +339,33 @@
                                 </td>
                                 <td><%=users[i]._id%></td>
                                 <td>
-                                    <!--<span class="pie"></span>-->
-                                        <%=users[i].username%>
+                                    <!--
+                                        <span class="pie"></span>
+                                    -->
+                                    <%=users[i].username%>
                                 </td>
                                 <td>jasonlwy@163.com</td>
                                 <td>2019.11.11</td>
                                 <td>
-                                    <a href="#"><i class="fa fa-times text-navy"></i></a>
+                                    <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-times text-navy"></i></a>
+                                    <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content animated flipInY">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title">操作确认</h4>
+                                                    <small class="font-bold">操作后将无法返回!</small>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p><strong>H+</strong>请认真阅读管理员操作手册，确认本次操作准确无误！！！！</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                                    <button type="button" class="btn btn-primary">确认</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             <%
@@ -376,11 +396,9 @@
                                 <li class="active"><a href="#">0</a></li>
                             <%
                             }else{
-                            for(let i = 1;i<=pages;i++){
                             %>
-                            <li><a href="/admin/adminList?page=<%=i%>"><%=i%></a></li>
+                            <li><a href="/admin/adminList?page=1">1</a></li>
                             <%
-                            }
                             }
                             %>
                             <%
