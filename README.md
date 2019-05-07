@@ -1,4 +1,4 @@
-# node-content-sys(还未修改好20190429)
+# node-content-sys(还未修改好20190507)
 >node内容发布系统,界面布局统一使用响应式boostrap布局，ejs 数据渲染，后台(也是boostrap实现布局)实现node-content-sys的管理，数据库是使用mongodb实现存储。
 ## node-content-sys 小项目需求整理
 1. 具备信息发布系统的特性
@@ -27,6 +27,10 @@
 
 ![用户操作](/public/img/aa.png)
 #### 文章发布管理 
+> 内容界面实现 文章内容添加实现
+
+![用户列表](/public/img/SS.png)
+
 
 ## 项目运行
 1. 具备node环境 npm install

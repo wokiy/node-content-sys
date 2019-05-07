@@ -82,7 +82,7 @@
                     %>
                         <span>还未上传文件</span>
                     <%
-                            }else{
+                      }else{
                     %>
                    您上传的图片: <img src="<%=session.img.imgName%>" alt="" class="img-circle">
                     <%
@@ -97,11 +97,11 @@
                     <label for="title">分类</label>
                     <select name="category" id="category" class="form-control">
                         <%
-                                for(let i = 0;i<categorys.length;i++){
+                          for(let i = 0;i<categorys.length;i++){
                         %>
-                        <option value="<%=categorys[i]._id%>"><%=categorys[i].name%></option>
+                          <option value="<%=categorys[i]._id%>"><%=categorys[i].name%></option>
                         <%
-                                }
+                          }
                         %>
                     </select>
                 </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H+ 后台主题UI框架 - Bootstrap3 Markdown编辑器</title>
+    <title>node-admin-sys</title>
     <meta name="keywords" content="node-admin-sys">
     <meta name="description" content="node-admin-sys">
     <link rel="shortcut icon" href="../images/bitbug_favicon.ico">
@@ -12,54 +12,92 @@
     <link href="../css/animate.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../css/plugins/markdown/bootstrap-markdown.min.css" />
     <link href="../css/style.min.css" rel="stylesheet">
+    <style>
+        .form-group{
+            height: 50px;
+        }
+        .control-label{
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Markdown文本编辑器</h5>
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_editors.html#">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="form_editors.html#">选项1</a>
-                            </li>
-                            <li><a href="form_editors.html#">选项2</a>
-                            </li>
-                        </ul>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
+            <div  class="ibox float-e-margins">
+                <form action="/admin/addContent" method="post">
+                <div class="ibox-content">
+                   <!--<h2>文章发布</h2>-->
+                    <!--文章标题-->
+                    <div class="form-group">
+                        <label  class="col-sm-1 control-label">内容标题</label>
+                        <div class="col-sm-2">
+                            <input id="title" name="title"  type="text" class="form-control">
+                        </div>
+                    </div>
+                    <!--文章简介-->
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">
+                            内容简介
+                        </label>
+                        <div class="col-sm-2">
+                            <input id="description" name="description" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <!--文章分类下拉列表-->
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">所属类目</label>
+                        <div class="col-sm-2">
+                            <select class="form-control m-b" name="category" id="category">
+                                <%
+                                    for (let i = 0;i<categorys.length;i++){
+                                %>
+                                <option value="<%=categorys[i]._id%>"><%=categorys[i].name%></option>
+                                <%
+                                  }
+                                %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <h5>文本内容编辑器</h5>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_editors.html#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                            <li><a href="form_editors.html#">选项1</a>
+                                            </li>
+                                            <li><a href="form_editors.html#">选项2</a>
+                                            </li>
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+                                    <textarea id="content" name="content" data-provide="markdown" rows="10">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-1">
+                            <button class="btn btn-primary" type="submit">保存内容</button>
+                        </div>
                     </div>
                 </div>
-                <div class="ibox-content">
-                    <textarea name="content" data-provide="markdown" rows="10"></textarea>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="display: none;" class="row">
-        <div class="col-lg-12">
-            <div class="ibox float-e-margins">
-
-                <div class="ibox-content">
-                    <div data-provide="markdown-editable">
-                        <h2>Bootstrap-Markdown简介</h2>
-                        <p>Bootstrap-Markdown是一款优秀的markdown编辑器，提供了实用的API，利用插件进行扩展。<code>你可以单击这段文字试试</code>
-                        </p>
-                    </div>
-                    <p class="alert alert-success alert-dismissable m-t">
-                        更多示例请访问：<a href="../../../toopay.github.io/bootstrap-markdown/default.htm">http://toopay.github.io/bootstrap-markdown/</a>
-                        <br>GitHub：
-                        <a href="../../../https@github.com/toopay/bootstrap-markdown">https://github.com/toopay/bootstrap-markdown</a>
-                    </p>
-                </div>
+                </form>
             </div>
         </div>
     </div>

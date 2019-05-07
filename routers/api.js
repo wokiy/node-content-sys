@@ -81,7 +81,7 @@ function checklogin(req,res,next) {
 //    判断是否登陆
         if(!req.session.loginUser){
         //    用户没有登陆，跳转登陆页面
-            res.render("login",{msg:{err:"请登录后再访问该页面！！！"}});
+            res.render("node-admin-sys-login",{msg:{err:"请登录后再访问该页面！！！"}});
         }else{
             next();
         }
