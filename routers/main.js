@@ -14,7 +14,7 @@ function checklogin(req,res,next) {
 //    判断是否登陆
     if(!req.session.loginUser){
         //    用户没有登陆，跳转登陆页面
-        res.render("login",{msg:{err:"请登录后再访问该页面！！！"}});
+        res.render("node-admin-sys-login",{msg:{err:"请登录后再访问该页面！！！"}});
     }else{
         next();
     }
@@ -29,7 +29,7 @@ router.get("/about",function (req,res) {
 分页显示
 * */
 router.get("/",function (req,res) {
-    res.redirect("/index?page=1");
+    res.redirect("/index");
 });
 router.get("/index",function (req,res,next) {
     /*分类排序*/
@@ -63,7 +63,7 @@ router.get("/index",function (req,res) {
         res.page=page;
 
         Content.find({}).limit(limit).skip(skip).sort({_id:-1}).populate(['category','user']).then(function (contents) {
-            let arr =[]
+            let arr =[];
             for(let i=0;i<contents.length;i++){
                 let nowT = contents[i].addTime;
                 let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
@@ -108,12 +108,12 @@ router.get("/views",function (req,res) {
             arr.push(now);
         }
         res.render("views",{
-                        categorys:res.categorys,
-                        content:content,
-                        now:now,
-                        arr:arr
-                    });
+            categorys:res.categorys,
+            content:content,
+            now:now,
+            arr:arr
         });
+    });
 });
 //———————————————————————---添加评论实现——————————————————————————————————————————
 /*评论模块*/

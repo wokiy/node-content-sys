@@ -269,7 +269,8 @@ pre {
     position: relative;
     overflow: hidden;
     /*为每个文章快添加边框区别显示*/
-    border: 1px solid #e1e4e8!important;
+    /*border: 1px solid #e1e4e8!important;*/
+    border: 1px solid #d1d5da;
 }
 .post .featured {
     position: absolute;

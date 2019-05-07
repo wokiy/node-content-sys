@@ -178,7 +178,7 @@ router.post("/add",checklogin,function (req,res) {
     let content = req.body.content;
     let image = {
         name:newName2
-    }
+    };
     delete req.session.img;
     Content.create({category:category,title:title,user:user,description:description,content:content,images:newName2}).then(function (err) {
         res.render("success",{msg:{success:'内容保存成功过!!!!!'}});
@@ -226,7 +226,7 @@ router.get("/admin",function (req,res) {
         })
     })
 });
-//-----------------------------------------------------新后台mongodb数据CRUD操作-----------------------------------------------------------------
+//-----------------------------------------------------（node-admin-sys）新后台mongodb数据CRUD操作-----------------------------------------------------------------
 //加载后台首页显示的页面
 router.get("/index_v3",function (req,res) {
     res.render("node-admin-sys-index_v3");
@@ -254,11 +254,18 @@ router.get("/userList",function (req,res) {
         //查询所有用户数据User.find({isBigadmin:{$ne:true},live:{$ne:false}})
         //相对应结构化SQL而言 "$ne"===================>"!="
         User.find({isBigadmin:{$ne:true},live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
+            let arr = [];
+            for(let i=0;i<users.length;i++){
+                let addT = users[i].addTime;
+                let now = moment(addT).format("YYYY-MM-DD HH:mm:ss");
+                arr.push(now);
+            }
             res.render("node-admin-sys-userList",{users:users,
                 count:count,
                 pages :pages,
                 page:page,
-                userType:userType
+                userType:userType,
+                arr:arr
             });
         });
     });
@@ -287,11 +294,18 @@ router.get("/adminList",function (req,res) {
         page = Math.max(page,1);
         //相对应结构化SQL而言 "$ne"===================>"!="
         User.find({isBigadmin:{$ne:false},live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
+            let arr = [];
+            for(let i = 0;i<users.length;i++){
+                let addT = users[i].addTime;
+                let now = moment(addT).format("YYYY-MM-DD HH:mm:ss");
+                arr.push(now);
+            }
             res.render("node-admin-sys-userList",{users:users,
                 count:count,
                 pages :pages,
                 page:page,
-                userType:userType
+                userType:userType,
+                arr:arr
             });
         });
     });
@@ -307,6 +321,10 @@ router.get("/delete_user",function (req,res) {
             res.redirect("/admin/userList?userList=1");
         }
     })
+});
+//能容文章发布
+router.get("/contentEdit",function (req,res) {
+    res.render("node-admin-sys-markdown");
 });
 module.exports = router;
 
