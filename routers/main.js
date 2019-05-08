@@ -1,6 +1,7 @@
 let express = require("express");
 let User = require("../schemas/User");
 let router = express.Router();
+let markdown = require('markdown-js');
 let  moment = require("moment");
 let Content = require("../schemas/Content");
 let Category = require("../schemas/Category");
@@ -91,16 +92,22 @@ router.get("/views",function (req,res,next) {
         next();
     });
 });
-/*加载views时候查询评论数点击查询viewss时候views字段加一*/
-/*详细文章查询*/
+/*加载views时候查询评论数点击查询views时候views字段加一*/
+
+//详细文章查询 + markdown格式转义
 router.get("/views",function (req,res) {
     //获取文章的id查询
     let id = req.query.id;
     Content.findOne({_id:id}).populate(['category','user']).then(function (content) {
         let nowT = content.addTime;
         let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
+        //阅读数views ; 每次点开始阅读数目 ; 自动添加一
         content.views++;
+        //添加后保存 阅读数的添加
         content.save();
+        //获取markdown内容
+        let text = content.content;
+        let html = markdown.makeHtml(text);
         let arr =[];
         for(let i=0;i<content.comments.length;i++){
             let nowT = content.comments[i].postTime;
@@ -111,7 +118,8 @@ router.get("/views",function (req,res) {
             categorys:res.categorys,
             content:content,
             now:now,
-            arr:arr
+            arr:arr,
+            contentHtml:html
         });
     });
 });

@@ -1,12 +1,13 @@
-var express = require("express");
-var router = express.Router();
+let express = require("express");
+let router = express.Router();
 const  fs = require("fs");
+let markdown = require('markdown-js');
 let User = require("../schemas/User");
 let Category = require("../schemas/Category");
 let Content = require("../schemas/Content");
 const pathLib=require('path');
 let  moment = require("moment");
-var newName2='';
+let newName2='';
 router.get("/user",function (req,res) {
     res.send("user 模块");
 });
@@ -344,7 +345,7 @@ router.post("/addContent",function (req,res) {
     let content = req.body.content;
     //数据库操作 数据保存成功
     Content.create({category:category,title:title,user:userID,description:description,content:content}).then(function (err) {
-        res.render("node-admin-sys-markdown",{msg:{success:'内容保存成功过!!!!!'}});
+        res.render("node-admin-sys-blog",{msg:{success:'内容保存成功过!!!!!'}});
     })
 });
 
