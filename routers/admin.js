@@ -323,13 +323,33 @@ router.get("/delete_user",function (req,res) {
     })
 });
 //查询分类上
-
-//跳转到容文章发布页面
+//跳转到容文章发布页面 + 查询所属分类
 router.get("/contentEdit",function (req,res) {
     //查询所有类目跳转完成并显示
     Category.find({live:{$ne:false}},function (err,categorys) {
         res.render("node-admin-sys-markdown",{categorys:categorys});
     });
+});
+//添加内容
+router.post("/addContent",function (req,res) {
+    //标题
+    let title  = req.body.title.trim();
+    //所属类目
+    let category = req.body.category;
+    //用户ID 从session 中获取
+    let userID = req.session.loginUser._id;
+    //简介
+    let description = req.body.description;
+    //内容
+    let content = req.body.content;
+    //数据库操作 数据保存成功
+    Content.create({category:category,title:title,user:userID,description:description,content:content}).then(function (err) {
+        res.render("node-admin-sys-markdown",{msg:{success:'内容保存成功过!!!!!'}});
+    })
+});
+
+router.get("/blog",function (req,res) {
+    res.render("node-admin-sys-blog");
 });
 module.exports = router;
 
