@@ -12,9 +12,11 @@
 #### 文章展示和评论
 
  ![node文章展示页](/public/img/d.jpg)
-#### 登陆页面展示
+#### 登陆页面展示（markdown编辑器发布的效果）
 
- ![node文章展示页](/public/img/b.jpg)
+> 原理是node express Web框架 使用markdown-js模块 ， 将markdown语法的 'content' 内容转换为 html 再ejs模板中直接渲染!!!
+
+ ![node文章展示页](/public/img/AS.png)
 ## 后台展示
 
 #### 后台首页
