@@ -62,7 +62,6 @@ router.get("/index",function (req,res) {
             page=page-1;
         }
         res.page=page;
-
         Content.find({}).limit(limit).skip(skip).sort({_id:-1}).populate(['category','user']).then(function (contents) {
             let arr =[];
             for(let i=0;i<contents.length;i++){
@@ -70,8 +69,6 @@ router.get("/index",function (req,res) {
                 let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
                 arr.push(now);
             }
-            /*console.log(contents);*/
-          /*  console.log(contents[1].category.name);*/
             res.render("index",{
                 contents:contents,
                 categorys:res.categorys,
@@ -84,7 +81,7 @@ router.get("/index",function (req,res) {
     });
 });
 //—————————————————————————————————————————————————————————————————————————
-/*点击博文的详细信息，显示所有文章的分类*/
+//点击博文的详细信息，显示所有文章的分类
 router.get("/views",function (req,res,next) {
     /*分类排序*/
     Category.find({}).sort({_id:1}).then(function (categorys) {
@@ -92,7 +89,7 @@ router.get("/views",function (req,res,next) {
         next();
     });
 });
-/*加载views时候查询评论数点击查询views时候views字段加一*/
+//加载views时候查询评论数点击查询views时候views字段加一
 
 //详细文章查询 + markdown格式转义
 router.get("/views",function (req,res) {

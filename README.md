@@ -33,6 +33,10 @@
 
 ![用户列表](/public/img/SS.png)
 
+#### 内容管理后台内容展示列表 
+
+![内容列表展示](/public/img/QQ.jpg)
+
 
 ## 项目运行
 1. 具备node环境 npm install

@@ -57,7 +57,7 @@
 
             <main class="col-md-8 main-content">
                 <%
-                if(!contents && contents.length  ==0){
+                if(!contents && contents.length ===0){
                 %>
                 <article id="108" class="post">
                     <div class="post-head">
@@ -73,7 +73,7 @@
                         <h1 class="post-title"><a href="/views?id=<%=contents[i]._id%>"><%=contents[i].title%></a></h1>
                         <div class="post-meta">
                             <span class="author">作者：<a href="/about"><%=contents[i].user.username%></a></span> &bull;
-                            <time class="post-date" datetime="2017年8月9日星期三下午4点57分" title="2017年8月9日星期三下午4点57分"><%=arr[i].toString()%></time>
+                            <time class="post-date" datetime="" title=""><%=arr[i].toString()%></time>
                         </div>
                     </div>
                     <div class="post-content">

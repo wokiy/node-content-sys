@@ -349,9 +349,27 @@ router.post("/addContent",function (req,res) {
     })
 });
 
+//后台系统全部博文测试展示demo
 router.get("/blog",function (req,res) {
-    res.render("node-admin-sys-blog");
-});
+    Content.find({}).sort({_id:-1}).populate(['category','user']).then(function (contents) {
+        //空数组 存储过滤处理好的时间数据
+        let arr =[];
+        //遍历内容中的 博文时间过滤处理
+        for(let i=0;i<contents.length;i++){
+            let nowT = contents[i].addTime;
+            let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
+            arr.push(now);
+        }
+
+        let comments = contents.length;
+        //阅读数目
+        let views= contents.views;
+        res.render("node-admin-sys-blog",{contents:contents,comments:comments,views:views,arr:arr})
+    });
+
+    //mongodb sort : -1是降序排序
+    });
+
 module.exports = router;
 
 
