@@ -211,7 +211,7 @@ router.get("/admin",function (req,res) {
         //设置最小
         page = Math.max(page,1);
         Content.find().limit(limit).skip(skip).populate(['category', 'user']).then(function (contents) {
-            let arr =[]
+            let arr =[];
             for(let i=0;i<contents.length;i++){
                 let nowT = contents[i].addTime;
                 let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
@@ -251,7 +251,6 @@ router.get("/userList",function (req,res) {
         //最小页数
         page = Math.max(page,1);
         userType = 'user';
-        // res.render("node-admin-sys-userList")
         //查询所有用户数据User.find({isBigadmin:{$ne:true},live:{$ne:false}})
         //相对应结构化SQL而言 "$ne"===================>"!="
         User.find({isBigadmin:{$ne:true},live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
@@ -319,7 +318,7 @@ router.get("/delete_user",function (req,res) {
         //重定向到用户列表页
         if (!err){
             //没出现出error 重定向
-            res.redirect("/admin/userList?userList=1");
+            res.redirect("/admin/userList");
         }
     })
 });
@@ -345,11 +344,11 @@ router.post("/addContent",function (req,res) {
     let content = req.body.content;
     //数据库操作 数据保存成功
     Content.create({category:category,title:title,user:userID,description:description,content:content}).then(function (err) {
-        res.render("node-admin-sys-blog",{msg:{success:'内容保存成功过!!!!!'}});
+        // res.render("node-admin-sys-contentList",{msg:{success:'内容保存成功过!!!!!'}});
+        res.redirect('/admin/blog');
     })
 });
-
-//后台系统全部博文测试展示demo
+//全部博文测试展示demo
 router.get("/blog",function (req,res) {
     Content.find({}).sort({_id:-1}).populate(['category','user']).then(function (contents) {
         //空数组 存储过滤处理好的时间数据
@@ -369,7 +368,54 @@ router.get("/blog",function (req,res) {
 
     //mongodb sort : -1是降序排序
     });
-
+//博文全部列表
+router.get("/contentList",function (req,res) {
+    //每页显示的条数
+    let limit = 6;
+    //页数
+    let page = Number(req.query.page || 1);
+    //过滤数目
+    let skip = (page-1)*limit;
+    //总页数初始化
+    let pages = 0;
+    //count
+    //查询所有的博文
+    Content.count().then(function (count){
+        //页数
+        pages = Math.ceil(count/limit);
+        //最大page
+        page = Math.min(page,pages-1);
+        //设置最小
+        page = Math.max(page,1);
+        Content.find().limit(limit).skip(skip).populate(['category', 'user']).then(function (contents) {
+            let arr =[];
+            for(let i=0;i<contents.length;i++){
+                let nowT = contents[i].addTime;
+                let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
+                arr.push(now);
+            }
+            res.render("node-admin-sys-contentList",{
+                contents:contents,
+                count:count,
+                pages:pages,
+                page:page,
+                arr:arr
+            })
+        })
+    })
+});
+//删除文章
+router.get("/delete_content",function (req,res) {
+    //根据ID 真删除文章
+    let id = req.query.id;
+    //根据ID删除对应的mongodb文档
+    Content.remove({_id:id},function (err) {
+        if (!err){
+            //没出错的情况下 重定向到contentList列表
+            res.redirect("/admin/contentList")
+        }
+    })
+});
 module.exports = router;
 
 

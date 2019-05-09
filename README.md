@@ -39,6 +39,13 @@
 
 ![内容列表展示](/public/img/QQ.jpg)
 
+#### 内容列表
+
+> 已实现内容文章删除功能
+
+![列表](/public/img/LL.png)
+
+
 
 ## 项目运行
 1. 具备node环境 npm install
