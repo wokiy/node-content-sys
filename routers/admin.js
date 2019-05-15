@@ -58,7 +58,7 @@ router.get("/logout",checklogin,function (req,res) {
     req.session.destroy();
     res.redirect("/login");
 });
-//分类管理and分类展示 和 分类分页展示
+//分类管理,分类展示  分类分页展示
 router.get("/catagory",checklogin,function (req,res){
     //每页显示的条数
     let limit = 6;
@@ -416,6 +416,37 @@ router.get("/delete_content",function (req,res) {
         }
     })
 });
+
+//全部栏目查询展示s
+router.get("/categoryList",function (req,res) {
+    //每页显示的条数
+    let limit = 6;
+    //页数
+    let page = Number(req.query.page || 1);
+    //过滤数目
+    let skip = (page-1)*limit;
+    //总页数初始化
+    let pages = 0;
+    //count
+    Category.count().then(function (count) {
+        //页数
+        pages = Math.ceil(count/limit);
+        //最大page
+        page = Math.min(page,pages);
+        //设置最小
+        page = Math.max(page,1);
+        Category.find({live:true}).skip(skip).limit(limit).then(function (categorys) {
+            res.render("node-admin-sys-categoryList",{
+                categorys:categorys,
+                count:count,
+                pages:pages,
+                page:page
+            });
+        });
+    });
+});
+
+
 module.exports = router;
 
 

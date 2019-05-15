@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>node-admin-sys栏目管理</title>
+    <meta name="keywords" content="node-admin-sys">
+    <meta name="description" content="node-admin-sys">
+    <link rel="shortcut icon" href="../images/bitbug_favicon.ico">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link href="../css/style.min.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>node-admin-sys栏目清单</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">选项1</a>
+                            </li>
+                            <li><a href="#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div style="display: none" class="row">
+                        <div class="col-sm-5 m-b-xs">
+                            <select class="input-sm form-control input-s-sm inline">
+                                <option value="0">请选择</option>
+                                <option value="1">选项1</option>
+                                <option value="2">选项2</option>
+                                <option value="3">选项3</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-4 m-b-xs">
+                            <div data-toggle="buttons" class="btn-group">
+                                <label class="btn btn-sm btn-white">
+                                    <input type="radio" id="option1" name="options">天</label>
+                                <label class="btn btn-sm btn-white active">
+                                    <input type="radio" id="option2" name="options">周</label>
+                                <label class="btn btn-sm btn-white">
+                                    <input type="radio" id="option3" name="options">月</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <input type="text" placeholder="请输入关键词" class="input-sm form-control"> <span class="input-group-btn">
+                                        <button type="button" class="btn btn-sm btn-primary"> 搜索</button> </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>ID</th>
+                                <th>栏目名</th>
+                                <th>状态</th>
+                                <th>日期</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <%
+                            if(!categorys && categorys.length ==0){
+                            %>
+                                <tr>
+                                    <td>Not categorys</td>
+                                </tr>
+                            <%
+                            }
+                            else{
+                                //数据遍历渲染
+                            for(let i=0;i<categorys.length;i++){
+                            %>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" class="i-checks" name="input[]">
+                                </td>
+                                <td><%=categorys[i]._id%></td>
+                                <td>
+                                    <!--
+                                        <span class="pie"></span>
+                                    -->
+                                    <%=categorys[i].name%>
+                                </td>
+                                <td><%=categorys[i].live%></td>
+                                <td>2019-05-15</td>
+                                <td>
+                                    <a class="dataID" href="#" data-toggle="modal" data-target="#myModal2" value="<%=categorys[i]._id%>">
+                                        <i class="fa fa-times text-navy"></i>
+                                    </a>
+                                    <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content animated flipInY">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                    <h4 class="modal-title">操作确认</h4>
+                                                    <small class="font-bold">操作后将无法返回!</small>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p><strong>NodeAdmin-sys</strong>删除操作前。请认真阅读管理员操作手册，确认本次操作准确无误！！！！
+                                                        <span class="test"></span>
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+                                                    <a class="delete btn btn-primary">确认</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <%
+                            }
+                            }
+                            %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <nav class="pull-right">
+                        <!--分页-->
+                        <ul class="pagination">
+                            <%
+                            if(categorys && categorys.length>0){
+                            %>
+                            <li><a href="/admin/categoryList?page=<%=page-1%>"><span aria-hidden="true">&laquo;</span></a></li>
+                            <%
+                            }
+                            %>
+                            <!--没有用户的情况-->
+                            <%
+                            if(!categorys && categorys.length == 0){
+                            %>
+                                <li class="active"><a href="#">0</a></li>
+                            <%
+                            }else{
+                            for(let i = 1;i<=pages;i++){
+                            %>
+                            <li><a href="/admin/categoryList?page=<%=i%>"><%=i%></a></li>
+                            <%
+                            }
+                            }
+                            %>
+                            <%
+                            if(categorys && categorys.length>0){
+                            %>
+                            <li><a href="/admin/categoryList?page=<%=page+1%>"><span aria-hidden="true">&raquo;</span></a></li>
+                            <%
+                            }
+                            %>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/plugins/peity/jquery.peity.min.js"></script>
+<script src="../js/content.min.js"></script>
+<script src="../js/plugins/iCheck/icheck.min.js"></script>
+<script src="../js/demo/peity-demo.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})
+        //管理员删除操作
+        $('.dataID').each(function (index,element) {
+            //获取ID
+            $(this).click(function () {
+                let dataID = $(element).attr('value');
+                $('.test').text(dataID);
+                let string = '/admin/delete_content?id='+dataID
+                $('.delete').attr('href',string)
+            })
+        })
+    });
+</script>
+
+</body>
+
+</html>
