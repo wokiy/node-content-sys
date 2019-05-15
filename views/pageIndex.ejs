@@ -3,15 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <title>随心笔记</title>
-    <meta name="description" content="Ghost 是基于 Node.js 构建的开源博客平台。Ghost 具有易用的书写界面和体验，博客内容默认采用 Markdown 语法书写。Ghost 的目标是取代臃肿的 Wordpress。" />
-    <meta name="keywords" content="Ghost,blog,Ghost中国,Ghost博客,Ghost中文,Ghost中文文档">
-
+    <title>node-content-sys</title>
+    <meta name="description" content="node-content-sys" />
+    <meta name="keywords" content="jasonlwy">
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="shortcut icon" href="images/bitbug_favicon.ico">
 
     <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
@@ -29,7 +26,7 @@
             clientSecret: "721352203d6a"
         });
     </script>
-    <meta name="generator" content="Ghost 0.7" />
+    <meta name="generator" content="node-content-sys" />
     <link rel="alternate" type="application/rss+xml" title="Ghost 开源博客平台" href="http://www.ghostchina.com/rss/" />
 </head>
 <body class="home-template">
@@ -56,7 +53,7 @@
 <nav class="main-navigation">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12 topColor">
                 <div style="display: none;" class="navbar-header ">
                         <span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu">
                         <span class="sr-only">Toggle navigation</span>
@@ -66,8 +63,8 @@
                 <div class="collapse navbar-collapse" id="main-menu">
                     <ul class="menu">
                         <li class="nav-current" role="presentation"><a href="/">首页</a></li>
-                        <li  role="presentation"><a href="/committeam">摄影</a></li>
-                        <li  role="presentation"><a href="/committeam">旅游</a></li>
+                        <!--<li  role="presentation"><a href="/committeam">摄影</a></li>-->
+                        <!--<li  role="presentation"><a href="/committeam">旅游</a></li>-->
                         <li  role="presentation"><a href="/about">关于博主</a></li>
                         <li class="pull-right"></li>
                     </ul>
@@ -206,7 +203,7 @@
     </div>
 </section>
 
-<footer class="main-footer">
+<footer style="display: none;" class="main-footer">
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
@@ -276,7 +273,7 @@
     </div>
 </footer>
 
-<div class="copyright">
+<div style="display: none;" class="copyright">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">

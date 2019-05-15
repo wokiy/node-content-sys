@@ -9,8 +9,7 @@ let multer = require("multer");
 var path = require('path');
 const fs=require('fs');
 //req.file文件  接受上传的文件
-//E:/mongodb/bin>mongod --dbpath E:\mongodb\data\db  mongodb启动命令
-/*设置中间件*/
+//设置中间件
 app.use(session({
     resave:false,
     saveUninitialized:false,
