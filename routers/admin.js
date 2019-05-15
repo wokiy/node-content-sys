@@ -132,7 +132,6 @@ router.get("/delete_category",function (req,res) {
 router.post("/edit_Category",function (req,res) {
     let id = req.body.id;
     let name = req.body.name;
-
     //修改不能为空值
     if(name==""){
         res.render("category",{msg:{err:"修改的类名字不能为空值!!!!!"}});
@@ -416,7 +415,6 @@ router.get("/delete_content",function (req,res) {
         }
     })
 });
-
 //全部栏目查询展示s
 router.get("/categoryList",function (req,res) {
     //每页显示的条数
@@ -445,8 +443,41 @@ router.get("/categoryList",function (req,res) {
         });
     });
 });
-
-
+//跳转到添加栏目表单
+router.get("/categoryForm",function (req,res) {
+    res.render("node-admin-sys-addCategory");
+});
+//添加栏目表单提交
+router.post('/add_Category',function (req,res) {
+    //分类名 输入不能为空，判断栏目名是否存在
+    //获取用户填写的栏目名称
+    let categoryName = req.body.name.trim();
+    //栏目简介
+    let description  = req.body.description.trim();
+    //分类是否为空
+    if(categoryName === ''){
+        //返回错误提示
+        res.render("node-admin-sys-addCategory",{msg:{err:'栏目名称不能为空!!!!'}});
+    }
+    //查找mongodb中是否有该栏目
+    Category.findOne({name:categoryName},function (err,categorys) {
+        if(categorys){
+            //栏目存在的情况
+            res.render("node-admin-sys-addCategory",{msg:{err:'该栏目已经存在！！！'}});
+        }else{
+            //栏目不存在的情况 向mongodb数据库插入新增栏目数据
+            Category.create({name:categoryName,description:description},function (err) {
+                if(!err) {
+                    //插入成功返回显示
+                    res.render("node-admin-sys-addCategory", {msg: {success: '栏目添加成功,可继续添加新栏目!!'}})
+                }else {
+                    //返回错误提示
+                    console.log("插入错误！！！");
+                }
+            });
+        }
+    });
+});
 module.exports = router;
 
 

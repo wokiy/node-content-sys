@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>node-admin-sys</title>
+    <meta name="keywords" content="node-admin-sys">
+    <meta name="description" content="node-admin-sys">
+    <link rel="shortcut icon" href="../images/bitbug_favicon.ico">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/plugins/markdown/bootstrap-markdown.min.css" />
+    <link href="../css/style.min.css" rel="stylesheet">
+    <style>
+        .form-group{
+            height: 50px;
+        }
+        .control-label{
+            line-height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <div  class="ibox float-e-margins">
+                <form action="/admin/add_Category" method="post">
+                    <div class="ibox-content">
+                        <!--栏目名-->
+                        <div class="form-group">
+                            <label  class="col-sm-1 control-label">栏目名称</label>
+                            <div class="col-sm-2">
+                                <input id="name" name="name"  type="text" class="form-control">
+                            </div>
+                        </div>
+                        <!--栏目简介-->
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">
+                                栏目简介
+                            </label>
+                            <div class="col-sm-6">
+                                <input id="description" name="description" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/content.min.js"></script>
+<script type="text/javascript" src="../js/plugins/markdown/markdown.js"></script>
+<script type="text/javascript" src="../js/plugins/markdown/to-markdown.js"></script>
+<script type="text/javascript" src="../js/plugins/markdown/bootstrap-markdown.js"></script>
+<script type="text/javascript" src="../js/plugins/markdown/bootstrap-markdown.zh.js"></script>
+
+<!--栏目添加显示结果-->
+<script>
+    $(function(){
+        var i=-1;var toastCount=0;var $toastlast;
+        var getMessage=function(){var msg="Hi, welcome to Inspinia. This is example of Toastr notification box.";return msg};
+        $("#showsimple").click(function(){toastr.success("Without any options","Simple notification!")});
+
+        $("#showtoast").click(function(){var shortCutFunction=$("#toastTypeGroup input:radio:checked").val();
+
+        var msg=$("#message").val();var title=$("#title").val()||"";
+
+        var $showDuration=$("#showDuration");var $hideDuration=$("#hideDuration");var $timeOut=$("#timeOut");
+        var $extendedTimeOut=$("#extendedTimeOut");var $showEasing=$("#showEasing");var $hideEasing=$("#hideEasing");
+        var $showMethod=$("#showMethod");var $hideMethod=$("#hideMethod");
+        var toastIndex=toastCount++;toastr.options={closeButton:$("#closeButton").prop("checked"),debug:$("#debugInfo").prop("checked"),progressBar:$("#progressBar").prop("checked"),positionClass:$("#positionGroup input:radio:checked").val()||"toast-top-right",onclick:null};if($("#addBehaviorOnToastClick").prop("checked")){toastr.options.onclick=function(){alert("You can perform some custom action after a toast goes away")}}if($showDuration.val().length){toastr.options.showDuration=$showDuration.val()}if($hideDuration.val().length){toastr.options.hideDuration=$hideDuration.val()}if($timeOut.val().length){toastr.options.timeOut=$timeOut.val()}if($extendedTimeOut.val().length){toastr.options.extendedTimeOut=$extendedTimeOut.val()}if($showEasing.val().length){toastr.options.showEasing=$showEasing.val()}if($hideEasing.val().length){toastr.options.hideEasing=$hideEasing.val()}if($showMethod.val().length){toastr.options.showMethod=$showMethod.val()}if($hideMethod.val().length){toastr.options.hideMethod=$hideMethod.val()}if(!msg){msg=getMessage()}$("#toastrOptions").text("Command: toastr["+shortCutFunction+']("'+msg+(title?'", "'+title:"")+'")\n\ntoastr.options = '+JSON.stringify(toastr.options,null,2));var $toast=toastr[shortCutFunction](msg,title);$toastlast=$toast;if($toast.find("#okBtn").length){$toast.delegate("#okBtn","click",function(){alert("you clicked me. i was toast #"+toastIndex+". goodbye!");$toast.remove()})}if($toast.find("#surpriseBtn").length){$toast.delegate("#surpriseBtn","click",function(){alert("Surprise! you clicked me. i was toast #"+toastIndex+". You could perform an action here.")})}});
+        function getLastToast(){return $toastlast}$("#clearlasttoast").click(function(){toastr.clear(getLastToast())});$("#cleartoasts").click(function(){toastr.clear()})});
+</script>
+
+</body>
+</html>
