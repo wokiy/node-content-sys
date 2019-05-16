@@ -173,20 +173,25 @@ router.get("/contents",function (req,res) {
         //设置最小
         page = Math.max(page,1);
         Content.find({category: id}).limit(limit).skip(skip).sort({_id: -1}).populate(['category', 'user']).then(function (contents) {
-            let arr = []
+            let arr = [];
             for (let i = 0; i < contents.length; i++) {
                 let nowT = contents[i].addTime;
                 let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
                 arr.push(now);
             }
-            res.render("pageIndex", {
-                contents: contents,
-                categorys: res.categorys,
-                count: count,
-                pages: pages,
-                page: res.page,
-                arr: arr
-            })
+            //判断分类点击查询有没有文章列表
+            if (contents.length>0){
+                res.render("pageIndex", {
+                    contents: contents,
+                    categorys: res.categorys,
+                    count: count,
+                    pages: pages,
+                    page: res.page,
+                    arr: arr
+                })
+            }else{
+                res.render("nothing")
+            }
         })
     })
 });

@@ -17,6 +17,13 @@
 > 原理是node express Web框架 使用markdown-js模块 ， 将markdown语法的 'content' 内容转换为 html 再ejs模板中直接渲染!!!
 
  ![node文章展示页](/public/img/AS.png)
+ 
+ #### 资源查询
+ 
+ > 统一返回界面
+ 
+ ![界面显示](/public/img/none.png)
+ 
 ## 后台展示
 
 #### 后台首页
