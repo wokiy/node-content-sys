@@ -21,6 +21,12 @@
             line-height: 30px;
             text-align: center;
         }
+        #tip{
+            visibility: hidden;
+        }
+        #err-tip{
+            visibility: hidden;
+        }
     </style>
 </head>
 <body class="gray-bg">
@@ -31,6 +37,12 @@
                 <form action="/admin/add_Category" method="post">
                     <div class="ibox-content">
                         <!--栏目名-->
+                        <span id="tip">
+                            <%=msg.success%>
+                        </span>
+                        <span id="err-tip">
+                            <%=msg.err%>
+                        </span>
                         <div class="form-group">
                             <label  class="col-sm-1 control-label">栏目名称</label>
                             <div class="col-sm-2">
@@ -69,6 +81,8 @@
 
 <!--栏目添加显示结果-->
 <script>
+   var textSuc =  $('#tip').text().trim();
+   var textErr =  $('#err-tip').text().trim();
     //提示配置信息
     toastr.options = {
         "closeButton": true,
@@ -84,7 +98,13 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-    toastr.success("栏目添加成功！！")
+    //根据后台返回的数据结果显示提示的内容
+    //成功情况
+    if (textSuc === 'ok'){
+        toastr.success('栏目添加成功！！！')
+    } else if (textErr === "err"){
+        toastr.error('栏目添加不规范或为空或已存在!!!!!')
+    }
 </script>
 </body>
 </html>

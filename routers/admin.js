@@ -457,19 +457,19 @@ router.post('/add_Category',function (req,res) {
     //分类是否为空
     if(categoryName === ''){
         //返回错误提示
-        res.render("node-admin-sys-addCategory",{msg:{err:'栏目名称不能为空!!!!'}});
+        res.render("node-admin-sys-addCategory",{msg:{err:'err'}});
     }
     //查找mongodb中是否有该栏目
     Category.findOne({name:categoryName},function (err,categorys) {
         if(categorys){
             //栏目存在的情况
-            res.render("node-admin-sys-addCategory",{msg:{err:'该栏目已经存在！！！'}});
+            res.render("node-admin-sys-addCategory",{msg:{err:'err'}});
         }else{
             //栏目不存在的情况 向mongodb数据库插入新增栏目数据
             Category.create({name:categoryName,description:description},function (err) {
                 if(!err) {
                     //插入成功返回显示
-                    res.render("node-admin-sys-addCategory", {msg: {success: '栏目添加成功,可继续添加新栏目!!'}})
+                    res.render("node-admin-sys-addCategory", {msg: {success: 'ok'}})
                 }else {
                     //返回错误提示
                     console.log("插入错误！！！");
