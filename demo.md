@@ -96,3 +96,37 @@ User.count()//总条数
 
 
 
+   <%
+            for(let i = 0;i<contents.length;i++){
+            %>
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="article.html" class="btn-link">
+                        <h2>
+                            <a href="/views?id=<%=contents[i]._id%>" target="_blank"><%=contents[i].title%></a>
+                        </h2>
+                    </a>
+                    <div class="small m-b-xs">
+                        <strong><%=contents[i].user.username%></strong> <span class="text-muted"><i class="fa fa-clock-o"></i> <%=arr[i]%></span>
+                    </div>
+                    <p>
+                        <%=contents[i].description%>
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>标签：</h5>
+                            <button class="btn btn-primary btn-xs" type="button"><%=contents[i].category.name%></button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>状态：</h5>
+                                <div> <i class="fa fa-comments-o"> </i> <%=comments%>评论 </div>
+                                <i class="fa fa-eye"> </i> <%=views%> 浏览
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+
+

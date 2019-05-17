@@ -33,7 +33,7 @@ router.get("/",function (req,res) {
     res.redirect("/index");
 });
 router.get("/index",function (req,res,next) {
-    /*分类排序*/
+    //分类排序
     Category.find({}).sort({_id:1}).then(function (categorys) {
         res.categorys = categorys;
         next();

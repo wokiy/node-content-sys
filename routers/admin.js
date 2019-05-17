@@ -229,8 +229,12 @@ router.get("/admin",function (req,res) {
 //-----------------------------------------------------（node-admin-sys）新后台mongodb数据CRUD操作-----------------------------------------------------------------
 //加载后台首页显示的页面
 router.get("/index_v3",function (req,res) {
+
     res.render("node-admin-sys-index_v3");
+
+
 });
+
 //用户列表查询显示
 router.get("/userList",function (req,res) {
     //每页显示条数
@@ -478,6 +482,18 @@ router.post('/add_Category',function (req,res) {
         }
     });
 });
+//评论管理 查询所有评论
+router.get('/commentList',function (req,res) {
+   //查询所有用户的评论列表展示
+    Content.find({}).populate(['category','user']).then(function (contents) {
+            res.render('node-admin-sys-comment',{
+                //遍历所有的contents双层遍历
+                contents:contents
+            })
+    });
+});
+
+
 module.exports = router;
 
 
