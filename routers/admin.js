@@ -486,35 +486,12 @@ router.post('/add_Category',function (req,res) {
 router.get('/commentList',function (req,res) {
    //查询所有用户的评论列表展示
     Content.find({}).populate(['category','user']).then(function (contents) {
-        for(let i = 0;i<contents.length;i++) {
-            //遍历数组的中的所有对象
-            var arr1 = contents[i].comments; //得到对象中的comments数组
-            // 得到数组 判断数组是否存在
-            if (arr1.length !== 0){
-                for(var j = 0;j<arr1.length ;j++){
-                    console.log(arr1[j]);
-                }
-            }
-            // for (var p in object1) {
-            //     //判断数据结构
-            //     var object2 = object1[p];
-            //     if (typeof object1[p] === "object") {
-            //         //在遍历数据结构
-            //         for (var q in object2) {
-            //             console.log(object2[q]);
-            //         }
-            //     }
-            // }
-        }
-
             res.render('node-admin-sys-comment',{
                 //遍历所有的contents双层遍历
                 contents:contents
             })
     });
 });
-
-
 module.exports = router;
 
 
