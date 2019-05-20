@@ -17,41 +17,46 @@
     <div class="row">
         <div class="col-lg-12">
             <%
-            for(let i = 0;i<contents.length;i++){
-                var object = contents[i];
-            //    遍历json
-                for(var p in object){
+            for(let i = 0;i<contents.length;i++) {
+                //遍历数组的中的所有对象
+                var arr1 = contents[i].comments; //得到对象中的comments数组
+                // 得到数组 判断数组是否存在
+                if (arr1.length !== 0){
+                 for(var j = 0;j<arr1.length ;j++){
+                    console.log(arr1[j]);
             %>
             <div class="ibox">
                 <div class="ibox-content">
                     <a href="article.html" class="btn-link">
                         <h2>
-                            <a href="/views?id=<%=contents[i]._id%>" target="_blank"><%=contents[i].title%></a>
+                            <a href="#" target="_blank"><%=arr1[j].comments%></a>
                         </h2>
                     </a>
                     <div class="small m-b-xs">
-                        <strong><%=contents[i].user.username%></strong> <span class="text-muted"><i class="fa fa-clock-o"></i> <%=arr[i]%></span>
+                        <strong></strong> <span class="text-muted"><i class="fa fa-clock-o"></i><%=arr1[j].postTime%></span>
                     </div>
                     <p>
-                        <%=contents[i].description%>
+
                     </p>
                     <div class="row">
                         <div class="col-md-6">
                             <h5>标签：</h5>
-                            <button class="btn btn-primary btn-xs" type="button"><%=contents[i].category.name%></button>
+                            <button class="btn btn-primary btn-xs" type="button"></button>
                         </div>
                         <div class="col-md-6">
                             <div class="small text-right">
                                 <h5>状态：</h5>
-                                <div> <i class="fa fa-comments-o"> </i> <%=comments%>评论 </div>
-                                <i class="fa fa-eye"> </i> <%=views%> 浏览
+                                <div> <i class="fa fa-comments-o"> </i> 用户名: <%=arr1[j].user%> </div>
+                                <i class="fa fa-eye"> </i> 超级管理员 - 浏览
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <%
-                }
+                    }
+                   }
+
                 }
             %>
 

@@ -52,11 +52,16 @@
 
 ![列表](/public/img/LL.png)
 
-
 #### 栏目管理
 > 实现栏目列表展示、栏目添加、栏目添加tip提示、栏目修改编辑
 
 ![栏目编辑](/public/img/CC.png)
+
+#### 用户评论列表
+
+>全部展示用户评论的列表
+
+![全部评论](/public/img/comments.png) 
 
 
 ## 项目架构分析
@@ -64,7 +69,6 @@
 
 ## mongodb数据库设计
 > node操作mongodb数据库实现 （还木有添加）
-
 
 ## 项目运行
 1. 具备node环境 npm install
