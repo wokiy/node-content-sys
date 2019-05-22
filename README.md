@@ -1,8 +1,7 @@
-# node-content-sys
+# node-content-sys (最后打算在完善下 发布到线上)
 >node内容发布系统,界面布局统一使用响应式boostrap布局，ejs 数据渲染，后台(也是boostrap实现布局)实现node-content-sys的管理，数据库是使用mongodb实现存储。
 ## node-content-sys 小项目需求整理（小项目基本功能已经实现不再修改）
 > 小项目缺陷： 没有对表单添加判断操作，按照最正确的方式擦做表单即可。
-
 1. 具备信息发布系统的功能
 2. 具备后台管理系统和前台系统
 3. 具备session登陆管理和评论管理

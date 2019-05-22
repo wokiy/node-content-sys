@@ -192,7 +192,7 @@
             $(this).click(function () {
                 let dataID = $(element).attr('value');
                 $('.test').text(dataID);
-                let string = '/admin/delete_content?id='+dataID
+                let string = '/admin/delete_category?id='+dataID
                 $('.delete').attr('href',string)
             })
         })

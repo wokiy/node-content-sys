@@ -15,7 +15,7 @@ router.use(function (req , res , next) {
     res.locals.msg = {};
     next();
 });
-/*判断用户是否登陆*/
+//判断用户是否登陆
 function checklogin(req,res,next) {
 //    判断是否登陆
     if(!req.session.loginUser){
@@ -25,7 +25,7 @@ function checklogin(req,res,next) {
         next();
     }
 }
-/*跳转到用户管理页面*/
+//跳转到用户管理页面
 router.get("/user_list",checklogin,function (req,res) {
     /*分页实先*/
 //每页显示条数
@@ -124,7 +124,7 @@ router.get("/delete_category",function (req,res) {
     Category.update({_id:id},{$set:{live:false}},function (err) {
         //重定向到分类页面
         if(!err) {
-            res.redirect("/admin/catagory?page=1");
+            res.redirect("/admin/categoryList");
         }
     });
 });
@@ -324,8 +324,7 @@ router.get("/delete_user",function (req,res) {
         }
     })
 });
-//查询分类上
-//跳转到容文章发布页面 + 查询所属分类
+//查询分类上跳转到容文章发布页面 + 查询所属分类
 router.get("/contentEdit",function (req,res) {
     //查询所有类目跳转完成并显示
     Category.find({live:{$ne:false}},function (err,categorys) {
@@ -333,7 +332,6 @@ router.get("/contentEdit",function (req,res) {
     });
 });
 //添加内容
-
 router.post("/addContent",function (req,res) {
     //标题
     let title  = req.body.title.trim();

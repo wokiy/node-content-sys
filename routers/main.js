@@ -131,8 +131,9 @@ router.post("/addComments",checklogin,function (req,res) {
     let postData ={
         user :req.session.loginUser.username,
         postTime:new Date(),
-        comments:req.body.comments.trim()
-    }
+        comments:req.body.comments.trim(),
+        live:true
+    };
     //判断评论是否空值
     //更具id 跟新文章的 评论数目 db.blog.update({"title":"A"},{$push:{"comments":{"testAdd":"T"}}});
     Content.update({_id:id},{$push:{comments:postData}},function (err) {
