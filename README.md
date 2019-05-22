@@ -11,7 +11,7 @@
  ![node博客首页](/public/img/a.png)
 #### 文章展示和评论
 
- ![node文章展示页](/public/img/d.jpg)
+ ![node文章展示页](/public/img/vv.jpg)
 #### 登陆页面展示（markdown编辑器发布的效果）
 
 > 原理是node express Web框架 使用markdown-js模块 ， 将markdown语法的 'content' 内容转换为 html 再ejs模板中直接渲染!!!
@@ -63,9 +63,14 @@
 
 ![全部评论](/public/img/comments.png) 
 
+## 项目整体架构分析
+> 技术选型 node express+ejs boostrap
+ 
+1. web应用程序{Express 是一种保持最低程度规模的灵活 Node.js Web 应用程序框架，为 Web 和移动应用程序提供一组强大的功能}
+2. API {各种HTTP使用程序方法和中间件，快速方便地创建强大的API}
+3. 性能 {EXpress 提供精简 web应用程序功能}
 
-## 项目架构分析
-> 项目搭建架构分析图（还木有添加）
+
 
 ## mongodb数据库设计
 > node操作mongodb数据库实现 （还木有添加）

@@ -234,7 +234,6 @@ router.get("/index_v3",function (req,res) {
 
 
 });
-
 //用户列表查询显示
 router.get("/userList",function (req,res) {
     //每页显示条数
@@ -334,6 +333,7 @@ router.get("/contentEdit",function (req,res) {
     });
 });
 //添加内容
+
 router.post("/addContent",function (req,res) {
     //标题
     let title  = req.body.title.trim();
@@ -347,8 +347,15 @@ router.post("/addContent",function (req,res) {
     let content = req.body.content;
     //数据库操作 数据保存成功
     Content.create({category:category,title:title,user:userID,description:description,content:content}).then(function (err) {
-        // res.render("node-admin-sys-contentList",{msg:{success:'内容保存成功过!!!!!'}});
-        res.redirect('/admin/blog');
+        //成功跳转
+        Category.find({live:{$ne:false}},function (err,categorys) {
+            res.render("node-admin-sys-markdown",{categorys:categorys,msg:{success:'ok'}});
+        });
+        if (err){
+            Category.find({live:{$ne:false}},function (err,categorys) {
+                res.render("node-admin-sys-markdown",{categorys:categorys,msg:{err:'err'}});
+            });
+        }
     })
 });
 //全部博文测试展示demo
