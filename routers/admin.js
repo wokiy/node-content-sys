@@ -497,6 +497,34 @@ router.get('/commentList',function (req,res) {
             })
     });
 });
+//评论删除 正常不不脑残的评论是不删除该内容的评论的
+router.get("/commentsDelete",function (req,res) {
+    //获取评论用户名
+    let id = req.query.id;
+    let commID = req.query.cid;
+    //根据ID内容跟和遍历评论列表
+    Content.find({_id:id}).populate(['category','user']).then(function (contents) {
+        //单查询
+        let arr = contents[0].comments;
+        //遍历数组 匹配用户 修改数组 live 为false updata comments字段数据。
+        for (let j = 0; j < arr.length; j++) {
+            //找评论的ID匹配
+            if(arr[j].id === commID){
+                //设置评论不现实false
+                arr[j].live = false;
+            }
+        }
+        //跟新操作
+        Content.update({_id:id},{$set:{comments:arr}},function (err) {
+            //重定向到评论页面
+            if(!err) {
+                res.redirect("/admin/commentList");
+            }
+        })
+    });
+});
+
+
 module.exports = router;
 
 

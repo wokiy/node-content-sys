@@ -8,7 +8,7 @@
 4. 具备markdown语法
 ## 页面展示
 #### 首页展示
- ![node博客首页](/public/img/a.png)
+  > 内容列表具体看个人爱好
 #### 文章展示和评论
 
  ![node文章展示页](/public/img/vv.jpg)
@@ -67,6 +67,13 @@
 >全部展示用户评论的列表
 
 ![全部评论](/public/img/comments.png) 
+
+##### 增加评论id管理
+![id](/public/img/id.png)
+
+##### 评论删除功能实现
+> 根据live状态伪删除用户评论(具体看源码操作)
+![评论删除](/public/img/admin_delete.png)
 
 ## 项目整体架构分析
 > 技术选型 node express+ejs boostrap

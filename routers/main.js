@@ -128,11 +128,18 @@ router.post("/addComments",checklogin,function (req,res) {
     let id = req.body.id;
     let username = req.session.loginUser.username;
     let comments = req.body.comments.trim();
+    //随机id函数
+    function GenNonDuplicateID(randomLength){
+        return Number(Math.random().toString().substr(3,randomLength) + Date.now()).toString(36)
+    }
+    //GenNonDuplicateID()将生成 rfmipbs8ag0kgkcogc 类似的ID
+    // GenNonDuplicateID()
     let postData ={
         user :req.session.loginUser.username,
         postTime:new Date(),
         comments:req.body.comments.trim(),
-        live:true
+        live:true,
+        id:GenNonDuplicateID(3)
     };
     //判断评论是否空值
     //更具id 跟新文章的 评论数目 db.blog.update({"title":"A"},{$push:{"comments":{"testAdd":"T"}}});

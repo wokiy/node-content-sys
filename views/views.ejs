@@ -129,9 +129,20 @@
                         } else{
                         for(let i =0;i<content.comments.length;i++){
 
+                            if (content.comments[i].live === true) {
+                                //评论激活的情况下
                         %>
-                        <li class="list-group-item"><strong><i class="glyphicon glyphicon-user"></i> <%=content.comments[i].user%>: &nbsp;&nbsp;</strong> <%=content.comments[i].comments%><strong class="pull-right"><%=arr[i]%></strong></li>
+                        <li class="list-group-item">
+                            <strong>
+                                <i class="glyphicon glyphicon-user"></i>
+                                <%=content.comments[i].user%>: &nbsp;&nbsp;
+                            </strong>
+
+                            <%=content.comments[i].comments%>
+                            <strong class="pull-right"><%=arr[i]%></strong>
+                        </li>
                         <%
+                          }
                           }
                         }
                         %>
@@ -163,10 +174,21 @@
                         <%
                         } else{
                             for(let i =0;i<content.comments.length;i++){
+                                if (content.comments[i].live === true){
                         %>
-                        <li class="list-group-item"><strong><i class="glyphicon glyphicon-user"></i> <%=content.comments[i].user%>: &nbsp;&nbsp;</strong> <%=content.comments[i].comments%><strong class="pull-right"><%=arr[i]%></strong></li>
+                        <li class="list-group-item">
+                            <strong>
+                                <i class="glyphicon glyphicon-user"></i>
+                                <%=content.comments[i].user%>: &nbsp;&nbsp;
+                            </strong>
+                            <%=content.comments[i].comments%>
+                            <strong class="pull-right">
+                                <%=arr[i]%>
+                            </strong>
+                        </li>
                     <%
-                             }
+                            }
+                            }
                      %>
                     </ul>
                         <button type="button" class="btn btn-primary pull-right" style="margin-left:5px; ">下一页</button>
