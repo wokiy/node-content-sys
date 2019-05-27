@@ -10,7 +10,7 @@
 #### 首页展示
   > 内容列表具体看个人爱好
   
-![ss](/public/img/index.jpg)  
+![ss](/public/img/index.png)  
 #### 文章展示和评论
 
  ![node文章展示页](/public/img/vv.jpg)
