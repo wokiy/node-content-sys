@@ -151,24 +151,35 @@ router.get("/addContent",checklogin,function (req,res) {
     });
 });
 //上传图片
-router.post("/add/images",function (req,res) {
+router.post("/images",function (req,res) {
     //上传图片解析问题
     console.log(req.files);
     //新文件名字
      let newName  = req.files[0].path + pathLib.parse(req.files[0].originalname).ext;
-      newName2 = newName.substring(6);
-     var img = {"imgName":newName2};
-
+     newName2 = newName.substring(6);
+     //{"imgName":newName2} 定义个空数组
+    if (!req.session.img){
+        var img = [];
+        //将文件名添加到数组中
+        img.push(newName2);
+    } else{
+        var img = req.session.img;
+        img.push(newName2);
+    }
     console.log(req.files);
     fs.rename(req.files[0].path,newName,function (err) {
         if(err){
             res.err = "上传失败！！";
         }else {
-            req.session.img = img;
-            res.redirect("/admin/addContent");
+            //数组存到session中
+            if (!req.session.img){
+                req.session.img = img;
+            }
+            //重定向到添加页面
+                res.redirect("/admin/contentEdit");
         }
     });
-})
+});
 /*发布文章页面-表单*/
 router.post("/add",checklogin,function (req,res) {
     let category = req.body.category;
@@ -176,11 +187,9 @@ router.post("/add",checklogin,function (req,res) {
     let user = req.session.loginUser._id;
     let description = req.body.description;
     let content = req.body.content;
-    let image = {
-        name:newName2
-    };
-    delete req.session.img;
-    Content.create({category:category,title:title,user:user,description:description,content:content,images:newName2}).then(function (err) {
+    let image = req.session.img;
+    Content.create({category:category,title:title,user:user,description:description,content:content,images:image}).then(function (err) {
+        delete req.session.img;
         res.render("success",{msg:{success:'内容保存成功过!!!!!'}});
     }).then(() =>{
         newName2=null
@@ -343,18 +352,23 @@ router.post("/addContent",function (req,res) {
     let description = req.body.description;
     //内容
     let content = req.body.content;
+    //获取session 当中的img数组
+    var images = req.session.img;
     //数据库操作 数据保存成功
-    Content.create({category:category,title:title,user:userID,description:description,content:content}).then(function (err) {
-        //成功跳转
-        Category.find({live:{$ne:false}},function (err,categorys) {
-            res.render("node-admin-sys-markdown",{categorys:categorys,msg:{success:'ok'}});
-        });
-        if (err){
+    Content.create({category:category,title:title,user:userID,description:description,content:content,images:images}).then(function (err) {
+        // if (err){
+        //     //错误时候
+        //     return  res.redirect('/admin/contentEdit');
+        // }else{
+            //成功跳转
             Category.find({live:{$ne:false}},function (err,categorys) {
-                res.render("node-admin-sys-markdown",{categorys:categorys,msg:{err:'err'}});
+                //删除session当中的img图片数组
+                res.render("node-admin-sys-markdown",{categorys:categorys,msg:{success:'ok'}});
             });
-        }
-    })
+        // }
+    });
+    //删除session当中的img数组
+    delete req.session.img;
 });
 //全部博文测试展示demo
 router.get("/blog",function (req,res) {
@@ -367,7 +381,6 @@ router.get("/blog",function (req,res) {
             let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
             arr.push(now);
         }
-
         let comments = contents.length;
         //阅读数目
         let views= contents.views;

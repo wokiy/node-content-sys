@@ -33,83 +33,109 @@
 <div class="wrapper wrapper-content">
     <div class="row">
         <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <form id="reportPicform" action="/admin/images" method="post" enctype="multipart/form-data">
+                    <div class="ibox-content">
+                    <div class="form-group" style="height: unset;">
+                        <label for="file">上传封面图片或内容性图片</label>
+                        <input style="display: inline-block;margin-left: 2em;" type="file" id="exampleInputFile" name="f1" multiple="multiple">
+                        <% if(!session.img && session.img == null){
+                        %>
+                            <span>还未上传图片</span>
+                        <%
+                        }else{
+                            var arr = session.img;
+                            for(var i = 0;i<arr.length;i++){
+                        %>
+                         <img src="<%=arr[i]%>" alt="" width="100" height="100" class="img-circle">
+                        <%
+                        }
+                        }
+                        %>
+                    </div>
+                    <img src="" alt="">
+                    <button id="inputButton" type="button" class="btn btn-primary" onclick="submitPic()">上传</button>
+                    </div>
+                </form>
+            </div>
+
             <div  class="ibox float-e-margins">
                 <form id="myform" action="/admin/addContent" method="post">
-                <div class="ibox-content">
+                    <div class="ibox-content">
                     <span id="tip">
                             <%=msg.success%>
                         </span>
-                    <span id="err-tip">
+                        <span id="err-tip">
                             <%=msg.err%>
                     </span>
-                   <!--<h2>文章发布</h2>-->
-                    <!--文章标题-->
-                    <div class="form-group">
-                        <label  class="col-sm-1 control-label">内容标题</label>
-                        <div class="col-sm-2">
-                            <input id="title" name="title"  type="text" class="form-control">
+                        <!--<h2>文章发布</h2>-->
+                        <!--文章标题-->
+                        <div class="form-group">
+                            <label  class="col-sm-1 control-label">内容标题</label>
+                            <div class="col-sm-2">
+                                <input id="title" name="title"  type="text" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <!--文章简介-->
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">
-                            内容简介
-                        </label>
-                        <div class="col-sm-6">
-                            <input id="description" name="description" type="text" class="form-control">
+                        <!--文章简介-->
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">
+                                内容简介
+                            </label>
+                            <div class="col-sm-6">
+                                <input id="description" name="description" type="text" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <!--文章分类下拉列表-->
-                    <div class="form-group">
-                        <label class="col-sm-1 control-label">所属类目</label>
-                        <div class="col-sm-2">
-                            <select class="form-control m-b" name="category" id="category">
-                                <%
+                        <!--文章分类下拉列表-->
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">所属类目</label>
+                            <div class="col-sm-2">
+                                <select class="form-control m-b" name="category" id="category">
+                                    <%
                                     for (let i = 0;i<categorys.length;i++){
-                                %>
-                                <option value="<%=categorys[i]._id%>"><%=categorys[i].name%></option>
-                                <%
-                                  }
-                                %>
-                            </select>
+                                    %>
+                                    <option value="<%=categorys[i]._id%>"><%=categorys[i].name%></option>
+                                    <%
+                                    }
+                                    %>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="ibox float-e-margins">
-                                <div class="ibox-title">
-                                    <h5>文本内容编辑器</h5>
-                                    <div class="ibox-tools">
-                                        <a class="collapse-link">
-                                            <i class="fa fa-chevron-up"></i>
-                                        </a>
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="form_editors.html#">
-                                            <i class="fa fa-wrench"></i>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-user">
-                                            <li><a href="form_editors.html#">选项1</a>
-                                            </li>
-                                            <li><a href="form_editors.html#">选项2</a>
-                                            </li>
-                                        </ul>
-                                        <a class="close-link">
-                                            <i class="fa fa-times"></i>
-                                        </a>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>文本内容编辑器</h5>
+                                        <div class="ibox-tools">
+                                            <a class="collapse-link">
+                                                <i class="fa fa-chevron-up"></i>
+                                            </a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_editors.html#">
+                                                <i class="fa fa-wrench"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-user">
+                                                <li><a href="form_editors.html#">选项1</a>
+                                                </li>
+                                                <li><a href="form_editors.html#">选项2</a>
+                                                </li>
+                                            </ul>
+                                            <a class="close-link">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="ibox-content">
+                                    <div class="ibox-content">
                                     <textarea id="content" name="content" data-provide="markdown" rows="10">
                                     </textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4 col-sm-offset-1">
-                            <button class="btn btn-primary" type="submit">保存内容</button>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-1">
+                                <button class="btn btn-primary" type="submit">保存内容</button>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </form>
             </div>
         </div>
@@ -128,7 +154,6 @@
 <script>
     var textSuc =  $('#tip').text().trim();
     var textErr =  $('#err-tip').text().trim();
-
     console.log(textSuc);
     //提示配置信息
     toastr.options = {
@@ -153,7 +178,17 @@
     } else if (textErr === "err"){
         toastr.error('内容添加不规范!!!!!')
     }
-    </script>
-</body>
+    function submitPic(){
+        var fileInput = $('#exampleInputFile').get(0).files[0];
+        console.info(fileInput);
+        if(fileInput){
+            toastr.success('图片上传！！！')
+            $('#reportPicform').submit();
+        }else{
+            toastr.error('请选择图片上传!!1')
+        }
+    }
 
+</script>
+</body>
 </html>

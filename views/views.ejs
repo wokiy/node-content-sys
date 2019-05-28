@@ -25,6 +25,12 @@
     </script>
     <meta name="generator" content="node-content-sys" />
     <link rel="alternate" type="application/rss+xml" title="node-content-sys" href="http://www.jasonlwy.cn" />
+    <style>
+        .img{
+            display: block;
+            margin-bottom: 25px;
+        }
+    </style>
 </head>
 <body class="post-template">
 <!-- start navigation -->
@@ -69,14 +75,19 @@
                         <section class="post-meta">
                             <span class="author">作者：<a href="/about"><%=content.user.username%></a></span> &bull;
                             <time class="post-date" datetime="" title=""><%=now%></time>
-
                         </section>
                     </header>
-
                     <section class="featured-media">
-                        <!--<img src="<=content.images%" alt="image">-->
-                    </section>
+                        <%
+                            var arr = content.images;
+                            for(var o = 0;o<arr.length;o++){
 
+                        %>
+                        <img src="<%=arr[o]%>" alt="image" class="img-responsive img">
+                        <%
+                            }
+                        %>
+                    </section>
                     <section class="post-content">
                         <p>
                             <!--markdown语法-->

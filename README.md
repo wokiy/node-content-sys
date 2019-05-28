@@ -1,11 +1,12 @@
 # node-content-sys (最后打算在完善下 发布到线上)
->node内容发布系统,界面布局统一使用响应式boostrap布局，ejs 数据渲染，后台(也是boostrap实现布局)实现node-content-sys的管理，数据库是使用mongodb实现存储。
+>node内容发布系统,界面布局统一使用响应式布局，ejs 数据渲染，后台响应式布局实现node-content-sys的管理后台关系系统，数据库是使用mongodb实现存储。
 ## node-content-sys 小项目需求整理（小项目基本功能已经实现不再修改）
 > 小项目缺陷： 没有对表单添加判断操作，按照最正确的方式擦做表单即可。
 1. 具备信息发布系统的功能
 2. 具备后台管理系统和前台系统
 3. 具备session登陆管理和评论管理
-4. 具备markdown语法
+4. 具备markdown语法发布内容
+5. 具备图片上传功能
 ## 页面展示
 #### 首页展示
   > 内容列表具体看个人爱好
@@ -53,11 +54,15 @@
 
 ![内容成功发布](/public/img/add.png)
 
+##### 内容首页封面图片添加或内容图片添加功能
+> 简单markdown 语法加单独图片上传功能
+
+![图片](/public/img/p1.png)
+
+![图片](/public/img/p2.png)
+
 #### 内容列表
-
 > 已实现内容文章删除功能
-
-
 
 ![列表](/public/img/LL.png)
 
@@ -78,6 +83,8 @@
 ##### 评论删除功能实现
 > 根据live状态伪删除用户评论(具体看源码操作)
 ![评论删除](/public/img/admin_delete.png)
+
+
 
 ## 项目整体架构分析
 > 技术选型 node express+ejs boostrap
