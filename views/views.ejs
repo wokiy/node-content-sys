@@ -50,6 +50,13 @@
                         <!--<li  role="presentation"><a href="/committeam">摄影</a></li>-->
                         <!--<li  role="presentation"><a href="/committeam">旅游</a></li>-->
                         <li  role="presentation"><a href="/about">关于博主</a></li>
+                        <%
+                        if(session.loginUser){
+                        %>
+                            <li class="pull-right"><a href="#">设置</a></li>
+                        <%
+                        }
+                        %>
                     </ul>
                 </div>
             </div>
@@ -225,8 +232,8 @@
 
                 <!-- start tag cloud widget -->
                 <div class="widget">
-                    <h4 class="title">用户区域</h4>
-                    <div class="content community">
+                    <h4 class="title" style="text-align: center">用户区域</h4>
+                    <div class="content community" style="text-align: center">
                         <%
                         if(!session.loginUser){
                         %>
@@ -236,8 +243,11 @@
                         <%
                         }else{
                         %>
-                        <p>用户: <%=session.loginUser.username%></p>
-                        <p><a href="/logout">退出</a></p>
+                            <div style="height: 110px;width: 150px;margin: 0 auto;">
+                                <img class="img-responsive" src="<%=session.loginUser.images%>" alt="用户头像">
+                            </div>
+                            <p>用户: <%=session.loginUser.username%></p>
+                            <p><a href="/logout">退出</a></p>
                         <%
                         }
                         %>
@@ -256,7 +266,7 @@
 
                 <!-- start tag cloud widget -->
                 <div class="widget">
-                    <h4 class="title">文章分类</h4>
+                    <h4 class="title" style="text-align: center;">文章分类</h4>
                     <div class="content tag-cloud">
                         <!--分类展示-->
                         <%
