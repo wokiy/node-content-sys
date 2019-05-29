@@ -5,8 +5,9 @@ let markdown = require('markdown-js');
 let  moment = require("moment");
 let Content = require("../schemas/Content");
 let Category = require("../schemas/Category");
-
-
+const  fs = require("fs");
+const pathLib=require('path');
+let newName2='';
 router.use(function (req , res , next) {
     res.locals.msg = {};
     next();
@@ -24,6 +25,44 @@ function checklogin(req,res,next) {
 router.get("/about",function (req,res) {
    res.render('about');
 });
+
+//个人中心页面
+router.get('/topCenter',function (req,res) {
+    res.render('node-content-sys-pCenter');
+});
+//上传用户新头像
+router.post('/ChangeImages',function (req,res) {
+    //上传图片解析问题
+    console.log(req.files);
+    //新文件名字
+    let newName  = req.files[0].path + pathLib.parse(req.files[0].originalname).ext;
+    newName2 = newName.substring(6);
+    //{"imgName":newName2} 定义个空数组
+    console.log(req.files);
+    //获取用户ID
+    let userID = req.session.loginUser._id;
+    fs.rename(req.files[0].path,newName,function(err){
+        if(err){
+            res.err = "上传失败！！";
+        }else {
+            //更新user文档中的imgage字段
+            User.update({_id:userID},{$set:{images:newName2}},function () {
+                //ID重新查找user 将user新添加到session
+                User.findOne({_id:userID},function (err,user) {
+                    //删除旧的loginUser
+                    delete req.session.loginUser;
+                    //新的user存到session里面
+                    req.session.loginUser = user;
+                    //重定向到添加页面
+                    res.redirect("/topCenter");
+                });
+
+
+            });
+        }
+    });
+});
+
 //============================================================================================================================================
 //—————————————————————查询博文展示和分页实现—————————————————————————————————————————
 
