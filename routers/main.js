@@ -28,7 +28,13 @@ router.get("/about",function (req,res) {
 
 //个人中心页面
 router.get('/topCenter',function (req,res) {
-    res.render('node-content-sys-pCenter');
+    //查询所有帖子
+    Content.find({}).populate(['category','user']).then(function (contents) {
+        res.render('node-content-sys-pCenter', {
+            //遍历所有的contents双层遍历
+            contents: contents
+        });
+    });
 });
 //上传用户新头像
 router.post('/ChangeImages',function (req,res) {
@@ -63,7 +69,7 @@ router.post('/ChangeImages',function (req,res) {
     });
 });
 
-//============================================================================================================================================
+
 //—————————————————————查询博文展示和分页实现—————————————————————————————————————————
 
 //首页博文展示的问题   分页显示
@@ -161,7 +167,7 @@ router.get("/views",function (req,res) {
 });
 //———————————————————————---添加评论实现——————————————————————————————————————————
 /*评论模块*/
-//评论原理   根据文章的ID 去添加 去update content 文章的表内容 添加
+//评论原理   根据文章的ID 去添加 去update content 文章的表内容
 router.post("/addComments",checklogin,function (req,res) {
     //获取文章的id
     let id = req.body.id;
@@ -173,12 +179,15 @@ router.post("/addComments",checklogin,function (req,res) {
     }
     //GenNonDuplicateID()将生成 rfmipbs8ag0kgkcogc 类似的ID
     // GenNonDuplicateID()
+    //获取当前用户的头像地址的引用
+    var picaddresss =  req.session.loginUser.images;
     let postData ={
         user :req.session.loginUser.username,
         postTime:new Date(),
         comments:req.body.comments.trim(),
         live:true,
-        id:GenNonDuplicateID(3)
+        id:GenNonDuplicateID(3),
+        images:picaddresss
     };
     //判断评论是否空值
     //更具id 跟新文章的 评论数目 db.blog.update({"title":"A"},{$push:{"comments":{"testAdd":"T"}}});

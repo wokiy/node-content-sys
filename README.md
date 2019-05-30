@@ -1,5 +1,7 @@
 # node-content-sys (最后打算在完善下 发布到线上)
 >node内容发布系统,界面布局统一使用响应式布局，ejs 数据渲染，后台响应式布局实现node-content-sys的管理后台关系系统，数据库是使用mongodb实现存储。
+
+* 代码千万行 注释第一行 注释不规范 后续两行泪
 ## node-content-sys 小项目需求整理（小项目基本功能已经实现不再修改）
 > 小项目缺陷： 没有对表单添加判断操作，按照最正确的方式擦做表单即可。
 1. 具备信息发布系统的功能
@@ -15,7 +17,7 @@
 
 #### 文章展示和评论
 
- ![node文章展示页](/public/img/view.png)
+ ![node文章展示页](/public/img/views.png)
  
 #### 登陆页面展示（markdown编辑器发布的效果）
 
@@ -34,12 +36,15 @@
  
 > 个人中心展示页面 个人信息和参与的内容帖子
 
-![个人中心](/public/img/pCenter.png)
+![个人中心](/public/img/center.png)
 
 > 个人中心头像修改功能实现
 
-![用户头像修改](/public/img/ct.png) 
+![用户头像修改](/public/img/ct2.png) 
  
+> 修改个人信息
+
+![个人信息](/public/img/more.png) 
  
 ## 后台展示
 

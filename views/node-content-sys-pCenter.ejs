@@ -34,7 +34,7 @@
     <meta name="generator" content="node-content-sys"/>
     <link rel="alternate" type="application/rss+xml" title="资深切图工程师" href="http://www.jasonlwy.cn " />
 </head>
-<body class="home-template">
+<body class="home-template" style="background: #f6f8fa">
 <nav class="main-navigation" style="margin-bottom: unset">
     <div class="container">
         <div class="row">
@@ -58,7 +58,7 @@
         </div>
     </div>
 </nav>
-<section class="gray-bg">
+<section class="gray-bg" style="background: #f6f8fa">
     <div class="wrapper wrapper-content container">
         <div class="row animated fadeInRight">
             <div class="col-sm-4">
@@ -102,7 +102,7 @@
                                         <!--<button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> 修改头像</button>-->
                                     </div>
                                     <div class="col-sm-6">
-                                        <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-coffee"></i>修改资料</button>
+                                        <a data-toggle="modal" class="btn btn-primary" href="#modal-form1">修改个人资料</a>
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@
             <div class="col-sm-8">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>最新动态</h5>
+                        <h5>参与的帖子回复</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link">
                                 <i class="fa fa-chevron-up"></i>
@@ -135,94 +135,52 @@
                     <div class="ibox-content">
                         <div>
                             <div class="feed-activity-list">
-
+                                <%
+                                for(let i = 0;i<contents.length;i++) {
+                                    //遍历数组的中的所有对象
+                                    var arr1 = contents[i].comments; //得到对象中的comments数组
+                                    // 得到数组 判断数组是否存在
+                                    if (arr1.length !== 0){
+                                    for(var j = 0;j<arr1.length ;j++){
+                                    // 评论是激活的状态才显示
+                                    if (arr1[j].live===true && arr1[j].user===session.loginUser.username) {
+                                %>
                                 <div class="feed-element">
                                     <a href="#" class="pull-left">
                                         <img alt="image" class="img-circle" src="<%=session.loginUser.images%>">
                                     </a>
                                     <div class="media-body ">
-                                        <small class="pull-right text-navy">1天前</small>
-                                        <strong>jasonlwy</strong> 关注了 <strong>韩立</strong>.
+                                        <small class="pull-right"><%=arr1[j].postTime%></small>
+                                        <strong><%=session.loginUser.username%></strong> 回复了 <%=contents[i].user.username%>创建的 >
+                                        <strong>
+                                        <a href="/contents?id=<%=contents[i].category._id%>&page=1"><%=contents[i].category.name%></a>
+                                        </strong>
+                                        >
+                                        <strong>
+                                        <a href="/views?id=<%=contents[i]._id%>"><%=contents[i].title%></a>
+                                        </strong>
                                         <br>
-                                        <small class="text-muted">一万分钟前 来自 皮皮时光机</small>
-                                        <div class="actions">
-                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                            <a class="btn btn-xs btn-danger"><i class="fa fa-heart"></i> 收藏</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="<%=session.loginUser.images%>">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">5分钟前</small>
-                                        <strong>作家韩立</strong> 发布了一篇文章
-                                        <br>
-                                        <small class="text-muted">今天 10:20 来自 iPhone 8 Plus</small>
-
-                                    </div>
-                                </div>
-
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="<%=session.loginUser.images%>">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">2小时前</small>
-                                        <strong>作家韩立</strong> 抽奖中了20万
-                                        <br>
-                                        <small class="text-muted">今天 09:27 来自 Koryolink iPhone</small>
+                                        <!--<small class="text-muted">今天 09:27 来自pc</small>-->
                                         <div class="well">
-                                            抽奖，2000仙元石，从转发这个微博的粉丝中抽取一人。11月16日平台开奖。随手一转，万一中了呢？
+                                            <%=arr1[j].comments%>
                                         </div>
                                         <div class="pull-right">
-                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
+                                            <!--<a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>-->
                                             <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</a>
-                                            <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>
+                                            <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> 评论</a>-->
                                         </div>
                                     </div>
                                 </div>
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="<%=session.loginUser.images%>">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">2天前</small>
-                                        <strong>jasonlwy </strong> 上传了2张图片
-                                        <br>
-                                        <small class="text-muted">11月7日 11:56 来自 微博 weibo.com</small>
-                                        <div class="photos">
-                                            <a target="_blank" href="../../../24.media.tumblr.com/20a9c501846f50c1271210639987000f/tumblr_n4vje69pJm1st5lhmo1_1280.jpg">
-                                                <img alt="image" class="feed-photo" src="<%=session.loginUser.images%>">
-                                            </a>
-                                            <a target="_blank" href="../../../37.media.tumblr.com/9afe602b3e624aff6681b0b51f5a062b/tumblr_n4ef69szs71st5lhmo1_1280.jpg">
-                                                <img alt="image" class="feed-photo" src="<%=session.loginUser.images%>">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="feed-element">
-                                    <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="<%=session.loginUser.images%>">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right text-navy">5小时前</small>
-                                        <strong>jasonlwy</strong> 关注了 <strong>那27年的单身</strong>.
-                                        <br>
-                                        <small class="text-muted">今天 10:39 来自 iPhone客户端</small>
-                                        <div class="actions">
-                                            <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                            <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> 收藏</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <%
+                                }
+                                }
+                                %>
 
+                                <%
+                                    }
+                                  }
+                                %>
                             </div>
-
-                            <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> 显示更多</button>
-
                         </div>
 
                     </div>
@@ -276,6 +234,75 @@
                 </div>
             </div>
         </div>
+
+        <!--弹出层修改个人资料-->
+        <div id="modal-form1" class="modal fade" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>修改个人资料</h5>
+                                <div class="ibox-tools" style="display: none">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user" style="display: none">
+                                        <li><a href="form_basic.html#">选项1</a>
+                                        </li>
+                                        <li><a href="form_basic.html#">选项2</a>
+                                        </li>
+                                    </ul>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+
+                                <form class="form-horizontal m-t" id="commentForm">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">姓名：</label>
+                                        <div class="col-sm-8">
+                                            <input id="cname" name="name" minlength="2" value="<%=session.loginUser.username%>" type="text" class="form-control" required="" aria-required="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">E-mail：</label>
+                                        <div class="col-sm-8">
+                                            <input id="cemail" type="email" class="form-control" name="email" required="" aria-required="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">地址：</label>
+                                        <div class="col-sm-8">
+                                            <input id="curl" type="url" class="form-control" name="url">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">关于我：</label>
+                                        <div class="col-sm-8">
+                                            <textarea id="ccomment" name="comment" class="form-control" required="" aria-required="true"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-3">
+                                            <button class="btn btn-primary" type="submit">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </div>
 </section>
 <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
