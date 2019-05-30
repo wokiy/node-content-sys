@@ -13,7 +13,7 @@
 #### 首页展示
   > 内容列表具体看个人爱好
   
-![ss](/public/img/ii.png)  
+![ss](/public/img/index2.png)  
 
 #### 文章展示和评论
 
