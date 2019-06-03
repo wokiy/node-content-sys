@@ -33,7 +33,7 @@
         }
         .list-group-item{
             display: flex;
-
+            background: #eff0f9;
         }
         .left{
             flex: 0 0 15%;
@@ -103,24 +103,23 @@
                             <time class="post-date" datetime="" title=""><%=now%></time>
                         </section>
                     </header>
-                    <section class="featured-media">
-                        <%
-                            var arr1 = content.images;
-                            for(var o = 0;o<arr1.length;o++){
-
-                        %>
-                        <img src="<%=arr1[o]%>" alt="image" class="img-responsive img">
-                        <%
-                            }
-                        %>
-                    </section>
                     <section class="post-content">
                         <p>
                             <!--markdown语法-->
                             <%-contentHtml%>
                         </p>
                     </section>
+                    <section class="featured-media">
+                        <%
+                            var arr1 = content.images;
+                        for(var o = 0;o<arr1.length;o++){
 
+                        %>
+                        <img src="<%=arr1[o]%>" alt="image" class="img-responsive img">
+                        <%
+                        }
+                        %>
+                    </section>
                     <footer class="post-footer clearfix">
                         <div class="pull-left tag-list">
                             <i class="fa fa-folder-open-o"></i>
@@ -199,9 +198,9 @@
                         }
                         %>
                     </ul>
-                    <a href="#" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</a>
-                            <span class="page-number">当前第  页&nbsp; 总共2页</span>
-                    <a href="#" class="btn btn-success pull-right">上一页</a>
+                    <!--<a href="#" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</a>-->
+                            <!--<span class="page-number">当前第  页&nbsp; 总共2页</span>-->
+                    <!--<a href="#" class="btn btn-success pull-right">上一页</a>-->
                     <%
                         }else {
                     %>
@@ -210,7 +209,7 @@
                                 <div class="form-group ">
                                     <label for="comments">发表评论</label>
                                     <input type="hidden" name="id" value="<%=content._id%>">
-                                    <input id="comments" style="border: 1px sandybrown solid" type="text" class="form-control" name="comments">
+                                    <input id="comments" style="border: 1px #7fa785 solid" type="text" class="form-control" name="comments">
                                     <!--<input type="submit" class="btn-primary pull-right addC" value="提交评论">-->
                                     <button id="inputButton" type="button" class="btn btn-success pull-right addC" onclick="submitComm()">提交评论</button>
                                 </div>
@@ -257,8 +256,8 @@
                             }
                      %>
                     </ul>
-                        <button type="button" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</button>
-                        <button type="button" class="btn btn-success pull-right">上一页</button>
+                        <!--<button type="button" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</button>-->
+                        <!--<button type="button" class="btn btn-success pull-right">上一页</button>-->
                     <%
                             }
                         }
@@ -334,7 +333,7 @@
 <!--页面底部内容-->
 
 
-<div class="copyright">
+<div class="copyright" style="display: none">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">

@@ -194,10 +194,6 @@ router.post("/add",checklogin,function (req,res) {
     }).then(() =>{
         newName2=null
     });
-    /*Content.create(category: category, title:title,user:user,description:description,content:content,images:image).then(function (err) {
-        //newName2 置为空.
-        res.render("success",{msg:{success:'内容保存成功!!!!!'}});
-    }).then(newName2 =>newName2=null);*/
 });
 /*跳转到文章管理页面*/
 router.get("/admin",function (req,res) {
