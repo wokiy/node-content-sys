@@ -47,7 +47,7 @@
                             var arr = session.img;
                             for(var i = 0;i<arr.length;i++){
                         %>
-                         <img src="<%=arr[i]%>" alt="" width="100" height="100" class="img-circle">
+                         <img src="<%=arr[i]%>" alt="" width="100" height="100" class="img-circle imgnum">
                         <%
                         }
                         }
@@ -191,6 +191,8 @@
         }
     }
     $('#clearButton').click(function () {
+
+
         $.ajax({
             url:"/admin/clearimgsession",
         });
