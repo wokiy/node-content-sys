@@ -15,6 +15,9 @@
     <meta name="referrer" content="origin" />
     <link rel="next" href="http://www.ghostchina.com/page/2/" />
     <script type="text/javascript" src="/shared/ghost-url.min.js?v=a8de6833b5"></script>
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
     <script type="text/javascript">
         ghost.init({
             clientId: "ghost-frontend",
@@ -138,8 +141,10 @@
                         if(!session.loginUser){
                         %>
                         <p>未登录</p>
-                        <p><a href="/login"><i class="glyphicon glyphicon-user"></i> &nbsp;登陆</a></p>
-                        <p><a href="/register"><i class="glyphicon glyphicon-pencil"></i>&nbsp; 注册</a></p>
+                        <!--<a data-toggle="modal" class="btn btn-primary" href="#modal-form">打开登录窗口</a>-->
+                        <!--<p><a  href="/login"><i class="glyphicon glyphicon-user"></i> &nbsp;登陆</a></p>-->
+                        <p><a data-toggle="modal"   href="#modal-form"><i class="glyphicon glyphicon-user"></i> &nbsp;登陆</a></p>
+                        <p><a  href="/register"><i class="glyphicon glyphicon-pencil"></i>&nbsp; 注册</a></p>
                         <%
                         }else{
                         %>
@@ -176,80 +181,49 @@
                 </div>
                 <!-- end tag cloud widget -->
             </aside>
-
         </div>
     </div>
 </section>
 
-<footer class="main-footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <div style="display: none;" class="widget">
-                    <h4 class="title">最新文章</h4>
-                    <div class="content recent-post">
-                        <div class="recent-single-post">
-                            <a href="/custom-excerpts/" class="post-title">自定义文章摘要（Excerpt）</a>
-                            <div class="date">2017年8月9日</div>
-                        </div>
-                        <div class="recent-single-post">
-                            <a href="/primary-tags/" class="post-title">首要“标签”</a>
-                            <div class="date">2017年8月3日</div>
-                        </div>
-                        <div class="recent-single-post">
-                            <a href="/ghost-1-0-released/" class="post-title">Ghost 1.0 版本正式发布</a>
-                            <div class="date">2017年7月29日</div>
-                        </div>
+<div id="modal-form" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6 b-r">
+                        <h3 class="m-t-none m-b">登录</h3>
+
+                        <p>欢迎登录本站(⊙o⊙)</p>
+
+                        <form role="form" action="api/login" method="post">
+                            <div class="form-group">
+                                <label>用户名：</label>
+                                <input type="text" name="username" placeholder="请输入用户名" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>密码：</label>
+                                <input type="password" name="password" placeholder="请输入密码" class="form-control">
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>登录</strong>
+                                </button>
+                                <label>
+                                    <input type="checkbox" class="i-checks">自动登录</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>还不是会员？</h4>
+                        <p>您可以注册一个账户</p>
+                        <p class="text-center">
+                            <a href="form_basic.html"><i class="fa fa-sign-in big-icon"></i></a>
+                        </p>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-4">
-                <div style="display: none;" class="widget">
-                    <h4 class="title">标签云</h4>
-                    <div class="content tag-cloud">
-                        <a href="/tag/about-ghost/">Ghost</a>
-                        <a href="/tag/release/">新版本发布</a>
-                        <a href="/tag/javascript/">JavaScript</a>
-                        <a href="/tag/promise/">Promise</a>
-                        <a href="/tag/zhuti/">主题</a>
-                        <a href="/tag/nodejs/">Node.js</a>
-                        <a href="/tag/mysql/">MySQL</a>
-                        <a href="/tag/nginx/">Nginx</a>
-                        <a href="/tag/aliyun-ecs/">阿里云服务器</a>
-                        <a href="/tag/ubuntu/">Ubuntu</a>
-                        <a href="/tag/ghost-in-depth/">深度玩转 Ghost</a>
-                        <a href="/tag/theme/">Theme</a>
-                        <a href="/tag/zhu-shou-han-shu/">助手函数</a>
-                        <a href="/tag/markdown/">Markdown</a>
-                        <a href="/tag/proxy/">反向代理</a>
-
-                        <a href="/tag-cloud/">...</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div style="display: none;" class="widget">
-                    <h4 class="title">合作伙伴</h4>
-                    <div class="content tag-cloud friend-links">
-                        <a href="http://www.bootcss.com" title="Bootstrap中文网" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'bootcsscom'])" target="_blank">Bootstrap中文网</a>
-                        <a href="http://www.bootcdn.cn" title="开放CDN服务" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'bootcdncn'])" target="_blank">开放CDN服务</a>
-                        <a href="http://www.gruntjs.net" title="Grunt中文网" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'gruntjsnet'])" target="_blank">Grunt中文网</a>
-                        <a href="http://www.gulpjs.com.cn/" title="Gulp中文网" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'gulpjscomcn'])" target="_blank">Gulp中文网</a>
-                        <hr>
-                        <a href="http://lodashjs.com/" title="Lodash中文文档" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'lodashjscom'])" target="_blank">Lodash中文文档</a>
-                        <a href="http://www.jquery123.com/" title="jQuery中文文档" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'jquery123com'])" target="_blank">jQuery中文文档</a>
-                        <hr>
-                        <a href="http://www.aliyun.com/" title="阿里云" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'aliyun'])" target="_blank">阿里云</a>
-                        <hr>
-                        <a href="https://www.upyun.com/" title="又拍云" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'upyun'])" target="_blank">又拍云</a>
-                        <a href="http://www.qiniu.com/" title="七牛云存储" onclick="_hmt.push(['_trackEvent', 'link', 'click', 'qiniu'])" target="_blank">七牛云存储</a>
-                    </div>
-                </div></div>
         </div>
     </div>
-</footer>
+</div>
 
 <div class="copyright">
     <div class="container">
@@ -270,6 +244,8 @@
 <script src="//cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>
 <script src="//cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
 <script src="js/demo.js"></script>
+
+<script src="js/content.min.js"></script>
 <script>
     $(function(){
         $('.post-content img').each(function(item){

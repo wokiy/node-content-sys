@@ -36,7 +36,7 @@
             <div class="ibox float-e-margins">
                 <form id="reportPicform" action="/admin/images" method="post" enctype="multipart/form-data">
                     <div class="ibox-content">
-                    <div class="form-group" style="height: unset;">
+                    <div  class="form-group" style="height: unset;">
                         <label for="file">先上传封面图片或内容性图片再填写帖子内容</label>
                         <input style="display: inline-block;margin-left: 2em;" type="file" id="exampleInputFile" name="f1" multiple="multiple">
                         <% if(!session.img && session.img == null){
@@ -53,7 +53,6 @@
                         }
                         %>
                     </div>
-                    <img src="" alt="">
                     <button id="inputButton" type="button" class="btn btn-primary" onclick="submitPic()">上传</button>
                         <!--清空伪删除图片-->
                     <button id="clearButton" type="button" class="btn btn-danger">清空图片</button>
@@ -191,11 +190,15 @@
         }
     }
     $('#clearButton').click(function () {
-
-
-        $.ajax({
-            url:"/admin/clearimgsession",
-        });
+        var imgs = ('.imgnum');
+        console.log(imgs.length);
+        if(!imgs){
+            toastr.error('请选择图片上传!!1')
+        }else{
+            $.ajax({
+                url:"/admin/clearimgsession",
+            });
+        }
     })
 
 </script>
