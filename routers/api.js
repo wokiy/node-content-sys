@@ -61,12 +61,18 @@ router.post("/login",function (req,res) {
     User.findOne({username:username},function (err,user) {
         if(!err && user && user.password ==sha1(password)&&user.isBigadmin==true){
                 req.session.loginUser = user;
+                //删除session当中的登陆提示信息
+                delete req.session.loginError;
                 res.render("node-admin-sys-index");
                 // res.redirect("/admin/admin?page=1");
         }else if(!err && user && user.password ==sha1(password)){
                 req.session.loginUser = user;
+                //删除session当中的登陆提示信息
+                delete req.session.loginError;
                 res.redirect("/index");
         }else {
+            //删除session当中的登陆提示信息
+            delete req.session.loginError;
             res.render("node-admin-sys-login", {msg: {err: "用户名或密码错误！！！！"}, username: username});
         }
     });

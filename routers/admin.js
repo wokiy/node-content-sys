@@ -11,6 +11,7 @@ let newName2='';
 router.get("/user",function (req,res) {
     res.send("user 模块");
 });
+
 router.use(function (req , res , next) {
     res.locals.msg = {};
     next();
@@ -19,8 +20,9 @@ router.use(function (req , res , next) {
 function checklogin(req,res,next) {
 //    判断是否登陆
     if(!req.session.loginUser){
-        //    用户没有登陆，跳转登陆页面
-        res.render("node-admin-sys-login",{msg:{err:"请登录后再访问该页面！！！"}});
+        //用户没有登陆，跳转登陆页面
+        req.session.loginError = '请登录！！！';
+        res.redirect('/login')
     }else{
         next();
     }
@@ -90,7 +92,7 @@ router.get("/addCategory",checklogin,function (req,res) {
     res.render("addCategory");
 });
 //添加分类
-router.post("/addCategory_content",function (req,res) {
+router.post("/addCategory_content",checklogin,function (req,res) {
     /*分类名 输入不能为空
       判断分类名是否存在
     * */
@@ -118,7 +120,7 @@ router.post("/addCategory_content",function (req,res) {
     });
 });
 //删除分类实现
-router.get("/delete_category",function (req,res) {
+router.get("/delete_category",checklogin,function (req,res) {
     //根据id 修改live 变为伪删除
     let id = req.query.id;
     Category.update({_id:id},{$set:{live:false}},function (err) {
@@ -129,7 +131,7 @@ router.get("/delete_category",function (req,res) {
     });
 });
 //编辑修改分类
-router.post("/edit_Category",function (req,res) {
+router.post("/edit_Category",checklogin,function (req,res) {
     let id = req.body.id;
     let name = req.body.name;
     //修改不能为空值
@@ -151,7 +153,7 @@ router.get("/addContent",checklogin,function (req,res) {
     });
 });
 //上传图片
-router.post("/images",function (req,res) {
+router.post("/images",checklogin,function (req,res) {
     //上传图片解析问题
     console.log(req.files);
     //新文件名字
@@ -196,7 +198,7 @@ router.post("/add",checklogin,function (req,res) {
     });
 });
 /*跳转到文章管理页面*/
-router.get("/admin",function (req,res) {
+router.get("/admin",checklogin,function (req,res) {
     //每页显示的条数
     let limit = 6;
     //页数
@@ -233,14 +235,11 @@ router.get("/admin",function (req,res) {
 });
 //-----------------------------------------------------（node-admin-sys）新后台mongodb数据CRUD操作-----------------------------------------------------------------
 //加载后台首页显示的页面
-router.get("/index_v3",function (req,res) {
-
+router.get("/index_v3",checklogin,function (req,res) {
     res.render("node-admin-sys-index_v3");
-
-
 });
 //用户列表查询显示
-router.get("/userList",function (req,res) {
+router.get("/userList",checklogin,function (req,res) {
     //每页显示条数
     let  limit = 6;
     //页数
@@ -278,7 +277,7 @@ router.get("/userList",function (req,res) {
     });
 });
 //查询admin 管理员
-router.get("/adminList",function (req,res) {
+router.get("/adminList",checklogin,function (req,res) {
     //每页显示条数
     let limit = 6;
     //页数
@@ -318,7 +317,7 @@ router.get("/adminList",function (req,res) {
     });
 });
 //用户删除
-router.get("/delete_user",function (req,res) {
+router.get("/delete_user",checklogin,function (req,res) {
     //根据id 修改live 变为伪删除
     let id = req.query.id;
     User.update({_id:id},{$set:{live:false}},function (err) {
@@ -330,14 +329,14 @@ router.get("/delete_user",function (req,res) {
     })
 });
 //查询分类上跳转到容文章发布页面 + 查询所属分类
-router.get("/contentEdit",function (req,res) {
+router.get("/contentEdit",checklogin,function (req,res) {
     //查询所有类目跳转完成并显示
     Category.find({live:{$ne:false}},function (err,categorys) {
         res.render("node-admin-sys-markdown",{categorys:categorys});
     });
 });
 //添加内容
-router.post("/addContent",function (req,res) {
+router.post("/addContent",checklogin,function (req,res) {
     //标题
     let title  = req.body.title.trim();
     //所属类目
@@ -367,7 +366,7 @@ router.post("/addContent",function (req,res) {
     delete req.session.img;
 });
 //全部博文测试展示demo
-router.get("/blog",function (req,res) {
+router.get("/blog",checklogin,function (req,res) {
     Content.find({}).sort({_id:-1}).populate(['category','user']).then(function (contents) {
         //空数组 存储过滤处理好的时间数据
         let arr =[];
@@ -386,7 +385,7 @@ router.get("/blog",function (req,res) {
     //mongodb sort : -1是降序排序
     });
 //博文全部列表
-router.get("/contentList",function (req,res) {
+router.get("/contentList",checklogin,function (req,res) {
     //每页显示的条数
     let limit = 6;
     //页数
@@ -422,7 +421,7 @@ router.get("/contentList",function (req,res) {
     })
 });
 //删除文章
-router.get("/delete_content",function (req,res) {
+router.get("/delete_content",checklogin,function (req,res) {
     //根据ID 真删除文章
     let id = req.query.id;
     //根据ID删除对应的mongodb文档
@@ -434,7 +433,7 @@ router.get("/delete_content",function (req,res) {
     })
 });
 //全部栏目查询展示s
-router.get("/categoryList",function (req,res) {
+router.get("/categoryList",checklogin,function (req,res) {
     //每页显示的条数
     let limit = 6;
     //页数
@@ -462,11 +461,11 @@ router.get("/categoryList",function (req,res) {
     });
 });
 //跳转到添加栏目表单
-router.get("/categoryForm",function (req,res) {
+router.get("/categoryForm",checklogin,function (req,res) {
     res.render("node-admin-sys-addCategory");
 });
 //添加栏目表单提交
-router.post('/add_Category',function (req,res) {
+router.post('/add_Category',checklogin,function (req,res) {
     //分类名 输入不能为空，判断栏目名是否存在
     //获取用户填写的栏目名称
     let categoryName = req.body.name.trim();
@@ -497,7 +496,7 @@ router.post('/add_Category',function (req,res) {
     });
 });
 //评论管理 查询所有评论
-router.get('/commentList',function (req,res) {
+router.get('/commentList',checklogin,function (req,res) {
    //查询所有用户的评论列表展示
     Content.find({}).populate(['category','user']).then(function (contents) {
             res.render('node-admin-sys-comment',{
@@ -507,7 +506,7 @@ router.get('/commentList',function (req,res) {
     });
 });
 //评论删除 正常不不脑残的评论是不删除该内容的评论的
-router.get("/commentsDelete",function (req,res) {
+router.get("/commentsDelete",checklogin,function (req,res) {
     //获取评论用户名
     let id = req.query.id;
     let commID = req.query.cid;

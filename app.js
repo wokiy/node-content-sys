@@ -9,6 +9,9 @@ let multer = require("multer");
 var path = require('path');
 const fs=require('fs');
 //req.file文件  接受上传的文件
+
+//登陆拦截
+
 //设置中间件
 app.use(session({
     resave:false,
@@ -19,6 +22,7 @@ app.use(session({
     },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
+
 /*加载模板文件*/
 app.set("view engine","ejs");
 app.set("views","views");
@@ -43,7 +47,7 @@ app.use("/admin",require("./routers/admin"));
 app.use("/api",require("./routers/api"));
 app.use("/",require("./routers/main"));
 /*body-parser 中间件*/
-app.listen(8081,function (err) {
+app.listen(8082,function (err) {
     if(!err){
         console.log("服务器成功启动！！！！！");
     }
