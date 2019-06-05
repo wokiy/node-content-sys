@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/8.5/styles/monokai_sublime.min.css">
     <link href="//cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <meta name="referrer" content="origin" />
     <link rel="next" href="http://www.ghostchina.com/page/2/" />
@@ -72,7 +75,7 @@
                         if(!session.loginUser){
                         %>
                             <p>未登录</p>
-                            <p><a href="/login"><i class="glyphicon glyphicon-user"></i> &nbsp;登陆</a></p>
+                            <p><a data-toggle="modal"   href="#modal-form"><i class="glyphicon glyphicon-user"></i> &nbsp;登陆</a></p>
                             <p><a href="/register"><i class="glyphicon glyphicon-pencil"></i>&nbsp; 注册</a></p>
                         <%
                         }else{
@@ -100,7 +103,45 @@
     <div class="container">
     </div>
 </footer>
+<div id="modal-form" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6 b-r">
+                        <h3 class="m-t-none m-b">登录</h3>
 
+                        <p>欢迎登录本站(⊙o⊙)</p>
+
+                        <form role="form" action="api/login" method="post">
+                            <div class="form-group">
+                                <label>用户名：</label>
+                                <input type="text" name="username" placeholder="请输入用户名" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>密码：</label>
+                                <input type="password" name="password" placeholder="请输入密码" class="form-control">
+                            </div>
+                            <div>
+                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>登录</strong>
+                                </button>
+                                <label>
+                                    <input type="checkbox" class="i-checks">自动登录</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-6">
+                        <h4>还不是会员？</h4>
+                        <p>您可以注册一个账户</p>
+                        <p class="text-center">
+                            <a href="/register"><i class="fa fa-sign-in big-icon"></i></a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="copyright" style="display: none;">
     <div class="container">
         <div class="row">

@@ -125,12 +125,130 @@ pre {
 }
 /* header */
 .topColor{
-    background: #24292e;
+    background: #15242f;
+}
+
+/*今日最热*/
+.widgetHot{
+    position: relative;
+    height: 68em;
+}
+.tariffCards {
+    position: absolute;
+    top: 29%;
+    left: 50%;
+    margin: -180px 0 0 -140px;
+    user-select: none;
+    transform: translate3d(0, 0, 0);
+    transform-style: preserve-3d;
+}
+.tariffCards:after {
+    position: absolute;
+    bottom: -27px;
+    left: 5%;
+    content: "";
+    width: 65%;
+    height: 10px;
+    border-radius: 100%;
+    background-image: radial-gradient(rgba(34, 50, 84, 0.04), rgba(34, 50, 84, 0));
+}
+.tariffCards > div {
+    position: relative;
+    width: 280px;
+    height: 140px;
+    border-radius: 12px;
+    color: white;
+    /*transform: rotateX(45deg) rotateY(-15deg) rotate(45deg);*/
+    transform: rotateX(1deg) rotateY(-8deg) rotate(0deg);
+    transition: all 0.4s ease;
+    overflow: hidden;
+    cursor: pointer;
+}
+.tariffCards > div:after {
+    position: absolute;
+    top: -70px;
+    left: 0;
+    content: "";
+    width: 200%;
+    height: 200%;
+    background-image: linear-gradient(60deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 80%);
+    transform: translateX(-100%);
+}
+.tariffCards > div img {
+    display: inline-block;
+    width: 65px;
+    height: 53px;
+    border-radius: 25%;
+    margin-top: 1.5em;
+    pointer-events: none;
+    margin-left: 4px;
+}
+.tariffCards > div h3 {
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+}
+.tariffCards > div span {
+    position: absolute;
+    font-weight: 700;
+    /*bottom: 15px;*/
+    left: 6em;
+    top: 23px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+.tariffCards > div.economy {
+    margin-top: 0;
+    z-index: 3;
+    background-color: #009933;
+    background-image: linear-gradient(135deg, #bebebe, #101c28);
+    box-shadow: 20px 20px 60px rgba(34, 50, 84, 0.5), 1px 1px 0px 1px #bebebe;
+}
+.tariffCards > div.premiumeconomy {
+    margin-top: 20px;
+    z-index: 2;
+    background-color: #009933;
+    /*background-image: linear-gradient(135deg, #7F94FC, #3F58E3);*/
+    background-image: linear-gradient(135deg, #bebebe, #101c28);
+    box-shadow: 20px 20px 60px rgba(34, 50, 84, 0.5), 1px 1px 0px 1px #bebebe;
+}
+.tariffCards > div.business {
+    margin-top: 20px;
+    z-index: 1;
+    background-color: #2C6FD1;
+    /*background-image: linear-gradient(135deg, #21BBFE, #2C6FD1);*/
+    background-image: linear-gradient(135deg, #bebebe, #101c28);
+    box-shadow: 20px 20px 60px rgba(34, 50, 84, 0.5), 1px 1px 0px 1px #bebebe;
+}
+.tariffCards > div.first {
+    margin-top: 20px;
+    background-color: #352F64;
+    /*background-image: linear-gradient(135deg, #415197, #352F64);*/
+    background-image: linear-gradient(135deg, #bebebe, #101c28);
+    box-shadow: 5px 5px 60px rgba(34, 50, 84, 0.1), 1px 1px 0px 1px #bebebe;
+}
+.tariffCards > div:hover {
+    /*transform: rotateX(30deg) rotateY(-15deg) rotate(30deg) translate(-25px, 50px);*/
+    transform: rotateX(0deg) rotateY(0deg) rotate(0deg) translate3D(1px, -10px,180px);
+}
+.tariffCards > div:hover:after {
+    transform: translateX(100%);
+    transition: all 1.2s ease-in-out;
+}
+.tariffCards .pull-right{
+    margin: 8em 1em 0 0;
 }
 /*====================================================
 
 	header
 ====================================================*/
+.widget{
+    margin-top: unset;
+}
 .main-header {
     text-align: center;
     padding: 42px 0;

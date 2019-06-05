@@ -18,11 +18,13 @@
 #### 首页展示
   > 内容列表具体看个人爱好
   
-![ss](/public/img/ii3.png)  
+![ss](/public/img/ii4.png)  
 
 #### 文章展示和评论
 
- ![node文章展示页](/public/img/views.png)
+> 新增今日最热帖子
+
+ ![node文章展示页](/public/img/ivewss.png)
  
 #### 登陆页面展示（markdown编辑器发布的效果）
 
