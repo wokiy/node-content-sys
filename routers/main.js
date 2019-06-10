@@ -5,6 +5,8 @@ let markdown = require('markdown-js');
 let  moment = require("moment");
 let Content = require("../schemas/Content");
 let Category = require("../schemas/Category");
+let Comment = require("../schemas/Comment");
+
 const  fs = require("fs");
 const pathLib=require('path');
 let newName2='';
@@ -27,13 +29,23 @@ router.get("/about",function (req,res) {
 });
 //个人中心页面
 router.get('/topCenter',function (req,res) {
-    //查询所有帖子
-    Content.find({}).populate(['category','user']).then(function (contents) {
+    //获取用户的ID
+    let userid = req.session.loginUser._id;
+    //根据用户ID查询
+    Comment.find({userID:userid}).populate(['userID','contentID']).then(function (comments) {
+        let arr =[];
+        for(let i=0;i<comments.length;i++){
+            let nowT = comments[i].addTime;
+            let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
+            arr.push(now);
+        }
+        console.log(arr3);
         res.render('node-content-sys-pCenter', {
-            //遍历所有的contents双层遍历
-            contents: contents
-        });
+            comments: comments,
+            arr1:arr,
+         });
     });
+
 });
 //上传用户新头像
 router.post('/ChangeImages',function (req,res) {
@@ -123,19 +135,30 @@ router.get("/index",function (req,res) {
 //—————————————————————————————————————————————————————————————————————————
 //点击博文的详细信息，显示所有文章的分类
 router.get("/views",function (req,res,next) {
+
     /*分类排序*/
     Category.find({}).sort({_id:1}).then(function (categorys) {
         res.categorys = categorys;
         next();
     });
+    // res.redirect('/login');
 });
+
+// router.get('/views',function (req,res,next) {
+//     //comment
+//     // Comment.find({})
+// });
+
 //加载views时候查询评论数点击查询views时候views字段加一
 
 //详细文章查询 + markdown格式转义
 router.get("/views",function (req,res) {
+    // console.log("aa");
     //获取文章的id查询
-    let id = req.query.id;
-    Content.findOne({_id:id}).populate(['category','user']).then(function (content) {
+    var id = req.query.id;
+    // console.log(id);
+    //帖子是一对多的关系。 1 -> n 所以要根据一条帖子的ID去查询评论文档中的评论内容
+    Content.findOne({_id:id}).populate(['user','category']).then(function (content) {
         let nowT = content.addTime;
         let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
         //阅读数views ; 每次点开始阅读数目 ; 自动添加一
@@ -143,20 +166,33 @@ router.get("/views",function (req,res) {
         //添加后保存 阅读数的添加
         content.save();
         //获取markdown内容
-        let text = content.content;
+        let text = content.contents;
         let html = markdown.makeHtml(text);
-        let arr =[];
-        for(let i=0;i<content.comments.length;i++){
-            let nowT = content.comments[i].postTime;
-            let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
-            arr.push(now);
-        }
-        res.render("views",{
-            categorys:res.categorys,
-            content:content,
-            now:now,
-            arr:arr,
-            contentHtml:html
+        // let arr =[];
+        // for(let i=0;i<content.comments.length;i++){
+        //     let nowT = content.comments[i].postTime;
+        //     let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
+        //     arr.push(now);
+        // }
+        //查询该帖子的评论文档
+        console.log(id);
+        Comment.find({contentID:id}).populate(['userID','contentID']).then(function (comments) {
+            console.log(comments);
+            let arr =[];
+            for(let i=0;i<comments.length;i++){
+                let nowT = comments[i].addTime;
+                let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
+                arr.push(now);
+            }
+
+            res.render("views",{
+                categorys:res.categorys,
+                content:content,
+                now:now,
+                arr:arr,
+                contentHtml:html,
+                comments:comments
+            });
         });
     });
 });
@@ -164,33 +200,42 @@ router.get("/views",function (req,res) {
 /*评论模块*/
 //评论原理   根据文章的ID 去添加 去update content 文章的表内容
 router.post("/addComments",checklogin,function (req,res) {
-    //获取文章的id
-    let id = req.body.id;
-    let username = req.session.loginUser.username;
+    //获取文章的ID
+    let contentid = req.body.id;
+    //用户I
+    let userID = req.session.loginUser._id;
+    //评论内容
     let comments = req.body.comments.trim();
     //随机id函数
-    function GenNonDuplicateID(randomLength){
-        return Number(Math.random().toString().substr(3,randomLength) + Date.now()).toString(36)
-    }
+    // function GenNonDuplicateID(randomLength){
+    //     return Number(Math.random().toString().substr(3,randomLength) + Date.now()).toString(36)
+    // }
     //GenNonDuplicateID()将生成 rfmipbs8ag0kgkcogc 类似的ID
     // GenNonDuplicateID()
-    //获取当前用户的头像地址的引用
-    var picaddresss =  req.session.loginUser.images;
-    let postData ={
-        user :req.session.loginUser.username,
-        postTime:new Date(),
-        comments:req.body.comments.trim(),
-        live:true,
-        id:GenNonDuplicateID(3),
-        images:picaddresss
-    };
+    //获取当前用户的头像地址的引用 ? 如果用户后期改变
+    // var picaddresss =  req.session.loginUser.images;
+    // let postData ={
+    //     user :req.session.loginUser.username,
+    //     postTime:new Date(),
+    //     comments:req.body.comments.trim(),
+    //     live:true,
+    //     id:GenNonDuplicateID(3),
+    //     images:picaddresss
+    // };
     //判断评论是否空值
     //更具id 跟新文章的 评论数目 db.blog.update({"title":"A"},{$push:{"comments":{"testAdd":"T"}}});
-    Content.update({_id:id},{$push:{comments:postData}},function (err) {
+    //向comment文档添加数据
+    Comment.create({userID:userID,contentID:contentid,contents:comments},function (err) {
         if(!err) {
-            res.redirect("/views?id=" + id + "");
+            res.redirect("/views?id=" + contentid + "");
         }
     });
+
+    // Content.update({_id:id},{$push:{comments:postData}},function (err) {
+    //     if(!err) {
+    //         res.redirect("/views?id=" + id + "");
+    //     }
+    // });
 });
 //------------------------------------------分类查询实现 和分页实现-------------------------------------------------------------------------
 //分类

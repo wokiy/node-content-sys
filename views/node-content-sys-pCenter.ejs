@@ -9,33 +9,22 @@
     <link rel="shortcut icon" href="images/bitbug_favicon.ico">
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/8.5/styles/monokai_sublime.min.css">
-    <link href="//cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/demo.css" />
     <meta name="referrer" content="origin" />
-
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min.css" rel="stylesheet">
-
-
     <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <style>
         .gohome{
             display: none;
         }
     </style>
-    <script type="text/javascript" src="/shared/ghost-url.min.js?v=a8de6833b5"></script>
-    <script type="text/javascript">
-        ghost.init({
-            clientId: "ghost-frontend",
-            clientSecret: "721352203d6a"
-        });
-    </script>
     <meta name="generator" content="node-content-sys"/>
     <link rel="alternate" type="application/rss+xml" title="资深切图工程师" href="http://www.jasonlwy.cn " />
 </head>
-<body class="home-template" style="background: #f8f7fc">
+<body class="home-template" style="background: #f5f5f5">
 <nav class="main-navigation" style="margin-bottom: unset">
     <div class="container">
         <div class="row">
@@ -128,33 +117,28 @@
                         <div>
                             <div class="feed-activity-list">
                                 <%
-                                for(let i = 0;i<contents.length;i++) {
-                                    //遍历数组的中的所有对象
-                                    var arr1 = contents[i].comments; //得到对象中的comments数组
-                                    // 得到数组 判断数组是否存在
-                                    if (arr1.length !== 0){
-                                    for(var j = 0;j<arr1.length ;j++){
-                                    // 评论是激活的状态才显示
-                                    if (arr1[j].live===true && arr1[j].user===session.loginUser.username) {
+                                    for (var i=0;i<comments.length;i++){
                                 %>
                                 <div class="feed-element">
                                     <a href="#" class="pull-left">
-                                        <img alt="image" class="img-circle" src="<%=session.loginUser.images%>">
+                                        <img alt="image" class="img-circle" src="<%=comments[i].userID.images%>">
                                     </a>
                                     <div class="media-body ">
-                                        <small class="pull-right"><%=arr1[j].postTime%></small>
-                                        <strong><%=session.loginUser.username%></strong> 回复了 <%=contents[i].user.username%>创建的 >
+                                        <small class="pull-right">
+                                            <%=arr1[i]%></small>
+                                        <strong><%=comments[i].userID.username%></strong> 回复了 <%=arr2[i]%>
                                         <strong>
-                                        <a href="/contents?id=<%=contents[i].category._id%>&page=1"><%=contents[i].category.name%></a>
+
+                                            <%=arr3[i]%>
                                         </strong>
                                         >
                                         <strong>
-                                        <a href="/views?id=<%=contents[i]._id%>"><%=contents[i].title%></a>
+                                        <a href="/views?id=<%=comments[i].contentID._id%>"><%=comments[i].contentID.title%></a>
                                         </strong>
                                         <br>
                                         <!--<small class="text-muted">今天 09:27 来自pc</small>-->
                                         <div class="well">
-                                            <%=arr1[j].comments%>
+                                            <%=comments[i].contents%>
                                         </div>
                                         <div class="pull-right">
                                             <!--<a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> 赞 </a>-->
@@ -163,15 +147,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <%
-                                }
-                                }
-                                %>
+                                <%}%>
 
-                                <%
-                                    }
-                                  }
-                                %>
                             </div>
                         </div>
 
@@ -299,9 +276,6 @@
 </section>
 <a href="#" id="back-to-top"><i class="fa fa-angle-up"></i></a>
 
-<script src="//cdn.bootcss.com/fitvids/1.1.0/jquery.fitvids.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/8.5/highlight.min.js"></script>
-<script src="//cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
 <script src="js/demo.js"></script>
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

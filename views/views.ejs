@@ -94,57 +94,60 @@
                 <%
                 }else{
                 %>
-                <article id="104" class="post">
+                    <article id="104" class="post">
 
-                    <header class="post-head">
-                        <h1 class="post-title"><%= content.title %></h1>
-                        <section class="post-meta">
-                            <span class="author">作者：<a href="/about"><%= content.user.username %></a></span> &bull;
-                            <time class="post-date" datetime="" title=""><%= now %></time>
+                        <header class="post-head">
+                            <h1 class="post-title"><%= content.title %></h1>
+                            <section class="post-meta">
+                                <span class="author">作者：<a href="/about"><%= content.user.username %></a></span> &bull;
+                                <time class="post-date" datetime="" title=""><%= now %></time>
+                            </section>
+                        </header>
+                        <section class="post-content">
+                            <p>
+                                <!--markdown语法-->
+                                <%- contentHtml %>
+                            </p>
+
                         </section>
-                    </header>
-                    <section class="post-content">
-                        <p>
-                            <!--markdown语法-->
-                            <%- contentHtml %>
-                        </p>
-                    </section>
-                    <section class="featured-media">
-                        <%
-                            var arr1 = content.images;
-                        for(var o = 0;o < arr1.length;o++){
-                        %>
-                        <img src="<%= arr1[o] %>" alt="image" class="img-responsive img">
-                        <%
-                        }
-                        %>
-                    </section>
-                    <footer class="post-footer clearfix">
-                        <div class="pull-left tag-list">
-                            <i class="fa fa-folder-open-o"></i>
-                            <%= content.category.name %>
-                        </div>
-
-                        <div class="pull-left tag-list marL">
-                            <i class="fa fa-folder-open-o">阅读数:</i>
-                            <%= content.views %>
-                        </div>
-                        <div class="pull-right share">
-                            <div class="bdsharebuttonbox share-icons">
-                                <a href="#" class="bds_more" data-cmd="more"></a>
-                                <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-                                <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-                                <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
-                                <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
-                                <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                        <section class="featured-media">
+                            <%
+                                var arr1 = content.images;
+                            for(var o = 0;o < arr1.length;o++){
+                            %>
+                                <img src="<%= arr1[o] %>" alt="image" class="img-responsive img">
+                            <%
+                            }
+                            %>
+                        </section>
+                        <footer class="post-footer clearfix">
+                            <div class="pull-left tag-list">
+                                <i class="fa fa-folder-open-o"></i>
+                                <%= content.category.name %>
                             </div>
-                        </div>
-                    </footer>
 
-                </article>
+                            <div class="pull-left tag-list marL">
+                                <i class="fa fa-folder-open-o">阅读数:</i>
+                                <%= content.views %>
+                            </div>
+                            <div class="pull-right share">
+                                <div class="bdsharebuttonbox share-icons">
+                                    <a href="#" class="bds_more" data-cmd="more"></a>
+                                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                                    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+                                    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+                                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                                </div>
+                            </div>
+                        </footer>
+
+                    </article>
                 <%
                 }
                 %>
+
+
                 <div class="about-author clearfix">
                     <!--<a href="/author/wangsai/"><img src="http://static.ghostchina.com/image/5/ea/da657733ee8c9add9cf3fd70183a6.png" alt="王赛" class="avatar pull-left"></a>-->
 
@@ -154,45 +157,39 @@
                     %>
                         <a href="/login" class="btn btn-default btn-block">你 还 没 登 陆 请 ! 先 登 陆 再 评 论</a>
                         <br>
-
                         <ul class="list-group">
                             <%
-                            if(!content && content.toString() == ""){
+                            if(!comments && comments.toString() == ""){
                             %>
                                 <li class="list-group-item"><strong>没有评论！！！！</strong></li>
                             <%
                             } else{
-                            for(let i = 0;i < content.comments.length;i++){
-
-
-                            if (content.comments[i].live === true) {
+                            for(let i = 0;i < comments.length;i++){
+                            if (comments[i].live === true) {
                                 //评论激活的情况下
                             %>
                             <li class="list-group-item">
                                 <div class="left">
                                      <span style=" display:inline-block;width: 50px;margin: 0 auto;">
                                          <!--头像-->
-                                        <img class="img-responsive" src="<%= content.comments[i].images %>" alt="用户头像">
+                                        <img class="img-responsive" src="<%=comments[i].userID.images %>" alt="用户头像">
                                     </span>
                                     <span class="strong1">
                                     <!--<i class="glyphicon glyphicon-user"></i>-->
                                     <strong>
-                                        <%= content.comments[i].user %>: &nbsp;&nbsp;
+                                        <%=comments[i].userID.username %>: &nbsp;&nbsp;
                                     </strong>
                                  </span>
                                 </div>
-
                                 <div class="right">
-                                    <span class=""><%= content.comments[i].comments %></span>
+                                    <span class=""><%=comments[i].contents %></span>
                                     <span class=" pull-right">
                                      <%= arr[i] %>
                                 </span>
                                 </div>
-
                             </li>
                             <%
                             }
-
                             }
                             }
                             %>
@@ -203,72 +200,69 @@
                     <%
                     }else {
                     %>
-                    <!--已登陆显示 评论表单!!!!-->
-                    <form action="/addComments" method="post" id="reportPicform">
-                        <div class="form-group ">
-                            <label for="comments">发表评论</label>
-                            <input type="hidden" name="id" value="<%= content._id %>">
-                            <input id="comments" style="border: 1px #7fa785 solid" type="text" class="form-control"
-                                   name="comments">
-                            <!--<input type="submit" class="btn-primary pull-right addC" value="提交评论">-->
-                            <button id="inputButton" type="button" class="btn btn-default pull-right addC"
-                                    onclick="submitComm()">提交评论
-                            </button>
-                        </div>
-                    </form>
-                    <br>
-                    <br>
-
-                    <ul class="list-group">
-                        <%
-                        if(!content && content.toString() == ""){
-                        %>
-                            <li class="list-group-item"><strong>没有评论！！！！</strong></li>
-                        <%
-                        } else{
-                        for(let i = 0;i < content.comments.length;i++){
-                        if (content.comments[i].live === true) {
-                        %>
-                        <li class="list-group-item">
-                            <div class="left">
+                        <!--已登陆显示 评论表单!!!!-->
+                        <form action="/addComments" method="post" id="reportPicform">
+                            <div class="form-group ">
+                                <label for="comments">发表评论</label>
+                                <input type="hidden" name="id" value="<%= content._id %>">
+                                <input id="comments" style="border: 1px #7fa785 solid" type="text" class="form-control"
+                                       name="comments">
+                                <!--<input type="submit" class="btn-primary pull-right addC" value="提交评论">-->
+                                <button id="inputButton" type="button" class="btn btn-default pull-right addC"
+                                        onclick="submitComm()">提交评论
+                                </button>
+                            </div>
+                        </form>
+                        <br>
+                        <br>
+                        <ul class="list-group">
+                            <%
+                            if(!comments && comments.toString() == ""){
+                            %>
+                                <li class="list-group-item"><strong>没有评论！！！！</strong></li>
+                            <%
+                            } else{
+                            for(let i = 0;i < comments.length;i++){
+                            if (comments[i].live === true) {
+                            %>
+                                <li class="list-group-item">
+                                    <div class="left">
                                      <span style=" display:inline-block;width: 50px;margin: 0 auto;">
-                                        <img class="img-responsive" src="<%= content.comments[i].images %>" alt="用户头像">
+                                        <img class="img-responsive" src="<%=comments[i].userID.images %>" alt="用户头像">
                                     </span>
-                                <span class="strong1">
+                                        <span class="strong1">
                                     <!--<i class="glyphicon glyphicon-user"></i>-->
                                     <strong>
-                                        <%= content.comments[i].user %>: &nbsp;&nbsp;
+                                        <%=comments[i].userID.username %>: &nbsp;&nbsp;
                                     </strong>
                                  </span>
-                            </div>
-
-                            <div class="right">
-                                <span class=""><%= content.comments[i].comments %></span>
-                                <span class=" pull-right">
+                                    </div>
+                                    <div class="right">
+                                        <span class=""><%=comments[i].contents %></span>
+                                        <span class=" pull-right">
                                      <%= arr[i] %>
                                 </span>
-                            </div>
-
-                        </li>
-                        <%
-                        }
-                        }
-                        %>
-                    </ul>
-                    <!--<button type="button" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</button>-->
-                    <!--<button type="button" class="btn btn-success pull-right">上一页</button>-->
+                                    </div>
+                                </li>
+                            <%
+                            }
+                            }
+                            %>
+                        </ul>
+                        <!--<button type="button" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</button>-->
+                        <!--<button type="button" class="btn btn-success pull-right">上一页</button>-->
                     <%
                     }
                     }
                     %>
 
                 </div>
+
             </main>
 
             <aside class="col-md-4 sidebar">
                 <!-- start widget -->
                 <!-- end widget -->
-
                 <!-- start tag cloud widget -->
                 <div class="widget">
                     <h4 class="title" style="text-align: center">用户区域</h4>
@@ -278,17 +272,18 @@
                         %>
                             <p>未登录</p>
                             <!--<p><a href="/login"><i class="glyphicon glyphicon-user"></i> &nbsp;登陆</a></p>-->
-                            <p><a data-toggle="modal"   href="#modal-form"><i class="glyphicon glyphicon-user"></i> &nbsp;登陆</a></p>
+                            <p><a data-toggle="modal" href="#modal-form"><i class="glyphicon glyphicon-user"></i> &nbsp;登陆</a>
+                            </p>
                             <p><a href="/register"><i class="glyphicon glyphicon-pencil"></i>&nbsp; 注册</a></p>
                         <%
                         }else{
                         %>
-                        <div style="width: 150px;margin: 0 auto;">
-                            <img class="img-responsive" src="<%= session.loginUser.images %>" alt="用户头像">
-                        </div>
-                        <p>用户: <%= session.loginUser.username %></p>
+                            <div style="width: 150px;margin: 0 auto;">
+                                <img class="img-responsive" src="<%= session.loginUser.images %>" alt="用户头像">
+                            </div>
+                            <p>用户: <%= session.loginUser.username %></p>
 
-                        <p><a href="/logout">退出</a></p>
+                            <p><a href="/logout">退出</a></p>
                         <%
                         }
                         %>
@@ -319,8 +314,8 @@
                         }else{
                         for(let i = 0;i < categorys.length;i++){
                         %>
-                        <!--根据分类ID查询该分类的所有文章-->
-                        <a href="/contents?id=<%= categorys[i]._id %>&page=1"><%= categorys[i].name %></a>
+                            <!--根据分类ID查询该分类的所有文章-->
+                            <a href="/contents?id=<%= categorys[i]._id %>&page=1"><%= categorys[i].name %></a>
                         <%
                         }
                         }
@@ -407,7 +402,8 @@
                                 <input type="password" name="password" placeholder="请输入密码" class="form-control">
                             </div>
                             <div>
-                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>登录</strong>
+                                <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">
+                                    <strong>登录</strong>
                                 </button>
                                 <label>
                                     <input type="checkbox" class="i-checks">自动登录</label>

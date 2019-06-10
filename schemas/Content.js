@@ -30,14 +30,9 @@ let blogSchema = mongoose.Schema({
         type:String,
         default:''
     },
-    content:{
+    contents:{
         type:String,
         default:''
-    },
-    //评论
-    comments:{
-        type:Array,
-        default:[]
     },
     images:{
         type:Array,

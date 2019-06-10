@@ -128,5 +128,129 @@ User.count()//总条数
                 </div>
             </div>
             <%}%>
+            
+            
+            
+            
+             <div class="about-author clearfix">
+                                <!--<a href="/author/wangsai/"><img src="http://static.ghostchina.com/image/5/ea/da657733ee8c9add9cf3fd70183a6.png" alt="王赛" class="avatar pull-left"></a>-->
+            
+                                <!--未登录显示-->
+                                <%
+                                if(!session.loginUser){
+                                %>
+                                    <a href="/login" class="btn btn-default btn-block">你 还 没 登 陆 请 ! 先 登 陆 再 评 论</a>
+                                    <br>
+            
+                                    <ul class="list-group">
+                                        <%
+                                        if(!content && content.toString() == ""){
+                                        %>
+                                            <li class="list-group-item"><strong>没有评论！！！！</strong></li>
+                                        <%
+                                        } else{
+                                        for(let i = 0;i < content.comments.length;i++){
+            
+            
+                                        if (content.comments[i].live === true) {
+                                            //评论激活的情况下
+                                        %>
+                                        <li class="list-group-item">
+                                            <div class="left">
+                                                 <span style=" display:inline-block;width: 50px;margin: 0 auto;">
+                                                     <!--头像-->
+                                                         <img class="img-responsive" src="<%= content.comments[i].images %>"
+                                                              alt="用户头像">
+                                                 </span>
+                                                <span class="strong1">
+                                                <!--<i class="glyphicon glyphicon-user"></i>-->
+                                                <strong>
+                                                    <%= content.comments[i].user %>: &nbsp;&nbsp;
+                                                </strong>
+                                             </span>
+                                            </div>
+            
+                                            <div class="right">
+                                                <span class=""><%= content.comments[i].comments %></span>
+                                                <span class=" pull-right">
+                                                 <%= arr[i] %>
+                                            </span>
+                                            </div>
+            
+                                        </li>
+                                        <%
+                                        }
+            
+                                        }
+                                        }
+                                        %>
+                                    </ul>
+                                    <!--<a href="#" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</a>-->
+                                    <!--<span class="page-number">当前第  页&nbsp; 总共2页</span>-->
+                                    <!--<a href="#" class="btn btn-success pull-right">上一页</a>-->
+                                    <%
+                                    }else {
+                                    %>
+                                        <!--已登陆显示 评论表单!!!!-->
+                                        <form action="/addComments" method="post" id="reportPicform">
+                                            <div class="form-group ">
+                                                <label for="comments">发表评论</label>
+                                                <input type="hidden" name="id" value="<%= content._id %>">
+                                                <input id="comments" style="border: 1px #7fa785 solid" type="text"
+                                                       class="form-control"
+                                                       name="comments">
+                                                <!--<input type="submit" class="btn-primary pull-right addC" value="提交评论">-->
+                                                <button id="inputButton" type="button" class="btn btn-default pull-right addC"
+                                                        onclick="submitComm()">提交评论
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <br>
+            
+                                        <ul class="list-group">
+                                            <%
+                                            if(!content && content.toString() == ""){
+                                            %>
+                                                <li class="list-group-item"><strong>没有评论！！！！</strong></li>
+                                            <%
+                                            } else{
+                                            for(let i = 0;i < content.comments.length;i++){
+                                            if (content.comments[i].live === true) {
+                                            %>
+                                                <li class="list-group-item">
+                                                    <div class="left">
+                                                 <span style=" display:inline-block;width: 50px;margin: 0 auto;">
+                                                    <img class="img-responsive" src="<%= content.comments[i].images %>" alt="用户头像">
+                                                </span>
+                                                        <span class="strong1">
+                                                <!--<i class="glyphicon glyphicon-user"></i>-->
+                                                <strong>
+                                                    <%= content.comments[i].user %>: &nbsp;&nbsp;
+                                                </strong>
+                                             </span>
+                                                    </div>
+            
+                                                    <div class="right">
+                                                        <span class=""><%= content.comments[i].comments %></span>
+                                                        <span class=" pull-right">
+                                                 <%= arr[i] %>
+                                            </span>
+                                                    </div>
+            
+                                                </li>
+                                            <%
+                                            }
+                                            }
+                                            %>
+                                        </ul>
+                                        <!--<button type="button" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</button>-->
+                                        <!--<button type="button" class="btn btn-success pull-right">上一页</button>-->
+                                    <%
+                                    }
+                                    }
+                                    %>
+            
+                            </div>
 
 

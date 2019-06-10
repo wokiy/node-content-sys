@@ -350,7 +350,7 @@ router.post("/addContent",checklogin,function (req,res) {
     //获取session 当中的img数组
     var images = req.session.img;
     //数据库操作 数据保存成功
-    Content.create({category:category,title:title,user:userID,description:description,content:content,images:images}).then(function (err) {
+    Content.create({category:category,title:title,user:userID,description:description,contents:content,images:images}).then(function (err) {
         // if (err){
         //     //错误时候
         //     return  res.redirect('/admin/contentEdit');
