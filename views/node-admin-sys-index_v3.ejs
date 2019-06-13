@@ -23,10 +23,10 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <span class="label label-success pull-right">月</span>
-                    <h5>总评论数</h5>
+                    <h5>总评帖子数</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">40 886,200</h1>
+                    <h1 class="no-margins"><%=count1%></h1>
                     <div class="stat-percent font-bold text-success">98% <i class="fa fa-bolt"></i>
                     </div>
                     <small>总收入</small>
@@ -40,7 +40,7 @@
                     <h5>注册用户</h5>
                 </div>
                 <div class="ibox-content">
-                    <h1 class="no-margins">275,800</h1>
+                    <h1 class="no-margins"><%=count2%></h1>
                     <div class="stat-percent font-bold text-info">20% <i class="fa fa-level-up"></i>
                     </div>
                     <small>新用户</small>
@@ -92,25 +92,27 @@
                 </div>
                 <div class="ibox-content ibox-heading">
                     <h3><i class="fa fa-envelope-o"></i> 新消息</h3>
-                    <small><i class="fa fa-tim"></i> 您有10条未读消息</small>
+                    <small><i class="fa fa-tim"></i> 您有10条消息读取</small>
                 </div>
                 <div class="ibox-content">
                     <div class="feed-activity-list">
 
-
-
+                        <%
+                        for(var i = 0; i<comments.length; i++){
+                            if(comments[i].live === true){
+                         %>     
 
                         <div class="feed-element">
                             <div>
-                                <small class="pull-right text-navy">1月前</small>
-                                <strong>井幽幽</strong>
-                                <div>有人说：“一辈子很长，要跟一个有趣的人在一起”。我想关注我的人，应该是那种喜欢找乐子也乐意分享乐趣的人，你们一定挺优秀的。所以单身的应该在这条留言，互相勾搭一下。特别有钱人又帅可以直接私信我！</div>
-                                <small class="text-muted">4月11日 00:00</small>
+                                <!-- <small class="pull-right text-navy">1月前</small> -->
+                                <strong><%=comments[i].userID.username%></strong>
+                                <div><%=comments[i].contents%></div>
+                                <small class="text-muted"><%=arr[i]%></small>
                             </div>
                         </div>
 
 
-
+                          <%}}%>  
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ let markdown = require('markdown-js');
 let User = require("../schemas/User");
 let Category = require("../schemas/Category");
 let Content = require("../schemas/Content");
+let Comment = require('../schemas/Comment');
 const pathLib=require('path');
 let  moment = require("moment");
 let newName2='';
@@ -235,8 +236,38 @@ router.get("/admin",checklogin,function (req,res) {
 });
 //-----------------------------------------------------（node-admin-sys）新后台mongodb数据CRUD操作-----------------------------------------------------------------
 //加载后台首页显示的页面
+router.get('/index_v3',checklogin,function (req,res,next) { 
+    Content.count().then(function (count1) {
+        res.count1 = count1
+        next();
+    })
+ })
+ router.get('/index_v3',checklogin,function (req,res,next) { 
+    User.count().then(function (count2) {
+        res.count2 = count2
+        next();
+    })
+})
+
 router.get("/index_v3",checklogin,function (req,res) {
-    res.render("node-admin-sys-index_v3");
+    // 查询评论表最新消息
+    let limit = 10;
+    Comment.find().limit(limit).populate(['userID','contentID']).then(function (comments) { 
+        let arr =[];
+        for(let i=0;i<comments.length;i++){
+            let nowT = comments[i].addTime;
+            let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
+            arr.push(now);
+        }
+         res.render("node-admin-sys-index_v3",
+         {
+            comments:comments,
+            count1:res.count1,
+            count2:res.count2,
+            arr:arr
+         }
+         );
+     })
 });
 //用户列表查询显示
 router.get("/userList",checklogin,function (req,res) {
@@ -498,38 +529,35 @@ router.post('/add_Category',checklogin,function (req,res) {
 //评论管理 查询所有评论
 router.get('/commentList',checklogin,function (req,res) {
    //查询所有用户的评论列表展示
-    Content.find({}).populate(['category','user']).then(function (contents) {
+    Comment.find({}).populate(['userID','contentID']).then(function (comments) {
+        let arr =[];
+        for(let i=0;i<comments.length;i++){
+            let nowT = comments[i].addTime;
+            let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
+            arr.push(now);
+        }
+        // console.log(comments);
             res.render('node-admin-sys-comment',{
                 //遍历所有的contents双层遍历
-                contents:contents
+                comments:comments,
+                arr:arr
             })
     });
+
 });
 //评论删除 正常不不脑残的评论是不删除该内容的评论的
 router.get("/commentsDelete",checklogin,function (req,res) {
-    //获取评论用户名
+    //获取评论ID
     let id = req.query.id;
-    let commID = req.query.cid;
-    //根据ID内容跟和遍历评论列表
-    Content.find({_id:id}).populate(['category','user']).then(function (contents) {
-        //单查询
-        let arr = contents[0].comments;
-        //遍历数组 匹配用户 修改数组 live 为false updata comments字段数据。
-        for (let j = 0; j < arr.length; j++) {
-            //找评论的ID匹配
-            if(arr[j].id === commID){
-                //设置评论不现实false
-                arr[j].live = false;
-            }
-        }
+    //根据ID评论列表
         //跟新操作
-        Content.update({_id:id},{$set:{comments:arr}},function (err) {
+        Comment.update({_id:id},{$set:{live:false}},function (err) {
             //重定向到评论页面
             if(!err) {
                 res.redirect("/admin/commentList");
             }
         })
-    });
+   
 });
 
 

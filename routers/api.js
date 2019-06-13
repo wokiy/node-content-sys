@@ -78,10 +78,47 @@ router.post("/login",function (req,res) {
     });
 });
 //node-admin-sys index  iframe 路由加载内容
-router.get("/index_v3",function (req,res) {
-   //iframe 路由添加内容
-   res.render("node-admin-sys-index_v3");
+
+
+//加载后台首页显示的页面
+router.get('/index_v3',checklogin,function (req,res,next) { 
+    Content.count().then(function (count1) {
+        res.count1 = count1
+        next();
+    })
+ })
+ router.get('/index_v3',checklogin,function (req,res,next) { 
+    User.count().then(function (count2) {
+        res.count2 = count2
+        next();
+    })
+})
+
+router.get("/index_v3",checklogin,function (req,res) {
+    // 查询评论表最新消息
+    let limit = 10;
+    Comment.find().limit(limit).populate(['userID','contentID']).then(function (comments) { 
+        let arr =[];
+        for(let i=0;i<comments.length;i++){
+            let nowT = comments[i].addTime;
+            let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
+            arr.push(now);
+        }
+         res.render("node-admin-sys-index_v3",
+         {
+            comments:comments,
+            count1:res.count1,
+            count2:res.count2,
+            arr:arr
+         }
+         );
+     })
 });
+
+// router.get("/index_v3",function (req,res) {
+//    //iframe 路由添加内容
+//    res.render("node-admin-sys-index_v3");
+// });
 /*判断用户是否登陆*/
 function checklogin(req,res,next) {
 //    判断是否登陆

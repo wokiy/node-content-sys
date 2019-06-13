@@ -47,7 +47,7 @@ app.use("/admin",require("./routers/admin"));
 app.use("/api",require("./routers/api"));
 app.use("/",require("./routers/main"));
 /*body-parser 中间件*/
-app.listen(8082,function (err) {
+app.listen(8083,function (err) {
     if(!err){
         console.log("服务器成功启动！！！！！");
     }

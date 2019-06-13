@@ -17,24 +17,18 @@
     <div class="row">
         <div class="col-lg-12">
             <%
-            for(let i = 0;i<contents.length;i++) {
-                //遍历数组的中的所有对象
-                var arr1 = contents[i].comments; //得到对象中的comments数组
-                // 得到数组 判断数组是否存在
-                if (arr1.length !== 0){
-                 for(var j = 0;j<arr1.length ;j++){
-                    // 评论是激活的状态才显示
-                    if (arr1[j].live===true) {
+                for(var i = 0; i<comments.length; i++){
+                    if(comments[i].live === true){
             %>
             <div class="ibox">
                 <div class="ibox-content">
                     <a href="#" class="btn-link">
                         <h2>
-                            <a href="#" target="_blank"><%=arr1[j].comments%> <%=contents[i]._id%> <%=arr1[j].id%></a>
+                            <a href="#" target="_blank"><%=comments[i].contents%></a>
                         </h2>
                     </a>
                     <div class="small m-b-xs">
-                        <strong></strong> <span class="text-muted"><i class="fa fa-clock-o"></i><%=arr1[j].postTime%></span>
+                        <strong></strong> <span class="text-muted"><i class="fa fa-clock-o"></i><%=arr[i]%></span>
                     </div>
                     <p>
 
@@ -46,9 +40,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="small text-right">
-                                <a class="btn btn-danger btn-rounded btn-outline" href="/admin/commentsDelete?id=<%=contents[i]._id%>&cid=<%=arr1[j].id%>">删除</a>
+                                <a class="btn btn-danger btn-rounded btn-outline" href="/admin/commentsDelete?id=<%=comments[i]._id%>">删除</a>
                                 <h5>状态：激活</h5>
-                                <div> <i class="fa fa-comments-o"> </i> 用户名: <%=arr1[j].user%> </div>
+                                <div> <i class="fa fa-comments-o"> </i> 用户名: <%=comments[i].userID.username%> </div>
                                 <i class="fa fa-eye"> </i> 超级管理员 - 浏览
                             </div>
                         </div>
@@ -56,12 +50,9 @@
                 </div>
             </div>
             <%
-                     }
-                    }
-                  }
+                    }       
                 }
-            %>
-
+            %>        
         </div>
     </div>
 </div>

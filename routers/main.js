@@ -39,7 +39,6 @@ router.get('/topCenter',function (req,res) {
             let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
             arr.push(now);
         }
-        console.log(arr3);
         res.render('node-content-sys-pCenter', {
             comments: comments,
             arr1:arr,
@@ -144,10 +143,6 @@ router.get("/views",function (req,res,next) {
     // res.redirect('/login');
 });
 
-// router.get('/views',function (req,res,next) {
-//     //comment
-//     // Comment.find({})
-// });
 
 //加载views时候查询评论数点击查询views时候views字段加一
 
@@ -168,16 +163,10 @@ router.get("/views",function (req,res) {
         //获取markdown内容
         let text = content.contents;
         let html = markdown.makeHtml(text);
-        // let arr =[];
-        // for(let i=0;i<content.comments.length;i++){
-        //     let nowT = content.comments[i].postTime;
-        //     let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
-        //     arr.push(now);
-        // }
         //查询该帖子的评论文档
-        console.log(id);
+        // console.log(id);
         Comment.find({contentID:id}).populate(['userID','contentID']).then(function (comments) {
-            console.log(comments);
+            // console.log(comments);
             let arr =[];
             for(let i=0;i<comments.length;i++){
                 let nowT = comments[i].addTime;
