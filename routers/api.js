@@ -10,6 +10,7 @@ router.use(function (req , res , next) {
     next();
 });
 var users = {};
+
 router.post("/register",function (req,res) {
     var username = req.body.username.trim();
     var password = req.body.password.trim();
@@ -53,6 +54,8 @@ router.get('/sendcode', function (req, res, next) {
     //3. 返回响应数据
     res.send({"code": 0})
 });
+
+
 /*登陆方法实现*/
 router.post("/login",function (req,res) {
     let username = req.body.username.trim();

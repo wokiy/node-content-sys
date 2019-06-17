@@ -34,6 +34,7 @@ let blogSchema = mongoose.Schema({
         type:String,
         default:''
     },
+    // 封面图片
     images:{
         type:Array,
         default:[]

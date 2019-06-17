@@ -15,10 +15,10 @@ router.use(function (req , res , next) {
     next();
 });
 function checklogin(req,res,next) {
-//    判断是否登陆
-    if(!req.session.loginUser){
-        //    用户没有登陆，跳转登陆页面
-        res.render("node-admin-sys-login",{msg:{err:"请登录后再访问该页面！！！"}});
+    //判断是否登陆
+    if(req.session.loginUser && req.session.loginUser.isBigadmin===true){
+    //用户没有登陆，跳转登陆页面
+        res.render("node-admin-sys-index");
     }else{
         next();
     }
@@ -143,7 +143,6 @@ router.get("/views",function (req,res,next) {
     // res.redirect('/login');
 });
 
-
 //加载views时候查询评论数点击查询views时候views字段加一
 
 //详细文章查询 + markdown格式转义
@@ -162,7 +161,7 @@ router.get("/views",function (req,res) {
         content.save();
         //获取markdown内容
         let text = content.contents;
-        let html = markdown.makeHtml(text);
+        // let html = markdown.makeHtml(text);
         //查询该帖子的评论文档
         // console.log(id);
         Comment.find({contentID:id}).populate(['userID','contentID']).then(function (comments) {
@@ -179,7 +178,7 @@ router.get("/views",function (req,res) {
                 content:content,
                 now:now,
                 arr:arr,
-                contentHtml:html,
+                contentHtml:text,
                 comments:comments
             });
         });
@@ -188,7 +187,7 @@ router.get("/views",function (req,res) {
 //———————————————————————---添加评论实现——————————————————————————————————————————
 /*评论模块*/
 //评论原理   根据文章的ID 去添加 去update content 文章的表内容
-router.post("/addComments",checklogin,function (req,res) {
+router.post("/addComments",function (req,res) {
     //获取文章的ID
     let contentid = req.body.id;
     //用户I
@@ -286,7 +285,8 @@ router.get("/register",function (req,res) {
 });
 //------------------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------跳转登陆页面---------------------------------------------------------------------------------
-router.get("/login",function (req,res) {
+
+router.get("/login",checklogin,function (req,res) {
     res.render("node-admin-sys-login");
 });
 //------------------------------------------------------------------------------------------------------------------------------------------

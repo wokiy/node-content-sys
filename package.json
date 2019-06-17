@@ -18,11 +18,12 @@
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
     "js-base64": "^2.4.0",
+    "markdown-js": ">= 0.0.1",
     "moment": "^2.20.1",
     "mongoose": "^4.13.0",
     "multer": "^1.3.0",
     "request": "^2.83.0",
     "sha1": "^1.1.1",
-    "markdown-js": ">= 0.0.1"
+    "ueditor": "^1.2.3"
   }
 }
