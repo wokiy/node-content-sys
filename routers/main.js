@@ -94,7 +94,7 @@ router.get("/index",function (req,res,next) {
 //点击帖子详情 显示最热的帖子
 router.get("/index",function (req,res,next) { 
     //设置截取的最热帖子数
-    let limit = 6;
+    let limit = 5;
     //查询最热帖子
     Content.find({}).limit(limit).sort({views:-1}).populate(['user','category']).then(function (contentsHost) { 
         res.contentsHost = contentsHost;
@@ -158,7 +158,7 @@ router.get("/views",function (req,res,next) {
 //点击帖子详情 显示最热的帖子
 router.get("/views",function (req,res,next) { 
     //设置截取的最热帖子数
-    let limit = 6;
+    let limit = 5;
     //查询最热帖子
     Content.find({}).limit(limit).sort({views:-1}).populate(['user','category']).then(function (contentsHost) { 
         res.contentsHost = contentsHost;
