@@ -184,57 +184,33 @@
                     <h4 class="title" style="text-align: center;">今日最热</h4>
                     <div class="content tag-cloud">
                         <div class="tariffCards">
-                            <div class="economy">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>网页排版设计案例，总有一款你会用得上</span>
-                                <div class="pull-right">
-                                    <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                    <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
-                                    <a class="btn btn-xs btn-white">阅：10</a>
-                                </div>
-                            </div>
-                            <div class="premiumeconomy">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>网页换肤最佳实践</span>
-                                <div class="pull-right">
-                                    <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                    <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
-                                    <a class="btn btn-xs btn-white">阅：10</a>
-                                    <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil a3"></i> 评论</a>-->
-                                </div>
 
-                            </div>
-                            <div class="business">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>智慧研究院</span>
+                                <%  
+                                if(!contentHost || contentHost.length ==0){
+                            %>
+                            <p>木有最热帖子！！！</p>
+                            <%}
+                            else{
+                                for(let i=0;i<contentHost.length;i++){
+                            %>
+                        
+                            <div class="first" onclick="window.location='/views?id=<%=contentHost[i]._id%>';">
+                                <img src="<%=contentHost[i].user.images%>" class="img-circle" alt="Economy">
+                                <span><%=contentHost[i].title%></span>
                                 <div class="pull-right">
                                     <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
                                     <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
-                                    <a class="btn btn-xs btn-white">阅：10</a>
                                     <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil a3"></i> 评论</a>-->
                                 </div>
                             </div>
-                            <div class="first">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>图片功能简单实现</span>
-                                <div class="pull-right">
-                                    <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                    <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
-                                    <a class="btn btn-xs btn-white">阅：10</a>
-                                    <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil a3"></i> 评论</a>-->
-                                </div>
-                            </div>
-                            <div class="first">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>智慧城市研究院</span>
-                                <div class="pull-right">
-                                    <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                    <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
-                                    <a class="btn btn-xs btn-white">阅:9000</a>
-                                    <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil a3"></i> 评论</a>-->
-                                </div>
+                     
+                            <%
+                                }
+                            }
+                            %>
 
-                            </div>
+     
+
                         </div>
 
                     </div>

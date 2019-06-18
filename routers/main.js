@@ -90,6 +90,18 @@ router.get("/index",function (req,res,next) {
         next();
     });
 });
+
+//点击帖子详情 显示最热的帖子
+router.get("/index",function (req,res,next) { 
+    //设置截取的最热帖子数
+    let limit = 6;
+    //查询最热帖子
+    Content.find({}).limit(limit).sort({views:-1}).populate(['user','category']).then(function (contentsHost) { 
+        res.contentsHost = contentsHost;
+        next();
+     });
+ });
+
 router.get("/index",function (req,res) {
     //分页展示前台的内容
     //每页显示的条数
@@ -126,7 +138,8 @@ router.get("/index",function (req,res) {
                 count:count,
                 pages:pages,
                 page:res.page,
-                arr:arr
+                arr:arr,
+                contentHost:res.contentsHost
             });
         });
     });
@@ -134,7 +147,6 @@ router.get("/index",function (req,res) {
 //—————————————————————————————————————————————————————————————————————————
 //点击博文的详细信息，显示所有文章的分类
 router.get("/views",function (req,res,next) {
-
     /*分类排序*/
     Category.find({}).sort({_id:1}).then(function (categorys) {
         res.categorys = categorys;
@@ -143,14 +155,24 @@ router.get("/views",function (req,res,next) {
     // res.redirect('/login');
 });
 
-//加载views时候查询评论数点击查询views时候views字段加一
+//点击帖子详情 显示最热的帖子
+router.get("/views",function (req,res,next) { 
+    //设置截取的最热帖子数
+    let limit = 6;
+    //查询最热帖子
+    Content.find({}).limit(limit).sort({views:-1}).populate(['user','category']).then(function (contentsHost) { 
+        res.contentsHost = contentsHost;
+        next();
+     });
+ });
 
+//加载views时候查询评论数点击查询views时候views字段加一
 //详细文章查询 + markdown格式转义
 router.get("/views",function (req,res) {
     // console.log("aa");
     //获取文章的id查询
     var id = req.query.id;
-    // console.log(id);
+
     //帖子是一对多的关系。 1 -> n 所以要根据一条帖子的ID去查询评论文档中的评论内容
     Content.findOne({_id:id}).populate(['user','category']).then(function (content) {
         let nowT = content.addTime;
@@ -163,7 +185,6 @@ router.get("/views",function (req,res) {
         let text = content.contents;
         // let html = markdown.makeHtml(text);
         //查询该帖子的评论文档
-        // console.log(id);
         Comment.find({contentID:id}).populate(['userID','contentID']).then(function (comments) {
             // console.log(comments);
             let arr =[];
@@ -172,14 +193,14 @@ router.get("/views",function (req,res) {
                 let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
                 arr.push(now);
             }
-
             res.render("views",{
                 categorys:res.categorys,
                 content:content,
                 now:now,
                 arr:arr,
                 contentHtml:text,
-                comments:comments
+                comments:comments,
+                contentHost:res.contentsHost
             });
         });
     });

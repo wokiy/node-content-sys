@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+    <title>NCS</title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>node-content-sys</title>
+    <meta name="referrer" content="origin"/>
+    <meta name="generator" content="node-content-sys"/>
     <meta name="description" content="node-content-sys"/>
     <meta name="keywords" content="node-content-sys">
     <meta name="HandheldFriendly" content="True"/>
@@ -13,15 +15,12 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/8.5/styles/monokai_sublime.min.css">
     <link href="//cdn.bootcss.com/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
+    
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/demo.css"/>
-
-    <meta name="referrer" content="origin"/>
-
     <link href="../css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <meta name="generator" content="node-content-sys"/>
     <link rel="alternate" type="application/rss+xml" title="node-content-sys" href="http://www.jasonlwy.cn"/>
     <style>
         .img {
@@ -107,19 +106,9 @@
                             <p></p>
                                 <!--markdown语法-->
                                 <%-contentHtml %>
-                          
 
                         </section>
-                        <!-- <section class="featured-media">
-                            <
-                                var arr1 = content.images;
-                            for(var o = 0;o < arr1.length;o++){
-                            >
-                                <img src="<%= arr1[o] %>" alt="image" class="img-responsive img">
-                            <
-                            }
-                            %>
-                        </section> -->
+
                         <footer class="post-footer clearfix">
                             <div class="pull-left tag-list">
                                 <i class="fa fa-folder-open-o"></i>
@@ -309,7 +298,7 @@
                         <%
                         if(!categorys && categorys.length == 0){
                         %>
-                            <p>没有任何文章分类！！！</p>
+                            <p>没有任何帖子栏目！！！</p>
                         <%
                         }else{
                         for(let i = 0;i < categorys.length;i++){
@@ -326,53 +315,30 @@
                     <h4 class="title" style="text-align: center;">今日最热</h4>
                     <div class="content tag-cloud">
                         <div class="tariffCards">
-                            <div class="economy">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>网页排版设计案例，总有一款你会用得上</span>
-                                <div class="pull-right">
-                                    <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                    <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
-                                    <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil a3"></i> 评论</a>-->
-                                </div>
-                            </div>
-                            <div class="premiumeconomy">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>网页换肤最佳实践</span>
-                                <div class="pull-right">
-                                    <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                    <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
-                                    <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil a3"></i> 评论</a>-->
-                                </div>
 
-                            </div>
-                            <div class="business">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>智慧研究院</span>
+                            <%  
+                                if(!contentHost || contentHost.length ==0){
+                            %>
+                            <p>木有最热帖子！！！</p>
+                            <%}
+                            else{
+                                for(let i=0;i<contentHost.length;i++){
+                            %>
+                        
+                            <div class="first" onclick="window.location='/views?id=<%=contentHost[i]._id%>';">
+                                <img src="<%=contentHost[i].user.images%>" class="img-circle" alt="Economy">
+                                <span><%=contentHost[i].title%></span>
                                 <div class="pull-right">
                                     <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
                                     <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
                                     <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil a3"></i> 评论</a>-->
                                 </div>
                             </div>
-                            <div class="first">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>图片功能简单实现</span>
-                                <div class="pull-right">
-                                    <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                    <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
-                                    <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil a3"></i> 评论</a>-->
-                                </div>
-                            </div>
-                            <div class="first">
-                                <img src="img/xx.jpg" class="img-circle" alt="Economy">
-                                <span>智慧城市研究院</span>
-                                <div class="pull-right">
-                                    <a class="btn btn-xs btn-white a1"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                                    <a class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
-                                    <!--<a class="btn btn-xs btn-primary"><i class="fa fa-pencil a3"></i> 评论</a>-->
-                                </div>
-
-                            </div>
+                     
+                            <%
+                                }
+                            }
+                            %>
                         </div>
 
                     </div>
@@ -504,9 +470,13 @@
             toastr.success('提交评论！！！')
             $('#reportPicform').submit();
         } else {
-            toastr.error('请填写评论!!1')
+            toastr.error('请填写评论!!')
         }
     }
+
+
+
+
 </script>
 </body>
 </html>
