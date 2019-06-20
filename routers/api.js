@@ -11,30 +11,6 @@ router.use(function (req , res , next) {
 });
 var users = {};
 
-router.post("/register",function (req,res) {
-    var username = req.body.username.trim();
-    var password = req.body.password.trim();
-    var repassword = req.body.repassword.trim();
-    //创建对象保存错误信息
-    var msg = {
-        username: username,
-        err: "",
-        succeed: ""
-    };
-    //插入数据库
-    User.create({
-        username:username,
-        password: sha1(password),
-    }, function (err) {
-        if (err) {
-            msg.err = "用户名已经存在";
-            res.render("node-admin-sys-register",{msg:msg});
-        } else {
-            msg.succeed = "注册成功";
-            res.render("node-admin-sys-login",{msg:msg});
-        }
-    });
-});
 //发送手机验证码
 router.get('/sendcode', function (req, res, next) {
     //1. 获取请求参数数据
@@ -56,30 +32,6 @@ router.get('/sendcode', function (req, res, next) {
 });
 
 
-/*登陆方法实现*/
-router.post("/login",function (req,res) {
-    let username = req.body.username.trim();
-    let password = req.body.password.trim();
-    //数据查询用户 和密码正确
-    User.findOne({username:username},function (err,user) {
-        if(!err && user && user.password ==sha1(password)&&user.isBigadmin==true){
-                req.session.loginUser = user;
-                //删除session当中的登陆提示信息
-                delete req.session.loginError;
-                res.render("node-admin-sys-index");
-                // res.redirect("/admin/admin?page=1");
-        }else if(!err && user && user.password ==sha1(password)){
-                req.session.loginUser = user;
-                //删除session当中的登陆提示信息
-                delete req.session.loginError;
-                res.redirect("/index");
-        }else {
-            //删除session当中的登陆提示信息
-            delete req.session.loginError;
-            res.render("node-admin-sys-login", {msg: {err: "用户名或密码错误！！！！"}, username: username});
-        }
-    });
-});
 //node-admin-sys index  iframe 路由加载内容
 
 

@@ -39,9 +39,21 @@
                         </div>
                         <div class="col-md-6">
                             <div class="small text-right">
-                                <h5>状态：</h5>
+                                <h5>状态：
+                                    <%
+                                        if(contents[i].live === true){
+                                    %>
+                                    <strong>激活</strong>
+                                    <%}
+                                        else{
+                                    %>
+                                    <strong>
+                                        未激活
+                                    </strong>
+                                    <%}%>
+                                </h5>
                                 <div> <i class="fa fa-comments-o"> </i> <%=comments%>评论 </div>
-                                <i class="fa fa-eye"> </i> <%=views%> 浏览
+                                <i class="fa fa-eye"> </i>浏览 <%=contents[i].views%>
                             </div>
                         </div>
                     </div>

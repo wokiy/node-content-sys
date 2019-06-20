@@ -7,8 +7,23 @@ let Category = require("../schemas/Category");
 let Content = require("../schemas/Content");
 let Comment = require('../schemas/Comment');
 const pathLib=require('path');
+var sha1 = require("sha1");
 let  moment = require("moment");
+
 let newName2='';
+// api 形式返回功能测试 响应一个JSON数据
+var responseJSON = function (res, ret) {
+    if (typeof ret === 'undefined') {
+      res.json({
+          code: '-200',
+          msg: '操作失败'
+      });
+    } else {
+      res.json(ret);
+    }
+};
+
+
 router.get("/user",function (req,res) {
     res.send("user 模块");
 });
@@ -28,6 +43,98 @@ function checklogin(req,res,next) {
         next();
     }
 }
+//登陆方法/*登陆方法实现*/ 
+
+router.post("/register",function (req,res) {
+    var username = req.body.username.trim();
+    var password = req.body.password.trim();
+    var repassword = req.body.repassword.trim();
+    var imageUrl = '\\upload\\1e7f6e9614774dcd686bc0b9a32fdd10.jpg';
+    //创建对象保存错误信息
+    var msg = {
+        username: username,
+        err: "",
+        succeed: ""
+    };
+    //插入数据库
+    User.create({
+        username:username,
+        password: sha1(password),
+        images:imageUrl
+    }, function (err) {
+        if (err) {
+            msg.err = "用户名已经存在";
+            res.render("node-admin-sys-register",{msg:msg});
+        } else {
+            msg.succeed = "注册成功";
+            res.render("node-admin-sys-login",{msg:msg});
+        }
+    });
+});
+
+
+router.post("/login",function (req,res) {
+    let username = req.body.username;
+    let password = req.body.password;
+    //数据查询用户 和密码正确
+    User.findOne({username:username},function (err,user) {
+        if(!err && user && user.password ==sha1(password)&&user.isBigadmin==true){
+                req.session.loginUser = user;
+                //删除session当中的登陆提示信息
+                delete req.session.loginError;
+                res.render("node-admin-sys-index");
+                // res.redirect("/admin/admin?page=1"); 
+        }else if(!err && user && user.password ==sha1(password)){
+                req.session.loginUser = user;
+                //删除session当中的登陆提示信息
+                delete req.session.loginError;
+                res.redirect("/index");
+        }else {
+            //删除session当中的登陆提示信息
+            delete req.session.loginError;
+            res.render("node-admin-sys-login", {msg: {err: "用户名或密码错误！！！！"}, username: username});
+        }
+    }); 
+});
+
+
+//api接口方式测试
+router.get("/loginApi",function (req,res) { 
+    // 获取前台页面传过来的参数
+    var param = req.query || req.params;
+    var userName = param.userName.trim();
+    var password = param.password.trim();
+
+    User.findOne({username:userName},function (err,user) {
+        var isTrue = false;    
+        var _res = res;
+        // console.log(sha1(password))
+        var userpassword = sha1(password);
+        var test = user.password;
+
+
+        if(userpassword === test){
+           isTrue = true;
+        }
+        var data = {};
+        data.isLogin = isTrue; //如果isTrue布尔值为true则登陆成功 有false则失败
+        if(isTrue) {
+            data.userInfo = {};
+            data.userInfo.id = user._id;
+            data.userInfo.userName = user.username;
+        }
+        result = {
+            code: 200,
+            msg: 'succeed'
+        };
+        data.result = result;
+         // 以json形式，把操作结果返回给前台页面
+         responseJSON(_res, data);
+
+    })
+ });
+
+
 //跳转到用户管理页面
 router.get("/user_list",checklogin,function (req,res) {
     /*分页实先*/
@@ -94,13 +201,11 @@ router.get("/addCategory",checklogin,function (req,res) {
 });
 //添加分类
 router.post("/addCategory_content",checklogin,function (req,res) {
-    /*分类名 输入不能为空
-      判断分类名是否存在
-    * */
+    //分类名 输入不能为空 判断分类名是否存在
     //获取用户填写的分类名字
     let name = req.body.name.trim();
     //分类是否为空
-    if(name == ''){
+    if(name === ''){
         res.render("addCategory",{msg:{err:'分类不能为空!!!!'}});
     }
     //查找数据库中是否有该分类
@@ -451,7 +556,7 @@ router.get("/contentList",checklogin,function (req,res) {
         })
     })
 });
-//删除文章
+//删除帖子
 router.get("/delete_content",checklogin,function (req,res) {
     //根据ID 真删除文章
     let id = req.query.id;

@@ -9,10 +9,9 @@ let mongoose = require("mongoose");
 let multer = require("multer");
 var path = require('path');
 const fs=require('fs');
+
 //req.file文件  接受上传的文件
-
 //登陆拦截
-
 //设置中间件
 app.use(session({
     resave:false,
@@ -23,7 +22,7 @@ app.use(session({
     },
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
-
+//跨域设置
 /*加载模板文件*/
 app.set("view engine","ejs");
 app.set("views","views");
@@ -66,8 +65,6 @@ app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res
     //   res.redirect('/ueditor/ueditor.config.json')
       res.redirect('/ueditor/nodejs/config.json');
   }}));
-
-
 app.use(multer({dest: './public/upload'}).any());
 //创建一个路由处理session
 app.use(function (req,res,next) {
@@ -82,8 +79,18 @@ app.use(function (req,res,next) {
 app.use("/admin",require("./routers/admin"));
 app.use("/api",require("./routers/api"));
 app.use("/",require("./routers/main"));
+
+// 跨域设置
+app.all("*", function(req, res, next) {
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
+  res.header("Content-Type", "application/json;charset=utf-8");
+  next();
+});
 /*body-parser 中间件*/
-app.listen(8083,function (err) {
+app.listen(8081,function (err) {
     if(!err){
         console.log("服务器成功启动！！！！！");
     }

@@ -110,9 +110,6 @@
 
 ![全部评论](/public/img/comments.png) 
 
-##### 增加评论id管理
-![id](/public/img/id.png)
-
 ##### 评论删除功能实现
 > 根据live状态伪删除用户评论(具体看源码操作)
 ![评论删除](/public/img/admin_delete.png)
