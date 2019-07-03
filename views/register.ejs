@@ -9,9 +9,6 @@
         body{height:100%;background:#16a085;overflow:hidden;}
         canvas{z-index:-1;position:absolute;}
     </style>
-    <script src="../../js/jquery-1.12.4.min.js"></script>
-    <script src="../../js/verificationNumbers.js"></script>
-    <script src="../../js/Particleground.js"></script>
     <script>
         $(document).ready(function() {
             //粒子背景特效
@@ -59,5 +56,35 @@
         </dd>
     </dl>
 </form>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/content.min.js"></script>
+<script src="../js/plugins/toastr/toastr.min.js"></script>
+<script>
+
+    //提示配置信息
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    //根据后台返回的数据结果显示提示的内容
+    //成功情况
+    if (textSuc === 'ok'){
+        toastr.success('栏目添加成功！！！')
+    } else if (textErr === "err"){
+        toastr.error('内容不规范或为空或已存在!!!!!')
+    }
+</script>
+
 </body>
 </html>

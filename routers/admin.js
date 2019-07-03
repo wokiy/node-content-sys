@@ -43,33 +43,43 @@ function checklogin(req,res,next) {
         next();
     }
 }
-//登陆方法/*登陆方法实现*/ 
+//登陆方法/*登陆方法实现*/
 
+
+//注册方法
 router.post("/register",function (req,res) {
     var username = req.body.username.trim();
     var password = req.body.password.trim();
     var repassword = req.body.repassword.trim();
+    //默认用户注册头像
     var imageUrl = '\\upload\\1e7f6e9614774dcd686bc0b9a32fdd10.jpg';
+    //判断重复密码正确不
     //创建对象保存错误信息
     var msg = {
         username: username,
         err: "",
         succeed: ""
     };
-    //插入数据库
-    User.create({
-        username:username,
-        password: sha1(password),
-        images:imageUrl
-    }, function (err) {
-        if (err) {
-            msg.err = "用户名已经存在";
-            res.render("node-admin-sys-register",{msg:msg});
-        } else {
-            msg.succeed = "注册成功";
-            res.render("node-admin-sys-login",{msg:msg});
-        }
-    });
+    if(repassword !== password) {
+        msg.err = "两次密码不正确";
+        // res.render("node-admin-sys-register",{msg:msg});
+        res.redirect('/register');
+    }else{
+        //插入数据库
+        User.create({
+            username:username,
+            password: sha1(password),
+            images:imageUrl
+        }, function (err) {
+            if (err) {
+                msg.err = "用户名已经存在";
+                res.render("node-admin-sys-register",{msg:msg});
+            } else {
+                msg.succeed = "注册成功";
+                res.render("node-admin-sys-login",{msg:msg});
+            }
+        });
+    }
 });
 
 
@@ -241,7 +251,7 @@ router.post("/edit_Category",checklogin,function (req,res) {
     let id = req.body.id;
     let name = req.body.name;
     //修改不能为空值
-    if(name==""){
+    if(name===""){
         res.render("category",{msg:{err:"修改的类名字不能为空值!!!!!"}});
     }
     Category.update({_id:id},{$set:{name:name}},function (err) {

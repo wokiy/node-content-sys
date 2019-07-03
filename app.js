@@ -59,10 +59,9 @@ app.use("/ueditor/ue", ueditor(path.join(__dirname, 'public'), function(req, res
     }
     // 客户端发起其它请求
     else {
-  
       res.setHeader('Content-Type', 'application/json');
       // 这里填写 ueditor.config.json 这个文件的路径
-    //   res.redirect('/ueditor/ueditor.config.json')
+      // res.redirect('/ueditor/ueditor.config.json')
       res.redirect('/ueditor/nodejs/config.json');
   }}));
 app.use(multer({dest: './public/upload'}).any());
@@ -90,7 +89,7 @@ app.all("*", function(req, res, next) {
   next();
 });
 /*body-parser 中间件*/
-app.listen(8081,function (err) {
+app.listen(3000,function (err) {
     if(!err){
         console.log("服务器成功启动！！！！！");
     }

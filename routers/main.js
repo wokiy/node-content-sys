@@ -44,8 +44,30 @@ router.get('/topCenter',function (req,res) {
             arr1:arr,
          });
     });
-
 });
+
+//修改个人信息
+router.post('/changeMessage',function (req,res) {
+   //获取用户修改的各输入框的内容
+   let id = req.session.loginUser._id;
+   let username = req.body.username;
+   let email = req.body.email;
+   let address = req.body.address;
+   let briefIntroduction = req.body.briefIntroduction;
+   //更新User数据库文档
+    User.update({_id:id},{$set:{username:username,email:email,address:address,briefIntroduction:briefIntroduction}},function (err,user) {
+        //没错就重定向到用户个人中心页面
+        if(!err){
+            User.findOne({_id:id},function (err,user) {
+                req.session.loginUser = user;
+                res.redirect("/topCenter");
+            });
+        }
+    })
+});
+
+
+
 //上传用户新头像
 router.post('/ChangeImages',function (req,res) {
     //上传图片解析问题
@@ -205,6 +227,7 @@ router.get("/views",function (req,res) {
         });
     });
 });
+
 //———————————————————————---添加评论实现——————————————————————————————————————————
 /*评论模块*/
 //评论原理   根据文章的ID 去添加 去update content 文章的表内容
@@ -310,6 +333,9 @@ router.get("/register",function (req,res) {
 router.get("/login",checklogin,function (req,res) {
     res.render("node-admin-sys-login");
 });
+
+
+
 //------------------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------退出登录----------------------------------------------------------------------------------
 router.get("/logout",function (req,res) {
