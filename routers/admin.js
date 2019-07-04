@@ -22,8 +22,6 @@ var responseJSON = function (res, ret) {
       res.json(ret);
     }
 };
-
-
 router.get("/user",function (req,res) {
     res.send("user 模块");
 });
@@ -51,6 +49,7 @@ router.post("/register",function (req,res) {
     var username = req.body.username.trim();
     var password = req.body.password.trim();
     var repassword = req.body.repassword.trim();
+    var email = req.body.emaddress.trim();
     //默认用户注册头像
     var imageUrl = '\\upload\\1e7f6e9614774dcd686bc0b9a32fdd10.jpg';
     //判断重复密码正确不
@@ -69,7 +68,8 @@ router.post("/register",function (req,res) {
         User.create({
             username:username,
             password: sha1(password),
-            images:imageUrl
+            images:imageUrl,
+            emaddress:email
         }, function (err) {
             if (err) {
                 msg.err = "用户名已经存在";
@@ -88,13 +88,13 @@ router.post("/login",function (req,res) {
     let password = req.body.password;
     //数据查询用户 和密码正确
     User.findOne({username:username},function (err,user) {
-        if(!err && user && user.password ==sha1(password)&&user.isBigadmin==true){
+        if(!err && user && user.password ===sha1(password)&&user.isBigadmin===true){
                 req.session.loginUser = user;
                 //删除session当中的登陆提示信息
                 delete req.session.loginError;
                 res.render("node-admin-sys-index");
                 // res.redirect("/admin/admin?page=1"); 
-        }else if(!err && user && user.password ==sha1(password)){
+        }else if(!err && user && user.password ===sha1(password)){
                 req.session.loginUser = user;
                 //删除session当中的登陆提示信息
                 delete req.session.loginError;
@@ -316,7 +316,7 @@ router.post("/add",checklogin,function (req,res) {
 /*跳转到文章管理页面*/
 router.get("/admin",checklogin,function (req,res) {
     //每页显示的条数
-    let limit = 6;
+    let limit = 12;
     //页数
     let page = Number(req.query.page || 1);
     //过滤数目
@@ -353,16 +353,16 @@ router.get("/admin",checklogin,function (req,res) {
 //加载后台首页显示的页面
 router.get('/index_v3',checklogin,function (req,res,next) { 
     Content.count().then(function (count1) {
-        res.count1 = count1
+        res.count1 = count1;
         next();
     })
- })
+ });
  router.get('/index_v3',checklogin,function (req,res,next) { 
     User.count().then(function (count2) {
-        res.count2 = count2
+        res.count2 = count2;
         next();
     })
-})
+});
 
 router.get("/index_v3",checklogin,function (req,res) {
     // 查询评论表最新消息
@@ -387,7 +387,7 @@ router.get("/index_v3",checklogin,function (req,res) {
 //用户列表查询显示
 router.get("/userList",checklogin,function (req,res) {
     //每页显示条数
-    let  limit = 6;
+    let  limit = 19;
     //页数
     let page = Number(req.query.page || 1);
     //过滤条数
@@ -404,7 +404,7 @@ router.get("/userList",checklogin,function (req,res) {
         page = Math.max(page,1);
         userType = 'user';
         //查询所有用户数据User.find({isBigadmin:{$ne:true},live:{$ne:false}})
-        //相对应结构化SQL而言 "$ne"===================>"!="
+        //相对应结构化SQL而言 "$ne"=>"!="
         User.find({isBigadmin:{$ne:true},live:{$ne:false}}).skip(skip).limit(limit).then(function(users){
             let arr = [];
             for(let i=0;i<users.length;i++){
@@ -425,7 +425,7 @@ router.get("/userList",checklogin,function (req,res) {
 //查询admin 管理员
 router.get("/adminList",checklogin,function (req,res) {
     //每页显示条数
-    let limit = 6;
+    let limit = 15;
     //页数
     let page = Number(req.query.page || 1);
     //过滤条数
@@ -646,19 +646,17 @@ router.get('/commentList',checklogin,function (req,res) {
    //查询所有用户的评论列表展示
     Comment.find({}).populate(['userID','contentID']).then(function (comments) {
         let arr =[];
-        for(let i=0;i<comments.length;i++){
+        for(let i=0;i<comments.length;i++) {
             let nowT = comments[i].addTime;
             let now = moment(nowT).format("YYYY-MM-DD HH:mm:ss");
             arr.push(now);
         }
-        // console.log(comments);
-            res.render('node-admin-sys-comment',{
-                //遍历所有的contents双层遍历
-                comments:comments,
-                arr:arr
-            })
+        res.render('node-admin-sys-comment',{
+            //遍历所有的contents双层遍历
+            comments:comments,
+            arr:arr
+        })
     });
-
 });
 //评论删除 正常不不脑残的评论是不删除该内容的评论的
 router.get("/commentsDelete",checklogin,function (req,res) {
@@ -672,10 +670,7 @@ router.get("/commentsDelete",checklogin,function (req,res) {
                 res.redirect("/admin/commentList");
             }
         })
-   
 });
-
-
 module.exports = router;
 
 

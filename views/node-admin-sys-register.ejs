@@ -12,25 +12,31 @@
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min.css" rel="stylesheet">
-    <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
     <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
     <style>
         /*修改gray-bg16进制颜色*/
         .gray-bg{
-            background-color: #092923;
+            /*background-color: #092923;*/
+            background-image: url('img/789.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
         }
         /*change middle-box margin-top 大小调整*/
         .middle-box{
-            margin-top:100px;
+            padding-top:170px;
+        }
+        .gohome{
+            display: none;
         }
     </style>
 </head>
 <body class="gray-bg">
 <div class="middle-box text-center loginscreen   animated fadeInDown">
     <div>
-        <div>
-            <h1 class="logo-name">N</h1>
-        </div>
+        <!--<div>-->
+            <!--<h1 class="logo-name">N</h1>-->
+        <!--</div>-->
         <h3>欢迎注册node-content-sys</h3>
         <p>创建一个N新账户</p>
         <form class="m-t" role="form" action="/admin/register" method="post">
@@ -38,11 +44,15 @@
                 <input type="text" name="username" class="form-control" placeholder="请输入用户名" required="">
             </div>
             <div class="form-group">
+                <input type="email" name="emaddress" placeholder="请输入您注册的E-mail" class="form-control">
+            </div>
+            <div class="form-group">
                 <input id="password" type="password" name="password" class="form-control" placeholder="请输入密码" required="">
             </div>
             <div class="form-group">
                 <input id="repassword" type="password" name="repassword" class="form-control" placeholder="请再次输入密码" required="">
             </div>
+            <!---->
             <div class="form-group text-left">
                 <div class="checkbox i-checks">
                     <label class="no-padding">
@@ -63,36 +73,6 @@
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script>
     $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
-
-    //提示配置信息
-    toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "positionClass": "toast-top-right",
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
-    //根据后台返回的数据结果显示提示的内容
-    //成功情况
-    //获取表单的值
-    var $password = $('#password').val();
-    var $repassword = $('#repassword').val();
-
-    $('#repassword').focusout(function () {
-        alert($password);
-        if ($password !== $repassword){
-            toastr.error('密码错误！！！')
-        }
-    })
-
-
 </script>
 
 </body>

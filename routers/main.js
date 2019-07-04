@@ -55,7 +55,7 @@ router.post('/changeMessage',function (req,res) {
    let address = req.body.address;
    let briefIntroduction = req.body.briefIntroduction;
    //更新User数据库文档
-    User.update({_id:id},{$set:{username:username,email:email,address:address,briefIntroduction:briefIntroduction}},function (err,user) {
+    User.update({_id:id},{$set:{username:username,email:email,address:address,briefIntroduction:briefIntroduction}},function (err) {
         //没错就重定向到用户个人中心页面
         if(!err){
             User.findOne({_id:id},function (err,user) {
