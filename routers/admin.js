@@ -76,7 +76,7 @@ router.post("/register",function (req,res) {
                 res.render("node-admin-sys-register",{msg:msg});
             } else {
                 msg.succeed = "注册成功";
-                res.render("node-admin-sys-login",{msg:msg});
+                res.redirect('/login')
             }
         });
     }

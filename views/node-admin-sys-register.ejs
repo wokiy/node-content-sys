@@ -18,10 +18,14 @@
         /*修改gray-bg16进制颜色*/
         .gray-bg{
             /*background-color: #092923;*/
-            background-image: url('img/789.jpg');
             background-size: cover;
             background-repeat: no-repeat;
         }
+
+        .gray-bg{
+            background-image: url('img/789.jpg');
+        }
+
         /*change middle-box margin-top 大小调整*/
         .middle-box{
             padding-top:170px;
@@ -39,27 +43,27 @@
         <!--</div>-->
         <h3>欢迎注册node-content-sys</h3>
         <p>创建一个N新账户</p>
-        <form class="m-t" role="form" action="/admin/register" method="post">
+        <form id="LoginBtn" class="m-t" role="form" action="/admin/register" method="post">
             <div class="form-group">
-                <input type="text" name="username" class="form-control" placeholder="请输入用户名" required="">
+                <input id="username" type="text" name="username" class="form-control" placeholder="请输入用户名" required="true">
             </div>
             <div class="form-group">
-                <input type="email" name="emaddress" placeholder="请输入您注册的E-mail" class="form-control">
+                <input id="email" type="email" name="emaddress" placeholder="请输入您注册的E-mail" class="form-control" required="true">
             </div>
             <div class="form-group">
-                <input id="password" type="password" name="password" class="form-control" placeholder="请输入密码" required="">
+                <input id="password" type="password" name="password" class="form-control" placeholder="请输入密码" required="true">
             </div>
             <div class="form-group">
-                <input id="repassword" type="password" name="repassword" class="form-control" placeholder="请再次输入密码" required="">
+                <input id="repassword" type="password" name="repassword" class="form-control" placeholder="请再次输入密码" required="true">
             </div>
             <!---->
             <div class="form-group text-left">
-                <div class="checkbox i-checks">
+                <div id="checkbox" class="checkbox i-checks">
                     <label class="no-padding">
                         <input type="checkbox"><i></i> 我同意注册协议</label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary block full-width m-b">注 册</button>
+            <button type="button" class="btn btn-primary block full-width m-b loginbtn" onclick="submitLogin()">注 册</button>
             <p class="text-muted text-center"><small>已经有账户了？</small><a href="/login">点此登录</a>
             </p>
 
@@ -72,9 +76,42 @@
 <script src="js/content.min.js"></script>
 <script src="js/plugins/toastr/toastr.min.js"></script>
 <script>
-    $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
+    $(document).ready(function(){
+        $(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",});});
 </script>
+<script>
+    //提示配置信息
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "positionClass": "toast-top-right",
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    //根据后台返回的数据结果显示提示的内容
+    function submitLogin(){
+        var ischeck = $('.icheckbox_square-green').hasClass('checked');
+        var username = $('#username').val();
+        var email = $('#email').val();
+        var password = $('#password').val();
+        var repassword = $('#repassword').val();
 
+        if(ischeck && username && email && password === repassword){
+            $('#LoginBtn').submit();
+            //
+        }else{
+            // toastr.error('请√选注册协议!')
+            toastr.warning('注意填写表单完整性！！！')
+        }
+    }
+</script>
 </body>
 
 </html>
