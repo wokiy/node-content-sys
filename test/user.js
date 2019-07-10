@@ -1,4 +1,4 @@
-require("../tools/db")
+require("../tools/db");
 
 var User = require("../schemas/User");
 User.create({
