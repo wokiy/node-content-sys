@@ -194,7 +194,6 @@ router.get("/views",function (req,res) {
     // console.log("aa");
     //获取文章的id查询
     var id = req.query.id;
-
     //帖子是一对多的关系。 1 -> n 所以要根据一条帖子的ID去查询评论文档中的评论内容
     Content.findOne({_id:id}).populate(['user','category']).then(function (content) {
         let nowT = content.addTime;
@@ -227,6 +226,26 @@ router.get("/views",function (req,res) {
         });
     });
 });
+
+
+//点赞实现路由操作 content的点赞数目增加
+router.get('/good',function (req,res) {
+    //获取文章id
+    var id = req.query.id;
+    var json = [{a:1}];
+    //修改文章的点赞数
+    Content.findOne({_id:id}).populate(['user','category']).then(function (content) {
+        //点赞数giveHuUp ; 每次用户点赞 ; 自动添加一
+        content.giveHuUp++;
+        //添加后保存
+        content.save();
+        res.redirect('/views?id='+id);
+    })
+});
+
+//用户点击收藏实现 帖子内容存储
+
+
 
 //———————————————————————---添加评论实现——————————————————————————————————————————
 /*评论模块*/

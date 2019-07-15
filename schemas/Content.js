@@ -38,6 +38,16 @@ let blogSchema = mongoose.Schema({
     images:{
         type: Array,
         default: []
+    },
+    //统计点赞数
+    giveHuUp:{
+        type:Number,
+        default: 0
+    },
+    //被收藏数
+    giveCollect:{
+      type: Number,
+      default: 0
     }
 }) ;
 module.exports = mongoose.model("Content",blogSchema);

@@ -27,27 +27,22 @@
             display: block;
             margin-bottom: 25px;
         }
-
         .list-group-item {
             display: flex;
             background: #eff0f9;
         }
-
         .left {
             flex: 0 0 15%;
         }
-
         .right {
             flex: 1;
             padding-top: 23px;
         }
-
         .strong1 {
             padding-left: 6px;
             position: absolute;
             margin: 0 auto;
         }
-
     </style>
 </head>
 <body class="post-template">
@@ -55,7 +50,7 @@
 <nav class="main-navigation">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 topColor  ">
+            <div class="col-sm-12 topColor">
                 <div style="display: none;" class="navbar-header">
                         <span class="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu">
                         <span class="sr-only">Toggle navigation</span>
@@ -73,7 +68,7 @@
                         %>
                             <li class="pull-right"><a href="/topCenter">设置信息</a></li>
                         <%
-                        }
+                            }
                         %>
                     </ul>
                 </div>
@@ -106,7 +101,6 @@
                             <p></p>
                                 <!--markdown语法-->
                                 <%-contentHtml %>
-
                         </section>
 
                         <footer class="post-footer clearfix">
@@ -119,6 +113,11 @@
                                 <i class="fa fa-folder-open-o">阅读数:</i>
                                 <%= content.views %>
                             </div>
+                           <div class="pull-left tag-list">
+                               <!--发送请求-->
+                               <a id="good" class="btn btn-xs btn-white a1" onclick="window.location='/good?id=<%=content._id%>';"><i class="fa fa-thumbs-up"></i> 赞 </a>
+                               <a id="collect" href="#" class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
+                           </div>
                             <div class="pull-right share">
                                 <div class="bdsharebuttonbox share-icons">
                                     <a href="#" class="bds_more" data-cmd="more"></a>
@@ -130,16 +129,13 @@
                                 </div>
                             </div>
                         </footer>
-
                     </article>
                 <%
-                }
+                    }
                 %>
-
 
                 <div class="about-author clearfix">
                     <!--<a href="/author/wangsai/"><img src="http://static.ghostchina.com/image/5/ea/da657733ee8c9add9cf3fd70183a6.png" alt="王赛" class="avatar pull-left"></a>-->
-
                     <!--未登录显示-->
                     <%
                     if(!session.loginUser){
@@ -279,15 +275,6 @@
                     </div>
                 </div>
                 <!-- end tag cloud widget -->
-
-                <!-- start widget -->
-                <div style="display: none;" class="widget">
-                    <h4 class="title">--</h4>
-                    <div class="content download">
-                        <a href="/download/" class="btn btn-default btn-block"
-                           onclick="_hmt.push(['_trackEvent', 'big-button', 'click', '下载Ghost'])">--</a>
-                    </div>
-                </div>
                 <!-- end widget -->
 
                 <!-- start tag cloud widget -->
@@ -306,8 +293,8 @@
                             <!--根据分类ID查询该分类的所有文章-->
                             <a href="/contents?id=<%= categorys[i]._id %>&page=1"><%= categorys[i].name %></a>
                         <%
-                        }
-                        }
+                            }
+                         }
                         %>
                     </div>
                 </div>
@@ -409,15 +396,6 @@
 <script src="//cdn.bootcss.com/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
 <script src="js/demo.js"></script>
 <script src="../js/plugins/toastr/toastr.min.js"></script>
-<script>
-    $(function () {
-        $('.post-content img').each(function (item) {
-            var src = $(this).attr('src');
-
-            $(this).wrap('<a href="' + src + '" class="mfp-zoom" style="display:block;"></a>');
-        });
-    });
-</script>
 
 <script>
     window._bd_share_config = {
@@ -441,10 +419,6 @@
         $download.html(html);
     });
 </script>
-<script type="text/javascript">
-    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F6338835ad35c6d950a554fdedb598e48' type='text/javascript'%3E%3C/script%3E"));
-</script>
 <script>
     //提示配置信息
     toastr.options = {
@@ -461,7 +435,6 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-
     //根据后台返回的数据结果显示提示的内容
     function submitComm() {
         var InputComm = $('#comments').val();
@@ -473,10 +446,6 @@
             toastr.error('请填写评论!!')
         }
     }
-
-
-
-
 </script>
 </body>
 </html>
