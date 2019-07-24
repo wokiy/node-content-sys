@@ -64,7 +64,7 @@
                         <!--<li  role="presentation"><a href="/committeam">旅游</a></li>-->
                         <li role="presentation"><a href="/about">关于博主</a></li>
                         <%
-                        if(session.loginUser){
+                            if(session.loginUser){
                         %>
                             <li class="pull-right"><a href="/topCenter">设置信息</a></li>
                         <%
@@ -115,8 +115,51 @@
                             </div>
                            <div class="pull-left tag-list">
                                <!--发送请求-->
-                               <a id="good" class="btn btn-xs btn-white a1" onclick="window.location='/good?id=<%=content._id%>';"><i class="fa fa-thumbs-up"></i> 赞 </a>
-                               <a id="collect" href="#" class="btn btn-xs btn-white"><i class="fa fa-heart a2"></i> 收藏</a>
+                               <%
+                                   //获取数组
+                                   var bool = null;
+                                   var goodArray = null;
+                                   //帖子ID
+                                   var id = content._id;
+                                   if(session.loginUser){
+                                     goodArray = session.loginUser.nice;
+                                       for(var i=0;i<goodArray.length;i++){
+                                           if(goodArray[i].toString() == id.toString()){
+                                               bool = true;
+                                           }else{
+                                               bool = false;
+                                           }
+                                       }
+                                   }
+                                   console.log(goodArray);
+                                   console.log(bool);
+
+                                   console.log(id);
+                                   //遍历数组
+
+                                   if(bool && session.loginUser){
+                                   //判断用户是否点赞过和收藏过
+                               %>
+                               <a id="good" class="btn btn-xs btn-white a1" onclick="goodButton()" >
+                                   <i class="fa fa-thumbs-up"></i> 已赞 </a>
+
+                               <%
+                                }else if(session.loginUser)
+                                    {
+                                %>
+
+                                    <a id="good" class="btn btn-xs btn-white a1" onclick="window.location='/good?id=<%=content._id%>';">
+                                        <i class="fa fa-thumbs-up"></i> 赞 </a>
+                                    <a id="collect" href="#" class="btn btn-xs btn-white">
+                                        <i class="fa fa-heart a2"></i> 收藏</a>
+
+                                <%
+                                   }
+                                %>
+
+
+
+
                            </div>
                             <div class="pull-right share">
                                 <div class="bdsharebuttonbox share-icons">
@@ -435,6 +478,7 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
+
     //根据后台返回的数据结果显示提示的内容
     function submitComm() {
         var InputComm = $('#comments').val();
@@ -446,6 +490,13 @@
             toastr.error('请填写评论!!')
         }
     }
+    
+
+    //已赞再点提示
+    function goodButton() {
+        toastr.warning('这帖子你已经赞了!!')
+    }
+
 </script>
 </body>
 </html>

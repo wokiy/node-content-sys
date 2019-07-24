@@ -227,25 +227,49 @@ router.get("/views",function (req,res) {
     });
 });
 
-
 //点赞实现路由操作 content的点赞数目增加
-router.get('/good',function (req,res) {
+router.get('/good',function (req,res,next) {
     //获取文章id
-    var id = req.query.id;
-    var json = [{a:1}];
+    let id = req.query.id;
     //修改文章的点赞数
     Content.findOne({_id:id}).populate(['user','category']).then(function (content) {
         //点赞数giveHuUp ; 每次用户点赞 ; 自动添加一
         content.giveHuUp++;
         //添加后保存
         content.save();
-        res.redirect('/views?id='+id);
+        // res.render('res.redirect(\'/views?id=\'+id);')
+        next();
     })
 });
 
+router.get('/good',function (req,res) {
+    //获取帖子id
+    var id = req.query.id;
+    console.log(id);
+    let userid = req.session.loginUser._id;
+    console.log(userid);
+    //moogodb 更新数组中的数据$push方法
+    User.update({_id:userid},{ $push: { nice: id }},function(){
+        //重新更新 会话中的user
+        User.findOne({_id:userid},function (err,user) {
+
+            req.session.loginUser = user;
+            res.redirect('/views?id='+id);
+
+        });
+    })
+    // User.findOne({_id:userid}).then(function (user) {
+    //     //得到点赞的数组
+    //     user.nice.push(id);
+    //     //向数组中添加用户的ID
+    //     user.save();
+    //     console.log(user.nice);
+    //     res.redirect('/views?id='+id);
+    //     // res.render('res.redirect(\'/views?id=\'+id);')
+    // })
+});
+
 //用户点击收藏实现 帖子内容存储
-
-
 
 //———————————————————————---添加评论实现——————————————————————————————————————————
 /*评论模块*/
