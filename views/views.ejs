@@ -114,7 +114,7 @@
                                 <%= content.views %>
                             </div>
                            <div class="pull-left tag-list">
-                               <!--发送请求-->
+                               <!--用户点赞功能实现-->
                                <%
                                    //获取数组
                                    var bool = null;
@@ -123,6 +123,7 @@
                                    var id = content._id;
                                    if(session.loginUser){
                                      goodArray = session.loginUser.nice;
+                                       //遍历数组
                                        for(var i=0;i<goodArray.length;i++){
                                            if(goodArray[i].toString() == id.toString()){
                                                bool = true;
@@ -131,34 +132,50 @@
                                            }
                                        }
                                    }
-                                   console.log(goodArray);
-                                   console.log(bool);
-
-                                   console.log(id);
-                                   //遍历数组
-
                                    if(bool && session.loginUser){
                                    //判断用户是否点赞过和收藏过
                                %>
                                <a id="good" class="btn btn-xs btn-white a1" onclick="goodButton()" >
                                    <i class="fa fa-thumbs-up"></i> 已赞 </a>
-
                                <%
                                 }else if(session.loginUser)
                                     {
                                 %>
-
                                     <a id="good" class="btn btn-xs btn-white a1" onclick="window.location='/good?id=<%=content._id%>';">
                                         <i class="fa fa-thumbs-up"></i> 赞 </a>
-                                    <a id="collect" href="#" class="btn btn-xs btn-white">
-                                        <i class="fa fa-heart a2"></i> 收藏</a>
-
                                 <%
                                    }
                                 %>
+                                    <!--收藏功能实现-->
+                                <%
+                                    //数组
+                                    var bool1 = false;
+                                    var goodArray1 = null;
+                                    var id1 = content._id;
+                                    if(session.loginUser){
+                                        goodArray1 = session.loginUser.collect;
+                                        //遍历数组
+                                        for(var j=0;j<goodArray1.length;j++){
+                                            console.log(goodArray1[j]._id);
+                                            if(goodArray1[j]._id === id1.toString()){
+                                                bool1 = true;
+                                            }
+                                        }
+                                    }
 
-
-
+                                if(bool1 && session.loginUser){
+                                    // 判断用户是否点赞过和收藏过
+                                %>
+                               <a id="collect" href="#" class="btn btn-xs btn-white" onclick="getCollect();">
+                                   <i class="fa fa-heart a2"></i> 已收藏</a>
+                               <%
+                                }else if(session.loginUser){
+                               %>
+                                    <a id="collect" href="#" class="btn btn-xs btn-white" onclick="window.location='/collect?id=<%=content._id%>';">
+                                        <i class="fa fa-heart a2"></i> 收藏</a>
+                               <%
+                                 }
+                               %>
 
                            </div>
                             <div class="pull-right share">
@@ -217,9 +234,9 @@
                                 </div>
                             </li>
                             <%
-                            }
-                            }
-                            }
+                                        }
+                                    }
+                                }
                             %>
                         </ul>
                         <!--<a href="#" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</a>-->
@@ -273,15 +290,15 @@
                                     </div>
                                 </li>
                             <%
-                            }
-                            }
+                                    }
+                                }
                             %>
                         </ul>
                         <!--<button type="button" class="btn btn-success pull-right" style="margin-left:5px; ">下一页</button>-->
                         <!--<button type="button" class="btn btn-success pull-right">上一页</button>-->
                     <%
-                    }
-                    }
+                            }
+                        }
                     %>
 
                 </div>
@@ -478,7 +495,6 @@
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
     }
-
     //根据后台返回的数据结果显示提示的内容
     function submitComm() {
         var InputComm = $('#comments').val();
@@ -490,11 +506,13 @@
             toastr.error('请填写评论!!')
         }
     }
-    
-
     //已赞再点提示
     function goodButton() {
         toastr.warning('这帖子你已经赞了!!')
+    }
+    //已点赞再点提示功能
+    function getCollect() {
+        toastr.warning('这帖子你已经收藏了，去个人信息查看')
     }
 
 </script>

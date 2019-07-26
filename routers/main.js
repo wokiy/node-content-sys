@@ -252,22 +252,38 @@ router.get('/good',function (req,res) {
     User.update({_id:userid},{ $push: { nice: id }},function(){
         //重新更新 会话中的user
         User.findOne({_id:userid},function (err,user) {
-
             req.session.loginUser = user;
             res.redirect('/views?id='+id);
-
         });
     })
-    // User.findOne({_id:userid}).then(function (user) {
-    //     //得到点赞的数组
-    //     user.nice.push(id);
-    //     //向数组中添加用户的ID
-    //     user.save();
-    //     console.log(user.nice);
-    //     res.redirect('/views?id='+id);
-    //     // res.render('res.redirect(\'/views?id=\'+id);')
-    // })
 });
+//用户点击收藏帖子(帖子收藏: 帖子的ID 标题 作者 )
+
+router.get('/collect',function (req,res) {
+
+    //获取帖子id
+    var id = req.query.id;
+    //在线用户ID
+    let userid = req.session.loginUser._id;
+    //查询帖子 获取当前帖子的信息
+    Content.findOne({_id:id}).populate(['user','category']).then(function (content) {
+        //查询得到帖子全部信息 以对象的形式 存进去
+        var obj_content = content;
+        //更新用户的文档信息
+        User.update({_id:userid},{ $push: { collect: obj_content}},function(){
+            //重新更新 会话中的user
+            User.findOne({_id:userid},function (err,user) {
+                req.session.loginUser = user;
+                res.redirect('/views?id='+id);
+            });
+        });
+
+    })
+
+
+});
+
+
 
 //用户点击收藏实现 帖子内容存储
 
